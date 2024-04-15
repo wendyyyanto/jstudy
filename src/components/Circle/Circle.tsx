@@ -21,19 +21,20 @@ const CircleElement = styled.div.attrs<{
     $bottom?: number | string;
     $left?: number | string;
 }>(({ $top, $right, $bottom, $left }) => ({
-    $top: `${$top}%` || "auto",
-    $right: `${$right}%` || "auto",
-    $bottom: `${$bottom}%` || "auto",
-    $left: `${$left}%` || "auto"
+    $top: $top,
+    $right: $right,
+    $bottom: $bottom,
+    $left: $left
 }))`
     position: absolute;
-    top: ${(props) => props.$top};
-    right: ${(props) => props.$right};
-    left: ${(props) => props.$left};
-    bottom: ${(props) => props.$bottom};
+    top: ${(props) => props.$top + "%"};
+    right: ${(props) => props.$right + "%"};
+    left: ${(props) => props.$left + "%"};
+    bottom: ${(props) => props.$bottom + "%"};
+    transform: ${(props) => `translateX(${props.$right || props.$left}%)`};
 
-    height: 27.93rem;
-    width: 27.93rem;
+    height: 60%;
+    aspect-ratio: 1;
     background-color: rgba(255, 216, 3, 0.6);
     border-radius: 50%;
 
