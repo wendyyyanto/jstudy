@@ -170,6 +170,13 @@ export default {
                 }
             ],
 
+            "h4-regular": [
+                "28px",
+                {
+                    lineHeight: "34px",
+                    fontWeight: "400"
+                }
+            ],
             "h4-semibold": [
                 "28px",
                 {
@@ -192,6 +199,13 @@ export default {
                 }
             ],
 
+            "h5-regular": [
+                "23px",
+                {
+                    lineHeight: "28px",
+                    fontWeight: "400"
+                }
+            ],
             "h5-semibold": [
                 "23px",
                 {
@@ -214,6 +228,13 @@ export default {
                 }
             ],
 
+            "h6-regular": [
+                "19px",
+                {
+                    lineHeight: "23px",
+                    fontWeight: "400"
+                }
+            ],
             "h6-semibold": [
                 "19px",
                 {
