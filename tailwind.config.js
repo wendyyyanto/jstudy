@@ -2,12 +2,6 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
-        borderRadius: {
-            sm: "10px",
-            md: "15px",
-            lg: "20px"
-        },
-
         colors: {
             white: "#FFFFFE",
             secondary: "#E3F6F5",
@@ -66,6 +60,12 @@ export default {
         },
 
         extend: {
+            borderRadius: {
+                sm: "10px",
+                md: "15px",
+                lg: "20px"
+            },
+
             fontSize: {
                 "d1-semibold": [
                     "72px",
