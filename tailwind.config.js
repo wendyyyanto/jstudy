@@ -65,291 +65,292 @@ export default {
             }
         },
 
-        fontSize: {
-            "d1-semibold": [
-                "72px",
-                {
-                    lineHeight: "80px",
-                    fontWeight: "600"
-                }
-            ],
-            "d1-bold": [
-                "72px",
-                {
-                    lineHeight: "80px",
-                    fontWeight: "700"
-                }
-            ],
-            "d1-extrabold": [
-                "72px",
-                {
-                    lineHeight: "80px",
-                    fontWeight: "800"
-                }
-            ],
+        extend: {
+            fontSize: {
+                "d1-semibold": [
+                    "72px",
+                    {
+                        lineHeight: "80px",
+                        fontWeight: "600"
+                    }
+                ],
+                "d1-bold": [
+                    "72px",
+                    {
+                        lineHeight: "80px",
+                        fontWeight: "700"
+                    }
+                ],
+                "d1-extrabold": [
+                    "72px",
+                    {
+                        lineHeight: "80px",
+                        fontWeight: "800"
+                    }
+                ],
 
-            "d2-semibold": [
-                "60px",
-                {
-                    lineHeight: "72px",
-                    fontWeight: "600"
-                }
-            ],
-            "d2-bold": [
-                "60px",
-                {
-                    lineHeight: "72px",
-                    fontWeight: "700"
-                }
-            ],
-            "d2-extrabold": [
-                "60px",
-                {
-                    lineHeight: "72px",
-                    fontWeight: "800"
-                }
-            ],
+                "d2-semibold": [
+                    "60px",
+                    {
+                        lineHeight: "72px",
+                        fontWeight: "600"
+                    }
+                ],
+                "d2-bold": [
+                    "60px",
+                    {
+                        lineHeight: "72px",
+                        fontWeight: "700"
+                    }
+                ],
+                "d2-extrabold": [
+                    "60px",
+                    {
+                        lineHeight: "72px",
+                        fontWeight: "800"
+                    }
+                ],
 
-            "h1-semibold": [
-                "48px",
-                {
-                    lineHeight: "56px",
-                    fontWeight: "600"
-                }
-            ],
-            "h1-bold": [
-                "48px",
-                {
-                    lineHeight: "56px",
-                    fontWeight: "700"
-                }
-            ],
-            "h1-extrabold": [
-                "48px",
-                {
-                    lineHeight: "56px",
-                    fontWeight: "800"
-                }
-            ],
+                "h1-semibold": [
+                    "48px",
+                    {
+                        lineHeight: "56px",
+                        fontWeight: "600"
+                    }
+                ],
+                "h1-bold": [
+                    "48px",
+                    {
+                        lineHeight: "56px",
+                        fontWeight: "700"
+                    }
+                ],
+                "h1-extrabold": [
+                    "48px",
+                    {
+                        lineHeight: "56px",
+                        fontWeight: "800"
+                    }
+                ],
 
-            "h2-semibold": [
-                "39px",
-                {
-                    lineHeight: "47px",
-                    fontWeight: "600"
-                }
-            ],
-            "h2-bold": [
-                "39px",
-                {
-                    lineHeight: "47px",
-                    fontWeight: "700"
-                }
-            ],
-            "h2-extrabold": [
-                "39px",
-                {
-                    lineHeight: "47px",
-                    fontWeight: "800"
-                }
-            ],
+                "h2-semibold": [
+                    "39px",
+                    {
+                        lineHeight: "47px",
+                        fontWeight: "600"
+                    }
+                ],
+                "h2-bold": [
+                    "39px",
+                    {
+                        lineHeight: "47px",
+                        fontWeight: "700"
+                    }
+                ],
+                "h2-extrabold": [
+                    "39px",
+                    {
+                        lineHeight: "47px",
+                        fontWeight: "800"
+                    }
+                ],
 
-            "h3-semibold": [
-                "33px",
-                {
-                    lineHeight: "40px",
-                    fontWeight: "600"
-                }
-            ],
-            "h3-bold": [
-                "33px",
-                {
-                    lineHeight: "40px",
-                    fontWeight: "700"
-                }
-            ],
-            "h3-extrabold": [
-                "33px",
-                {
-                    lineHeight: "40px",
-                    fontWeight: "800"
-                }
-            ],
+                "h3-semibold": [
+                    "33px",
+                    {
+                        lineHeight: "40px",
+                        fontWeight: "600"
+                    }
+                ],
+                "h3-bold": [
+                    "33px",
+                    {
+                        lineHeight: "40px",
+                        fontWeight: "700"
+                    }
+                ],
+                "h3-extrabold": [
+                    "33px",
+                    {
+                        lineHeight: "40px",
+                        fontWeight: "800"
+                    }
+                ],
 
-            "h4-regular": [
-                "28px",
-                {
-                    lineHeight: "34px",
-                    fontWeight: "400"
-                }
-            ],
-            "h4-semibold": [
-                "28px",
-                {
-                    lineHeight: "34px",
-                    fontWeight: "600"
-                }
-            ],
-            "h4-bold": [
-                "28px",
-                {
-                    lineHeight: "34px",
-                    fontWeight: "700"
-                }
-            ],
-            "h4-extrabold": [
-                "28px",
-                {
-                    lineHeight: "34px",
-                    fontWeight: "800"
-                }
-            ],
+                "h4-regular": [
+                    "28px",
+                    {
+                        lineHeight: "34px",
+                        fontWeight: "400"
+                    }
+                ],
+                "h4-semibold": [
+                    "28px",
+                    {
+                        lineHeight: "34px",
+                        fontWeight: "600"
+                    }
+                ],
+                "h4-bold": [
+                    "28px",
+                    {
+                        lineHeight: "34px",
+                        fontWeight: "700"
+                    }
+                ],
+                "h4-extrabold": [
+                    "28px",
+                    {
+                        lineHeight: "34px",
+                        fontWeight: "800"
+                    }
+                ],
 
-            "h5-regular": [
-                "23px",
-                {
-                    lineHeight: "28px",
-                    fontWeight: "400"
-                }
-            ],
-            "h5-semibold": [
-                "23px",
-                {
-                    lineHeight: "28px",
-                    fontWeight: "600"
-                }
-            ],
-            "h5-bold": [
-                "23px",
-                {
-                    lineHeight: "28px",
-                    fontWeight: "700"
-                }
-            ],
-            "h5-extrabold": [
-                "23px",
-                {
-                    lineHeight: "28px",
-                    fontWeight: "800"
-                }
-            ],
+                "h5-regular": [
+                    "23px",
+                    {
+                        lineHeight: "28px",
+                        fontWeight: "400"
+                    }
+                ],
+                "h5-semibold": [
+                    "23px",
+                    {
+                        lineHeight: "28px",
+                        fontWeight: "600"
+                    }
+                ],
+                "h5-bold": [
+                    "23px",
+                    {
+                        lineHeight: "28px",
+                        fontWeight: "700"
+                    }
+                ],
+                "h5-extrabold": [
+                    "23px",
+                    {
+                        lineHeight: "28px",
+                        fontWeight: "800"
+                    }
+                ],
 
-            "h6-regular": [
-                "19px",
-                {
-                    lineHeight: "23px",
-                    fontWeight: "400"
-                }
-            ],
-            "h6-semibold": [
-                "19px",
-                {
-                    lineHeight: "23px",
-                    fontWeight: "600"
-                }
-            ],
-            "h6-bold": [
-                "19px",
-                {
-                    lineHeight: "23px",
-                    fontWeight: "700"
-                }
-            ],
-            "h6-extrabold": [
-                "19px",
-                {
-                    lineHeight: "23px",
-                    fontWeight: "800"
-                }
-            ],
+                "h6-regular": [
+                    "19px",
+                    {
+                        lineHeight: "23px",
+                        fontWeight: "400"
+                    }
+                ],
+                "h6-semibold": [
+                    "19px",
+                    {
+                        lineHeight: "23px",
+                        fontWeight: "600"
+                    }
+                ],
+                "h6-bold": [
+                    "19px",
+                    {
+                        lineHeight: "23px",
+                        fontWeight: "700"
+                    }
+                ],
+                "h6-extrabold": [
+                    "19px",
+                    {
+                        lineHeight: "23px",
+                        fontWeight: "800"
+                    }
+                ],
 
-            "p1-regular": [
-                "14px",
-                {
-                    lineHeight: "17px",
-                    fontWeight: "400"
-                }
-            ],
-            "p1-semibold": [
-                "14px",
-                {
-                    lineHeight: "17px",
-                    fontWeight: "500"
-                }
-            ],
+                "p1-regular": [
+                    "14px",
+                    {
+                        lineHeight: "17px",
+                        fontWeight: "400"
+                    }
+                ],
+                "p1-semibold": [
+                    "14px",
+                    {
+                        lineHeight: "17px",
+                        fontWeight: "500"
+                    }
+                ],
 
-            "p2-regular": [
-                "16px",
-                {
-                    lineHeight: "24px",
-                    fontWeight: "400"
-                }
-            ],
-            "p2-semibold": [
-                "16px",
-                {
-                    lineHeight: "24px",
-                    fontWeight: "500"
-                }
-            ],
+                "p2-regular": [
+                    "16px",
+                    {
+                        lineHeight: "24px",
+                        fontWeight: "400"
+                    }
+                ],
+                "p2-semibold": [
+                    "16px",
+                    {
+                        lineHeight: "24px",
+                        fontWeight: "500"
+                    }
+                ],
 
-            "caption-regular": [
-                "12px",
-                {
-                    fontWeight: "400"
-                }
-            ],
-            "caption-semibold": [
-                "12px",
-                {
-                    fontWeight: "500"
-                }
-            ],
+                "caption-regular": [
+                    "12px",
+                    {
+                        fontWeight: "400"
+                    }
+                ],
+                "caption-semibold": [
+                    "12px",
+                    {
+                        fontWeight: "500"
+                    }
+                ],
 
-            "caption-sm-regular": [
-                "8px",
-                {
-                    fontWeight: "400"
-                }
-            ],
-            "caption-sm-semibold": [
-                "8px",
-                {
-                    fontWeight: "500"
-                }
-            ],
+                "caption-sm-regular": [
+                    "8px",
+                    {
+                        fontWeight: "400"
+                    }
+                ],
+                "caption-sm-semibold": [
+                    "8px",
+                    {
+                        fontWeight: "500"
+                    }
+                ],
 
-            "footer-regular": [
-                "10px",
-                {
-                    fontWeight: "400",
-                    lineHeight: "14px"
-                }
-            ],
-            "footer-semibold": [
-                "10px",
-                {
-                    fontWeight: "500",
-                    lineHeight: "14px"
-                }
-            ],
+                "footer-regular": [
+                    "10px",
+                    {
+                        fontWeight: "400",
+                        lineHeight: "14px"
+                    }
+                ],
+                "footer-semibold": [
+                    "10px",
+                    {
+                        fontWeight: "500",
+                        lineHeight: "14px"
+                    }
+                ],
 
-            "subheading-regular": [
-                "20px",
-                {
-                    fontWeight: "400",
-                    lineHeight: "28px"
-                }
-            ],
-            "subheading-semibold": [
-                "20px",
-                {
-                    fontWeight: "500",
-                    lineHeight: "28px"
-                }
-            ]
-        },
-        extend: {}
+                "subheading-regular": [
+                    "20px",
+                    {
+                        fontWeight: "400",
+                        lineHeight: "28px"
+                    }
+                ],
+                "subheading-semibold": [
+                    "20px",
+                    {
+                        fontWeight: "500",
+                        lineHeight: "28px"
+                    }
+                ]
+            }
+        }
     },
     plugins: []
 };
