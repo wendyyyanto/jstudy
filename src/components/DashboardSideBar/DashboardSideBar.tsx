@@ -12,22 +12,22 @@ function DashboardSideBar() {
             <h1 className="text-h4-extrabold">JStudy.</h1>
             <SideBarItemsContainer>
                 <ul>
-                    <li className="active bg-secondary">
+                    <li className="active bg-secondary text-p1-semibold">
                         <SlScreenDesktop size={28} /> Dashboard
                     </li>
-                    <li>
+                    <li className="text-p1-regular">
                         <IoBookOutline size={28} /> Courses
                     </li>
-                    <li>
+                    <li className="text-p1-regular">
                         <BsLightningCharge size={28} /> Daily Challenge
                     </li>
-                    <li>
+                    <li className="text-p1-regular">
                         <FaRegStar size={28} /> Achievements
                     </li>
-                    <li className="flex-1 items-end mb-11">
-                        <TbLogout2 size={28} /> Logout
-                    </li>
                 </ul>
+                <a href="/" className="flex text-p1-regular items-center pl-[15px] mb-[30px] gap-[10px]">
+                    <TbLogout2 size={28} /> Logout
+                </a>
             </SideBarItemsContainer>
         </SideBarContainer>
     );
@@ -47,6 +47,7 @@ const SideBarContainer = styled.div`
 
 const SideBarItemsContainer = styled.div`
     display: flex;
+    flex-direction: column;
     flex: 1;
     margin-top: 60px;
 
@@ -59,12 +60,13 @@ const SideBarItemsContainer = styled.div`
         & > li {
             display: flex;
             gap: 10px;
+            align-items: center;
 
             border-radius: 10px;
             cursor: pointer;
 
             margin-top: 25px;
-            padding: 15px 0px 15px 15px;
+            padding: 15px;
         }
     }
 `;

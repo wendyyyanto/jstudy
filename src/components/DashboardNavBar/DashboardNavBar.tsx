@@ -10,8 +10,8 @@ function DashboardNavBar() {
                 <BsLightningCharge size={28} />
                 <p className="text-h5-semibold">03</p>
             </div>
-            <div className="flex items-center gap-2 bg-stroke-900 py-3 pl-2 pr-6 profile-image">
-                <img className="h-10 aspect-square" alt="Profile Image" src={profileImage} />
+            <div className="flex items-center gap-2 bg-stroke-900 py-2 pl-2 pr-10 profile-image">
+                <img className="h-9 aspect-square" alt="Profile Image" src={profileImage} />
                 <p className="text-p2-semibold text-white">Wendy</p>
             </div>
         </NavBarContainer>
@@ -23,8 +23,7 @@ const NavBarContainer = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    height: 8rem;
-
+    margin-top: 4rem;
     margin-bottom: 2rem;
 
     & > .profile-image {
