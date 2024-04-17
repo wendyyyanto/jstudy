@@ -38,7 +38,7 @@ const CircleElement = styled.div.attrs<{
     background-color: rgba(255, 216, 3, 0.6);
     border-radius: 50%;
 
-    z-index: -999;
+    z-index: -20;
 `;
 
 export default Circle;
