@@ -8,6 +8,7 @@ import trophyIconWhite from "assets/trophy-white.svg";
 import trophyIconYellow from "assets/trophy-yellow.svg";
 import lampIcon from "assets/lamp.svg";
 import giftIcon from "assets/gift.svg";
+import styled from "styled-components";
 
 function Dashboard() {
     return (
@@ -47,29 +48,64 @@ function Dashboard() {
                         </div>
                     </div>
                     <div className="col-span-2 col-start-9 row-span-1 bg-secondary rounded-sm flex items-center gap-4 px-4">
-                        <span className="h-14 aspect-square bg-stroke-900 p-3 rounded-full">
+                        <div className="h-14 aspect-square bg-stroke-900 p-3 rounded-full">
                             <img alt="Lamp Icon" src={lampIcon} className="h-full" />
-                        </span>
+                        </div>
                         <div>
                             <p className="text-p1-regular">Level</p>
                             <p className="text-h3-semibold">04</p>
                         </div>
                     </div>
                     <div className="col-span-2 col-start-9 row-span-1 bg-tertiary-500 rounded-sm flex items-center gap-4 px-4">
-                        <span className="h-14 aspect-square bg-stroke-900 p-3 rounded-full">
+                        <div className="h-14 aspect-square bg-stroke-900 p-3 rounded-full">
                             <img alt="Lamp Icon" src={giftIcon} className="h-full" />
-                        </span>
+                        </div>
                         <div>
                             <p className="text-p1-regular">Point</p>
                             <p className="text-h3-semibold">602</p>
                         </div>
                     </div>
-                    <div className="col-span-6 col-start-1 row-span-5 bg-white rounded-sm"></div>
-                    <div className="col-span-4 row-span-5 bg-white rounded-sm"></div>
+                    <WhiteCard className="col-span-6 col-start-1 row-span-5 bg-white rounded-sm px-8 py-6">
+                        <div className="flex flex-col h-full overflow-y-auto">
+                            <p className="text-h5-semibold">Learning Progress</p>
+                            <div className="grid grid-cols-2 gap-5 mt-6">
+                                <div className="flex flex-col h-28 rounded-sm border border-stroke-300 p-4">
+                                    <p className="text-p2-semibold w-11/12 overflow-hidden text-nowrap text-ellipsis">
+                                        JavaScript Fundamental
+                                    </p>
+                                    <div className="flex flex-col gap-1 flex-1 justify-end">
+                                        <p className="text-footer-regular text-para-200">
+                                            90% complete • started 2 days ago
+                                        </p>
+                                        <div className="w-full h-3 rounded-sm bg-stroke-50">
+                                            <div className="w-11/12 h-3 rounded-sm bg-stroke-400"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </WhiteCard>
+                    <WhiteCard className="col-span-4 row-span-5 bg-white rounded-sm px-8 py-6">
+                        <div className="flex flex-col h-full overflow-y-auto">
+                            <p className="text-h5-semibold">Achievements</p>
+                            <div className="flex flex-col my-5">
+                                <div className="flex items-center gap-5">
+                                    <div className="h-14 aspect-square flex items-center justify-center bg-highlight-100 p-3 rounded-full text-center text-subheading-semibold">
+                                        01
+                                    </div>
+                                    <p className="text-subheading-regular">Hello, World</p>
+                                </div>
+                            </div>
+                        </div>
+                    </WhiteCard>
                 </div>
             </div>
         </div>
     );
 }
+
+const WhiteCard = styled.div`
+    box-shadow: 1px 0px 10px -4px rgba(0, 0, 0, 0.25);
+`;
 
 export default Dashboard;

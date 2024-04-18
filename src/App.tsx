@@ -4,8 +4,8 @@ import Dashboard from "pages/Dashboard";
 function App() {
     return (
         <main>
-            {/* <Home /> */}
-            <Dashboard />
+            <Home />
+            {/* <Dashboard /> */}
         </main>
     );
 }

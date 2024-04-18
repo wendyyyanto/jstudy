@@ -1,6 +1,6 @@
 import illustration from "assets/illustration.svg";
 import Button from "components/Button";
-import Circle from "components/Circle";
+import BigCircle from "@/components/BigCircle";
 import styled from "styled-components";
 
 function Home() {
@@ -38,8 +38,8 @@ function Home() {
                 />
             </section>
             <StyledImage src={illustration} alt="Landing Page Illustration" />
-            <Circle top={20} left={-15} />
-            <Circle bottom={-32} right={-20} />
+            <BigCircle top={20} left={-15} />
+            <BigCircle bottom={-32} right={-20} />
         </div>
     );
 }
