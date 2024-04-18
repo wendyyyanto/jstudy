@@ -7,7 +7,7 @@ interface ICircleProps {
     left?: number;
 }
 
-function Circle({ top, right, left, bottom }: ICircleProps) {
+function BigCircle({ top, right, left, bottom }: ICircleProps) {
     return (
         <>
             <CircleElement $top={top} $right={right} $bottom={bottom} $left={left} />
@@ -41,4 +41,4 @@ const CircleElement = styled.div.attrs<{
     z-index: -20;
 `;
 
-export default Circle;
+export default BigCircle;
