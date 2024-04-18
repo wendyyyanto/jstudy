@@ -4,6 +4,8 @@ import { HiArrowRight } from "react-icons/hi";
 import DashboardNavBar from "components/DashboardNavBar";
 import DashboardSideBar from "components/DashboardSideBar";
 
+import SmallCircle from "pages/Dashboard/components/SmallCircle";
+
 import trophyIconWhite from "assets/trophy-white.svg";
 import trophyIconYellow from "assets/trophy-yellow.svg";
 import lampIcon from "assets/lamp.svg";
@@ -48,18 +50,18 @@ function Dashboard() {
                         </div>
                     </div>
                     <div className="col-span-2 col-start-9 row-span-1 bg-secondary rounded-sm flex items-center gap-4 px-4">
-                        <div className="h-14 aspect-square bg-stroke-900 p-3 rounded-full">
+                        <SmallCircle color="dark">
                             <img alt="Lamp Icon" src={lampIcon} className="h-full" />
-                        </div>
+                        </SmallCircle>
                         <div>
                             <p className="text-p1-regular">Level</p>
                             <p className="text-h3-semibold">04</p>
                         </div>
                     </div>
                     <div className="col-span-2 col-start-9 row-span-1 bg-tertiary-500 rounded-sm flex items-center gap-4 px-4">
-                        <div className="h-14 aspect-square bg-stroke-900 p-3 rounded-full">
+                        <SmallCircle color="dark">
                             <img alt="Lamp Icon" src={giftIcon} className="h-full" />
-                        </div>
+                        </SmallCircle>
                         <div>
                             <p className="text-p1-regular">Point</p>
                             <p className="text-h3-semibold">602</p>
@@ -90,9 +92,9 @@ function Dashboard() {
                             <p className="text-h5-semibold">Achievements</p>
                             <div className="flex flex-col my-5">
                                 <div className="flex items-center gap-5">
-                                    <div className="h-14 aspect-square flex items-center justify-center bg-highlight-100 p-3 rounded-full text-center text-subheading-semibold">
-                                        01
-                                    </div>
+                                    <SmallCircle color="light">
+                                        <span>01</span>
+                                    </SmallCircle>
                                     <p className="text-subheading-regular">Hello, World</p>
                                 </div>
                             </div>
