@@ -1,5 +1,5 @@
 import Home from "pages/Home";
-import Dashboard from "pages/Dashboard";
+import Dashboard from "@/pages";
 
 function App() {
     return (

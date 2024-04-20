@@ -12,10 +12,10 @@ function DashboardSideBar() {
             <h1 className="text-h4-extrabold">JStudy.</h1>
             <SideBarItemsContainer>
                 <ul>
-                    <li className="active bg-secondary text-p1-semibold">
+                    <li className="text-p1-regular">
                         <SlScreenDesktop size={28} /> Dashboard
                     </li>
-                    <li className="text-p1-regular">
+                    <li className="active bg-secondary text-p1-semibold">
                         <IoBookOutline size={28} /> Courses
                     </li>
                     <li className="text-p1-regular">
