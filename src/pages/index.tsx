@@ -3,6 +3,7 @@ import DashboardSideBar from "components/DashboardSideBar";
 
 import DashboardPage from "./Dashboard";
 import CoursesPage from "./Courses";
+import AchievementsPage from "./Achievements";
 
 function Dashboard() {
     return (
@@ -11,7 +12,8 @@ function Dashboard() {
             <div className="w-screen h-screen px-[60px] py-[50px] pt-0 overflow-hidden">
                 <DashboardNavBar />
                 {/* <DashboardPage /> */}
-                <CoursesPage />
+                {/* <CoursesPage /> */}
+                <AchievementsPage />
             </div>
         </div>
     );

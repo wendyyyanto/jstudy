@@ -15,13 +15,13 @@ function DashboardSideBar() {
                     <li className="text-p1-regular">
                         <SlScreenDesktop size={28} /> Dashboard
                     </li>
-                    <li className="active bg-secondary text-p1-semibold">
+                    <li className="text-p1-regular">
                         <IoBookOutline size={28} /> Courses
                     </li>
                     <li className="text-p1-regular">
                         <BsLightningCharge size={28} /> Daily Challenge
                     </li>
-                    <li className="text-p1-regular">
+                    <li className="active bg-secondary text-p1-semibold">
                         <FaRegStar size={28} /> Achievements
                     </li>
                 </ul>
