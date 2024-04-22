@@ -67,6 +67,20 @@ export default {
             },
 
             fontSize: {
+                "d1-extralight": [
+                    "72px",
+                    {
+                        lineHeight: "80px",
+                        fontWeight: "200"
+                    }
+                ],
+                "d1-regular": [
+                    "72px",
+                    {
+                        lineHeight: "80px",
+                        fontWeight: "400"
+                    }
+                ],
                 "d1-semibold": [
                     "72px",
                     {
@@ -89,6 +103,20 @@ export default {
                     }
                 ],
 
+                "d2-extralight": [
+                    "60px",
+                    {
+                        lineHeight: "72px",
+                        fontWeight: "200"
+                    }
+                ],
+                "d2-regular": [
+                    "60px",
+                    {
+                        lineHeight: "72px",
+                        fontWeight: "400"
+                    }
+                ],
                 "d2-semibold": [
                     "60px",
                     {
