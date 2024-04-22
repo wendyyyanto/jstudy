@@ -12,3 +12,12 @@
 body {
     background-color: theme("colors.highlight.50");
 }
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: theme("colors.stroke.300");
+    border-radius: 10px;
+}
