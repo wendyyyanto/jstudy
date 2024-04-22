@@ -6,9 +6,9 @@ import CoursesPage from "./Courses";
 
 function Dashboard() {
     return (
-        <div className="flex w-screen h-screen">
+        <div className="flex">
             <DashboardSideBar />
-            <div className="w-screen h-screen flex flex-col px-[60px] py-[50px] pt-0 overflow-hidden">
+            <div className="w-screen h-screen px-[60px] py-[50px] pt-0 overflow-hidden">
                 <DashboardNavBar />
                 {/* <DashboardPage /> */}
                 <CoursesPage />
