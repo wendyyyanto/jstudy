@@ -8,7 +8,7 @@ interface IButtonProps {
     classes?: string;
 }
 
-function Button({ text, rounded = "small", height, width, classes = "" }: IButtonProps) {
+function Button({ text, rounded = "small", height, width, classes }: IButtonProps) {
     const roundedValues = {
         small: "10px",
         medium: "15px",
