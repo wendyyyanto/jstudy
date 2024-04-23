@@ -1,9 +1,7 @@
 import DashboardNavBar from "components/DashboardNavBar";
 import DashboardSideBar from "components/DashboardSideBar";
 
-import DashboardPage from "./Dashboard";
-import CoursesPage from "./Courses";
-import AchievementsPage from "./Achievements";
+import { Outlet } from "react-router-dom";
 
 function Dashboard() {
     return (
@@ -11,9 +9,7 @@ function Dashboard() {
             <DashboardSideBar />
             <div className="w-screen h-screen px-[60px] py-[50px] pt-0 overflow-hidden">
                 <DashboardNavBar />
-                {/* <DashboardPage /> */}
-                {/* <CoursesPage /> */}
-                <AchievementsPage />
+                <Outlet />
             </div>
         </div>
     );
