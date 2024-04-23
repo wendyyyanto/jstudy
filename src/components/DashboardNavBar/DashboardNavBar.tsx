@@ -1,19 +1,14 @@
 import styled from "styled-components";
-import { BsLightningCharge } from "react-icons/bs";
 
 import profileImage from "assets/profile.png";
+import ProfileBadge from "./ProfileBadge";
+import StreakCount from "./StreakCount";
 
 function DashboardNavBar() {
     return (
         <NavBarContainer>
-            <div className="flex items-center gap-1">
-                <BsLightningCharge size={28} />
-                <p className="text-h5-semibold">03</p>
-            </div>
-            <div className="flex items-center gap-2 bg-stroke-900 py-2 pl-2 pr-10 profile-image">
-                <img className="h-9 aspect-square" alt="Profile Image" src={profileImage} />
-                <p className="text-p2-semibold text-white">Wendy</p>
-            </div>
+            <StreakCount streak={4} />
+            <ProfileBadge image={profileImage} username="Wendy" />
         </NavBarContainer>
     );
 }
