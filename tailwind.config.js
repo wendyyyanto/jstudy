@@ -306,6 +306,13 @@ export default {
                         fontWeight: "500"
                     }
                 ],
+                "p1-bold": [
+                    "14px",
+                    {
+                        lineHeight: "17px",
+                        fontWeight: "600"
+                    }
+                ],
 
                 "p2-regular": [
                     "16px",
