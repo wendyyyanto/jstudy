@@ -3,26 +3,38 @@ import { FaRegStar } from "react-icons/fa";
 import { IoBookOutline } from "react-icons/io5";
 import { SlScreenDesktop } from "react-icons/sl";
 import { TbLogout2 } from "react-icons/tb";
+import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
 
 function DashboardSideBar() {
+    const onActiveClass = ({ isActive }: { isActive: boolean }) =>
+        isActive ? "bg-secondary text-p1-semibold" : "text-p1-regular";
+
     return (
         <SideBarContainer className="bg-tertiary-500">
             <h1 className="text-h4-extrabold">JStudy.</h1>
             <SideBarItemsContainer>
                 <ul>
-                    <li className="text-p1-regular">
-                        <SlScreenDesktop size={28} /> Dashboard
+                    <li>
+                        <NavLink to="/dashboard" className={onActiveClass} end>
+                            <SlScreenDesktop size={28} /> Dashboard
+                        </NavLink>
                     </li>
-                    <li className="text-p1-regular">
-                        <IoBookOutline size={28} /> Courses
+                    <li>
+                        <NavLink to="/dashboard/courses" className={onActiveClass} end>
+                            <IoBookOutline size={28} /> Courses
+                        </NavLink>
                     </li>
-                    <li className="text-p1-regular">
-                        <BsLightningCharge size={28} /> Daily Challenge
+                    <li>
+                        <NavLink to="/dashboard/challenge" className={onActiveClass} end>
+                            <BsLightningCharge size={28} /> Daily Challenge
+                        </NavLink>
                     </li>
-                    <li className="active bg-secondary text-p1-semibold">
-                        <FaRegStar size={28} /> Achievements
+                    <li>
+                        <NavLink to="/dashboard/achievements" className={onActiveClass} end>
+                            <FaRegStar size={28} /> Achievements
+                        </NavLink>
                     </li>
                 </ul>
                 <a href="/" className="flex text-p1-regular items-center pl-[15px] mb-[30px] gap-[10px]">
@@ -57,7 +69,7 @@ const SideBarItemsContainer = styled.div`
         flex: 1;
         padding-right: 10px;
 
-        & > li {
+        & > li > a {
             display: flex;
             gap: 10px;
             align-items: center;
