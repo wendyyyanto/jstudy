@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 function DashboardSideBar() {
     const onActiveClass = ({ isActive }: { isActive: boolean }) =>
-        isActive ? "bg-secondary text-p1-semibold" : "text-p1-regular";
+        isActive ? "bg-secondary text-p1-bold" : "text-p1-regular";
 
     return (
         <SideBarContainer className="bg-tertiary-500">
