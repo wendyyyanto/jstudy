@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard";
 import AchievementsPage from "./pages/Achievements";
 import CoursesPage from "./pages/Courses";
+import ChallengePage from "./pages/Challenge";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "courses",
                 element: <CoursesPage />
+            },
+            {
+                path: "challenge",
+                element: <ChallengePage />
             },
             {
                 path: "achievements",
