@@ -7,7 +7,8 @@ import DashboardPage from "pages/Dashboard";
 import AchievementsPage from "pages/Achievements";
 import CoursesPage from "pages/Courses";
 import ChallengePage from "pages/Challenge";
-
+import SignIn from "@/pages/SignIn";
+import SignUp from "@/pages/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -35,7 +36,20 @@ const router = createBrowserRouter([
                 element: <AchievementsPage />
             }
         ]
+    },
+    {
+        path: "auth",
+        children: [
+            {
+                path: "signin",
+                element: <SignIn />
+            },
+            {
+                path: "signup",
+                element: <SignUp />
+            }
+        ]
     }
 ]);
 
-export default router
+export default router;
