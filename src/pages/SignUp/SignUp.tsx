@@ -1,5 +1,6 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import supabase from "@/supabaseClient";
 
 import Input from "components/Input";
 
@@ -18,8 +19,26 @@ type Inputs = {
 function SignUp() {
     const { handleSubmit, control } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
+    const navigate = useNavigate();
+
+    const onSubmit: SubmitHandler<Inputs> = async ({ username, email, password }) => {
+        const { data: authData, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    username
+                }
+            }
+        });
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        console.log("Sign Up Success!", authData);
+
+        navigate("/auth/signin");
     };
 
     return (
@@ -98,7 +117,7 @@ function SignUp() {
                         form="signup-form"
                         className="bg-highlight-400 flex w-full justify-center items-center h-16 rounded-md cursor-pointer"
                     >
-                        <p className="text-h6-semibold text-stroke-400">Sign In</p>
+                        <p className="text-h6-semibold text-stroke-400">Sign Up</p>
                     </button>
 
                     <p className="text-stroke-400 text-p1-bold">Or</p>
