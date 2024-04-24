@@ -8,7 +8,7 @@ function NavBar() {
                 <Button
                     height="auto"
                     width="auto"
-                    classes="text-h6-regular text-stroke-200 h-auto w-auto"
+                    classes="text-h6-regular text-stroke-500 h-auto w-auto"
                     text="Log-in"
                 />
                 <Button
