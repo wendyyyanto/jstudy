@@ -1,10 +1,12 @@
-import Home from "pages/Home";
-import Dashboard from "@/pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import DashboardPage from "./pages/Dashboard";
-import AchievementsPage from "./pages/Achievements";
-import CoursesPage from "./pages/Courses";
-import ChallengePage from "./pages/Challenge";
+
+import Dashboard from "@/pages";
+
+import Home from "pages/Home";
+import DashboardPage from "pages/Dashboard";
+import AchievementsPage from "pages/Achievements";
+import CoursesPage from "pages/Courses";
+import ChallengePage from "pages/Challenge";
 
 const router = createBrowserRouter([
     {
