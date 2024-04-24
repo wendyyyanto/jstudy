@@ -1,9 +1,30 @@
 import DashboardNavBar from "@/layout/NavBar";
 import DashboardSideBar from "@/layout/SideBar";
+import supabase from "@/supabaseClient";
+import { useEffect } from "react";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 function Dashboard() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkUser = async () => {
+            const {
+                data: { user }
+            } = await supabase.auth.getUser();
+
+            if (!user) {
+                navigate("/auth/signin");
+                throw new Error("You're not logged in yet!");
+            }
+        };
+
+        checkUser();
+
+        return () => {};
+    });
+
     return (
         <div className="flex">
             <DashboardSideBar />

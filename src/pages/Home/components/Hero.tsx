@@ -1,4 +1,4 @@
-import Button from "@/components/Button";
+import { NavLink } from "react-router-dom";
 
 function Hero() {
     return (
@@ -9,12 +9,12 @@ function Hero() {
             <p className="text-stroke-200 text-subheading-regular text-center w-[440px] mt-6">
                 Unleash your programming potential with JavaScript.
             </p>
-            <Button
-                height="4rem"
-                width="16rem"
-                text="LEARN NOW"
-                classes="text-h5-bold text-stroke-500 bg-highlight-400 mt-6"
-            />
+            <NavLink
+                to={"/dashboard"}
+                className="flex items-center justify-center text-h5-bold text-stroke-500 rounded-sm bg-highlight-400 mt-6 h-16 w-64"
+            >
+                LEARN NOW
+            </NavLink>
         </section>
     );
 }
