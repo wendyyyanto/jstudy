@@ -13,7 +13,9 @@ function DashboardSideBar() {
 
     return (
         <SideBarContainer className="bg-tertiary-500">
-            <h1 className="text-h4-extrabold">JStudy.</h1>
+            <NavLink to={"/"} className="text-h4-extrabold">
+                JStudy.
+            </NavLink>
             <SideBarItemsContainer>
                 <ul>
                     <li>
