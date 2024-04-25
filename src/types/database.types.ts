@@ -9,6 +9,42 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      challenges: {
+        Row: {
+          answer: string
+          created_at: string
+          difficulty: string
+          duration: string
+          id: number
+          question: string
+          reward_points: number
+          topics: string
+          user_ids: number
+        }
+        Insert: {
+          answer?: string
+          created_at?: string
+          difficulty: string
+          duration: string
+          id?: number
+          question?: string
+          reward_points?: number
+          topics: string
+          user_ids: number
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          difficulty?: string
+          duration?: string
+          id?: number
+          question?: string
+          reward_points?: number
+          topics?: string
+          user_ids?: number
+        }
+        Relationships: []
+      }
       students: {
         Row: {
           achievements: Json | null
@@ -18,7 +54,8 @@ export type Database = {
           level: number
           points: number
           streaks: number
-          user: string | null
+          user_id: string | null
+          username: string | null
         }
         Insert: {
           achievements?: Json | null
@@ -28,7 +65,8 @@ export type Database = {
           level?: number
           points?: number
           streaks?: number
-          user?: string | null
+          user_id?: string | null
+          username?: string | null
         }
         Update: {
           achievements?: Json | null
@@ -38,12 +76,13 @@ export type Database = {
           level?: number
           points?: number
           streaks?: number
-          user?: string | null
+          user_id?: string | null
+          username?: string | null
         }
         Relationships: [
           {
             foreignKeyName: "students_user_fkey"
-            columns: ["user"]
+            columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]

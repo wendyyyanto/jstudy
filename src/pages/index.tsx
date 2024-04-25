@@ -7,10 +7,10 @@ import DashboardSideBar from "@/layout/SideBar";
 import useAuth from "@/hooks/useAuth";
 
 function Dashboard() {
-    const { checkUserAndNavigateToLogin } = useAuth();
+    const { checkLoggedInUserAndNavigateToLogin } = useAuth();
 
     useEffect(() => {
-        checkUserAndNavigateToLogin();
+        checkLoggedInUserAndNavigateToLogin();
 
         return () => {};
     }, []);

@@ -1,17 +1,17 @@
-import { User } from "@supabase/supabase-js";
+import { Tables } from "@/types/database.types";
 import { create } from "zustand";
 
 type State = {
-    authUser: User | null;
+    authUser: Tables<"students"> | null;
 };
 
 type Action = {
-    updateAuthUser: (user: User) => void;
+    updateAuthUser: (user: Tables<"students">) => void;
 };
 
 const useAuthContext = create<State & Action>((set) => ({
     authUser: null,
-    updateAuthUser: (user: User) => set({ authUser: user })
+    updateAuthUser: (user: Tables<"students">) => set({ authUser: user })
 }));
 
 export default useAuthContext;

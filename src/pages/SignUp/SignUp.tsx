@@ -25,10 +25,10 @@ function SignUp() {
 
     const navigate = useNavigate();
 
-    const { checkUserSessionAndNavigateToDashboard } = useAuth();
+    const { checkLoggedInUserAndNavigateToDashboard } = useAuth();
 
     useEffect(() => {
-        checkUserSessionAndNavigateToDashboard();
+        checkLoggedInUserAndNavigateToDashboard();
 
         return () => {};
     }, []);
@@ -47,6 +47,11 @@ function SignUp() {
         if (error) {
             throw new Error(error.message);
         }
+
+        await supabase.from("students").insert({
+            user_id: authData?.user?.id,
+            username
+        });
 
         console.log("Sign Up Success!", authData);
 

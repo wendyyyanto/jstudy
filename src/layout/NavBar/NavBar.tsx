@@ -8,10 +8,14 @@ import useAuthContext from "@/context/authContext";
 function DashboardNavBar() {
     const { authUser: user } = useAuthContext();
 
+    if (!user) {
+        return;
+    }
+
     return (
         <NavBarContainer>
-            <StreakCount streak={4} />
-            <ProfileBadge image={profileImage} username={user?.user_metadata.username} />
+            <StreakCount streak={user.streaks} />
+            <ProfileBadge image={profileImage} username={user.username!} />
         </NavBarContainer>
     );
 }

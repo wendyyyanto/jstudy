@@ -23,10 +23,10 @@ function SignIn() {
 
     const navigate = useNavigate();
 
-    const { checkUserSessionAndNavigateToDashboard } = useAuth();
+    const { checkLoggedInUserAndNavigateToDashboard } = useAuth();
 
     useEffect(() => {
-        checkUserSessionAndNavigateToDashboard();
+        checkLoggedInUserAndNavigateToDashboard();
 
         return () => {};
     }, []);
