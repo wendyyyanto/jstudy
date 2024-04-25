@@ -31,7 +31,7 @@ function SignUp() {
         checkUserSessionAndNavigateToDashboard();
 
         return () => {};
-    });
+    }, []);
 
     const onSubmit: SubmitHandler<Inputs> = async ({ username, email, password }) => {
         const { data: authData, error } = await supabase.auth.signUp({

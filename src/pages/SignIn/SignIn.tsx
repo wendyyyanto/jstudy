@@ -29,7 +29,7 @@ function SignIn() {
         checkUserSessionAndNavigateToDashboard();
 
         return () => {};
-    });
+    }, []);
 
     const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
         const { data: authData, error } = await supabase.auth.signInWithPassword({

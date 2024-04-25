@@ -13,7 +13,7 @@ function Dashboard() {
         checkUserAndNavigateToLogin();
 
         return () => {};
-    });
+    }, []);
 
     return (
         <div className="flex">
