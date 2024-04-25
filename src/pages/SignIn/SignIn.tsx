@@ -1,8 +1,12 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 import supabase from "@/supabaseClient";
 
 import Input from "components/Input";
+
+import useAuth from "@/hooks/useAuth";
 
 import signInIllustration from "assets/signin-illustration.svg";
 import MailIcon from "assets/components/MailIcon";
@@ -18,6 +22,14 @@ function SignIn() {
     const { handleSubmit, control } = useForm<Inputs>();
 
     const navigate = useNavigate();
+
+    const { checkUserSessionAndNavigateToDashboard } = useAuth();
+
+    useEffect(() => {
+        checkUserSessionAndNavigateToDashboard();
+
+        return () => {};
+    });
 
     const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
         const { data: authData, error } = await supabase.auth.signInWithPassword({

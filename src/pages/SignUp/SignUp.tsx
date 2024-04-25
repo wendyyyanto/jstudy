@@ -1,5 +1,9 @@
+import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
+
+import useAuth from "@/hooks/useAuth";
+
 import supabase from "@/supabaseClient";
 
 import Input from "components/Input";
@@ -20,6 +24,14 @@ function SignUp() {
     const { handleSubmit, control } = useForm<Inputs>();
 
     const navigate = useNavigate();
+
+    const { checkUserSessionAndNavigateToDashboard } = useAuth();
+
+    useEffect(() => {
+        checkUserSessionAndNavigateToDashboard();
+
+        return () => {};
+    });
 
     const onSubmit: SubmitHandler<Inputs> = async ({ username, email, password }) => {
         const { data: authData, error } = await supabase.auth.signUp({
