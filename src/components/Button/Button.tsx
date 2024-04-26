@@ -6,9 +6,10 @@ interface IButtonProps {
     height: string;
     width: string;
     classes?: string;
+    onClick?: () => void;
 }
 
-function Button({ text, rounded = "small", height, width, classes }: IButtonProps) {
+function Button({ text, rounded = "small", height, width, classes, onClick = () => {} }: IButtonProps) {
     const roundedValues = {
         small: "10px",
         medium: "15px",
@@ -16,7 +17,13 @@ function Button({ text, rounded = "small", height, width, classes }: IButtonProp
     };
 
     return (
-        <StyledButton $height={height} $width={width} $rounded={roundedValues[rounded]} className={classes}>
+        <StyledButton
+            $height={height}
+            $width={width}
+            $rounded={roundedValues[rounded]}
+            className={classes}
+            onClick={onClick}
+        >
             {text}
         </StyledButton>
     );

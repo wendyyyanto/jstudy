@@ -13,35 +13,35 @@ export type Database = {
         Row: {
           answer: string
           created_at: string
-          difficulty: string
-          duration: string
+          difficulty: Database["public"]["Enums"]["Difficulty"]
+          durations: number
           id: number
           question: string
           reward_points: number
           topics: string
-          user_ids: number
+          user_ids: number[] | null
         }
         Insert: {
           answer?: string
           created_at?: string
-          difficulty: string
-          duration: string
+          difficulty?: Database["public"]["Enums"]["Difficulty"]
+          durations: number
           id?: number
           question?: string
           reward_points?: number
           topics: string
-          user_ids: number
+          user_ids?: number[] | null
         }
         Update: {
           answer?: string
           created_at?: string
-          difficulty?: string
-          duration?: string
+          difficulty?: Database["public"]["Enums"]["Difficulty"]
+          durations?: number
           id?: number
           question?: string
           reward_points?: number
           topics?: string
-          user_ids?: number
+          user_ids?: number[] | null
         }
         Relationships: []
       }
@@ -100,7 +100,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      Difficulty: "Easy" | "Medium" | "Hard"
     }
     CompositeTypes: {
       [_ in never]: never
