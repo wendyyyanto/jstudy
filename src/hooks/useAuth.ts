@@ -10,14 +10,14 @@ const useAuth = () => {
     const { updateAuthUser } = useAuthContext();
     const { updateStudent } = useStudentContext();
 
-    const checkLoggedInUserAndNavigateToDashboard = async () => {
+    const handleDashboardAuth = async (path: string = "/") => {
         const {
             data: { user }
         } = await supabase.auth.getUser();
 
         if (!user) {
-            navigate("/auth/signin");
-            throw new Error("You're not logged in yet!");
+            navigate(path);
+            return;
         }
 
         navigate("/dashboard");
@@ -32,7 +32,7 @@ const useAuth = () => {
         updateStudent(student[0]);
     };
 
-    return { checkLoggedInUserAndNavigateToDashboard };
+    return { handleDashboardAuth };
 };
 
 export default useAuth;
