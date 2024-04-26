@@ -11,7 +11,6 @@ import useAuth from "@/hooks/useAuth";
 import signInIllustration from "assets/signin-illustration.svg";
 import MailIcon from "assets/components/MailIcon";
 import LockKeyIcon from "assets/components/LockKeyIcon";
-import googleIcon from "assets/google.svg";
 
 type Inputs = {
     email: string;
@@ -23,10 +22,10 @@ function SignIn() {
 
     const navigate = useNavigate();
 
-    const { checkLoggedInUserAndNavigateToDashboard } = useAuth();
+    const { handleDashboardAuth } = useAuth();
 
     useEffect(() => {
-        checkLoggedInUserAndNavigateToDashboard();
+        handleDashboardAuth("/auth/signin");
 
         return () => {};
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -111,13 +110,6 @@ function SignIn() {
                     >
                         <p className="text-h6-semibold text-stroke-400">Sign In</p>
                     </button>
-
-                    <p className="text-stroke-400 text-p1-bold">Or</p>
-
-                    <div className="bg-white flex gap-2 w-full justify-center items-center h-16 rounded-md cursor-pointer">
-                        <img src={googleIcon} alt="Google Icon" />
-                        <p className="text-h6-semibold text-stroke-400">Google</p>
-                    </div>
 
                     <p className="text-p2-semibold text-para-300">
                         You don't have an account?{" "}

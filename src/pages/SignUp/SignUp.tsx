@@ -12,7 +12,6 @@ import UserIcon from "assets/components/UserIcon";
 import MailIcon from "assets/components/MailIcon";
 import LockKeyIcon from "assets/components/LockKeyIcon";
 import signUpIllustration from "assets/signup-illustration.svg";
-import googleIcon from "assets/google.svg";
 
 type Inputs = {
     username: string;
@@ -25,10 +24,10 @@ function SignUp() {
 
     const navigate = useNavigate();
 
-    const { checkLoggedInUserAndNavigateToDashboard } = useAuth();
+    const { handleDashboardAuth } = useAuth();
 
     useEffect(() => {
-        checkLoggedInUserAndNavigateToDashboard();
+        handleDashboardAuth("/auth/signup");
 
         return () => {};
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -137,13 +136,6 @@ function SignUp() {
                     >
                         <p className="text-h6-semibold text-stroke-400">Sign Up</p>
                     </button>
-
-                    <p className="text-stroke-400 text-p1-bold">Or</p>
-
-                    <div className="bg-white flex gap-2 w-full justify-center items-center h-16 rounded-md">
-                        <img src={googleIcon} alt="Google Icon" />
-                        <p className="text-h6-semibold text-stroke-400">Google</p>
-                    </div>
 
                     <p className="text-p2-semibold text-para-300">
                         Already have an account?{" "}
