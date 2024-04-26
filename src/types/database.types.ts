@@ -53,6 +53,7 @@ export type Database = {
           id: number
           level: number
           points: number
+          rank: string
           streaks: number
           user_id: string | null
           username: string | null
@@ -64,6 +65,7 @@ export type Database = {
           id?: number
           level?: number
           points?: number
+          rank?: string
           streaks?: number
           user_id?: string | null
           username?: string | null
@@ -75,6 +77,7 @@ export type Database = {
           id?: number
           level?: number
           points?: number
+          rank?: string
           streaks?: number
           user_id?: string | null
           username?: string | null
