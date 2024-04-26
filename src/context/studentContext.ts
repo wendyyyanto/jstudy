@@ -6,12 +6,12 @@ type State = {
 };
 
 type Action = {
-    updateStudent: (user: Tables<"students">) => void;
+    updateStudent: (student: Tables<"students">) => void;
 };
 
 const useStudentContext = create<State & Action>((set) => ({
     student: null,
-    updateStudent: (user: Tables<"students">) => set({ student: user })
+    updateStudent: (student: Tables<"students">) => set({ student })
 }));
 
 export default useStudentContext;
