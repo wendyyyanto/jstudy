@@ -3,19 +3,19 @@ import styled from "styled-components";
 import profileImage from "assets/profile.png";
 import ProfileBadge from "./ProfileBadge";
 import StreakCount from "./StreakCount";
-import useAuthContext from "@/context/authContext";
+import useStudentContext from "@/context/studentContext";
 
 function DashboardNavBar() {
-    const { authUser: user } = useAuthContext();
+    const { student } = useStudentContext();
 
-    if (!user) {
-        return;
+    if (!student) {
+        return <p>Loading...</p>;
     }
 
     return (
         <NavBarContainer>
-            <StreakCount streak={user.streaks} />
-            <ProfileBadge image={profileImage} username={user.username!} />
+            <StreakCount streak={student.streaks} />
+            <ProfileBadge image={profileImage} username={student.username!} />
         </NavBarContainer>
     );
 }

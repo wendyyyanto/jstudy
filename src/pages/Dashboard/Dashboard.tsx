@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import useStudentContext from "@/context/studentContext";
+
 import Achievements from "./components/Achievements";
 import LearningProgress from "./components/LearningProgress";
 import LastModuleInfo from "./components/Info/LastModuleInfo";
@@ -8,6 +10,12 @@ import LevelInfo from "./components/Info/LevelInfo";
 import PointInfo from "./components/Info/PointInfo";
 
 function DashboardPage() {
+    const { student } = useStudentContext();
+
+    if (!student) {
+        return <p>Loading...</p>;
+    }
+
     return (
         <>
             <h1 className="text-h2-semibold text-stroke-600 mb-5">Dashboard</h1>
@@ -18,15 +26,15 @@ function DashboardPage() {
                 </div>
 
                 <div className="relative col-span-4 row-span-2 bg-stroke-900 rounded-sm flex items-center pl-10 gap-8 overflow-hidden">
-                    <RankInfo rank="Beginner" />
+                    <RankInfo rank={student.rank} />
                 </div>
 
                 <div className="col-span-2 col-start-9 row-span-1 bg-secondary rounded-sm flex items-center gap-4 px-4">
-                    <LevelInfo level="04" />
+                    <LevelInfo level={student.level} />
                 </div>
 
                 <div className="col-span-2 col-start-9 row-span-1 bg-tertiary-500 rounded-sm flex items-center gap-4 px-4">
-                    <PointInfo points={602} />
+                    <PointInfo points={student.points} />
                 </div>
 
                 <WhiteCard className="col-span-6 col-start-1 row-span-5">
