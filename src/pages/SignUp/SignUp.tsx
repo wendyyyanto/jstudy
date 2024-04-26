@@ -31,6 +31,7 @@ function SignUp() {
         checkLoggedInUserAndNavigateToDashboard();
 
         return () => {};
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onSubmit: SubmitHandler<Inputs> = async ({ username, email, password }) => {
