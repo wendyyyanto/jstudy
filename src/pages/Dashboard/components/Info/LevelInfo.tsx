@@ -1,7 +1,7 @@
 import SmallCircle from "../SmallCircle";
 import lampIcon from "assets/lamp.svg";
 
-function LevelInfo({ level }: { level: string }) {
+function LevelInfo({ level }: { level: number }) {
     return (
         <>
             <SmallCircle color="dark">
