@@ -10,7 +10,7 @@ const useAuth = () => {
     const { updateAuthUser } = useAuthContext();
     const { updateStudent } = useStudentContext();
 
-    const checkLoggedInUserAndNavigateToLogin = async () => {
+    const checkLoggedInUserAndNavigateToDashboard = async () => {
         const {
             data: { user }
         } = await supabase.auth.getUser();
@@ -20,27 +20,19 @@ const useAuth = () => {
             throw new Error("You're not logged in yet!");
         }
 
+        navigate("/dashboard");
         updateAuthUser(user);
 
         const { data: student } = await supabase.from("students").select().eq("user_id", user.id);
 
-        if (student) {
-            updateStudent(student[0]);
+        if (!student) {
+            throw new Error("Something went wrong, failed fetching Student data");
         }
+
+        updateStudent(student[0]);
     };
 
-    const checkLoggedInUserAndNavigateToDashboard = async () => {
-        const {
-            data: { user }
-        } = await supabase.auth.getUser();
-
-        if (user) {
-            navigate("/dashboard");
-            return;
-        }
-    };
-
-    return { checkLoggedInUserAndNavigateToLogin, checkLoggedInUserAndNavigateToDashboard };
+    return { checkLoggedInUserAndNavigateToDashboard };
 };
 
 export default useAuth;

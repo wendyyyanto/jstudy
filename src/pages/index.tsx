@@ -7,10 +7,10 @@ import DashboardSideBar from "@/layout/SideBar";
 import useAuth from "@/hooks/useAuth";
 
 function Dashboard() {
-    const { checkLoggedInUserAndNavigateToLogin } = useAuth();
+    const { checkLoggedInUserAndNavigateToDashboard } = useAuth();
 
     useEffect(() => {
-        checkLoggedInUserAndNavigateToLogin();
+        checkLoggedInUserAndNavigateToDashboard();
 
         return () => {};
         // eslint-disable-next-line react-hooks/exhaustive-deps
