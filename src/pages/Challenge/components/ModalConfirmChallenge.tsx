@@ -1,3 +1,6 @@
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+
 import { FaRankingStar } from "react-icons/fa6";
 import { FiClock } from "react-icons/fi";
 import { PiWarningCircleFill } from "react-icons/pi";
@@ -7,9 +10,13 @@ import Button from "@/components/Button";
 import useChallengeContext from "@/context/challengeContext";
 import { useNavigate } from "react-router-dom";
 
+dayjs.extend(duration);
+
 function ModalConfirmChallenge() {
     const navigate = useNavigate();
-    const { updateIsConfirmed, updateIsOpened } = useChallengeContext();
+    const { challenge, updateIsConfirmed, updateIsOpened } = useChallengeContext();
+
+    const durations = dayjs.duration({ seconds: challenge?.durations }).asMinutes();
 
     const handleOnStart = () => {
         updateIsOpened(false);
@@ -27,7 +34,7 @@ function ModalConfirmChallenge() {
                 <div className="bg-white w-[700px] h-96 rounded-md p-8 flex flex-col">
                     <div>
                         <p className="text-p2-regular">Challenge's Topic</p>
-                        <p className="text-h5-semibold">Variables</p>
+                        <p className="text-h5-semibold">{challenge?.topics}</p>
                     </div>
 
                     <div className="flex gap-8 mt-10">
@@ -35,21 +42,21 @@ function ModalConfirmChallenge() {
                             <p className="text-caption-regular">Difficulty</p>
                             <div className="flex items-end gap-2">
                                 <FaRankingStar size={28} />
-                                <p className="text-p2-semibold">Medium</p>
+                                <p className="text-p2-semibold">{challenge?.difficulty}</p>
                             </div>
                         </div>
                         <div className="flex flex-col gap-2">
                             <p className="text-caption-regular">Reward</p>
                             <div className="flex items-end gap-2">
                                 <SlBadge size={28} />
-                                <p className="text-p2-semibold">10 Points</p>
+                                <p className="text-p2-semibold">{challenge?.reward_points} Points</p>
                             </div>
                         </div>
                         <div className="flex flex-col gap-2">
                             <p className="text-caption-regular">Time Limit</p>
                             <div className="flex items-end gap-2">
                                 <FiClock size={28} />
-                                <p className="text-p2-semibold">7 Minutes</p>
+                                <p className="text-p2-semibold">{durations} Minute(s)</p>
                             </div>
                         </div>
                     </div>
