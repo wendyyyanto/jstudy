@@ -1,17 +1,19 @@
 import { Tables } from "@/types/database.types";
 import { create } from "zustand";
 
+type Student = Tables<"students"> | null;
+
 type State = {
-    student: Tables<"students"> | null;
+    student: Student;
 };
 
 type Action = {
-    updateStudent: (student: Tables<"students">) => void;
+    updateStudent: (student: Student) => void;
 };
 
 const useStudentContext = create<State & Action>((set) => ({
     student: null,
-    updateStudent: (student: Tables<"students">) => set({ student })
+    updateStudent: (student: Student) => set({ student })
 }));
 
 export default useStudentContext;
