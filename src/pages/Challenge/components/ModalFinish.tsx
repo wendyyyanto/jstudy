@@ -16,7 +16,7 @@ function ModalFinish({ headerText, descriptionText }: IModalFinishProps) {
     return (
         <div className="absolute top-0 left-0 w-screen h-screen bg-para-900 bg-opacity-25">
             <div className="w-screen h-screen relative flex items-center justify-center">
-                <div className="bg-white rounded-md p-8 flex flex-col max-w-96">
+                <div className="bg-white text-stroke-900 w-[600px] rounded-md p-8 flex flex-col max-w-96">
                     <p className="text-h6-semibold">{headerText}</p>
                     <p className="text-p2-regular my-4">{descriptionText}</p>
 
