@@ -11,35 +11,38 @@ export type Database = {
     Tables: {
       challenges: {
         Row: {
-          answer: string
+          answers: string[]
           created_at: string
           difficulty: Database["public"]["Enums"]["Difficulty"]
           durations: number
           id: number
           question: string
           reward_points: number
+          snippet: string | null
           topics: string
           user_ids: number[] | null
         }
         Insert: {
-          answer?: string
+          answers?: string[]
           created_at?: string
           difficulty?: Database["public"]["Enums"]["Difficulty"]
           durations: number
           id?: number
           question?: string
           reward_points?: number
+          snippet?: string | null
           topics: string
           user_ids?: number[] | null
         }
         Update: {
-          answer?: string
+          answers?: string[]
           created_at?: string
           difficulty?: Database["public"]["Enums"]["Difficulty"]
           durations?: number
           id?: number
           question?: string
           reward_points?: number
+          snippet?: string | null
           topics?: string
           user_ids?: number[] | null
         }
@@ -47,37 +50,43 @@ export type Database = {
       }
       students: {
         Row: {
-          achievements: Json | null
+          achievements: number[] | null
           created_at: string
           current_xp: number
+          has_finished_challenge: boolean
           id: number
+          last_challenge_timestamp: string | null
           level: number
           points: number
-          rank: string
+          rank: Database["public"]["Enums"]["Ranks"]
           streaks: number
           user_id: string | null
           username: string | null
         }
         Insert: {
-          achievements?: Json | null
+          achievements?: number[] | null
           created_at?: string
           current_xp?: number
+          has_finished_challenge?: boolean
           id?: number
+          last_challenge_timestamp?: string | null
           level?: number
           points?: number
-          rank?: string
+          rank?: Database["public"]["Enums"]["Ranks"]
           streaks?: number
           user_id?: string | null
           username?: string | null
         }
         Update: {
-          achievements?: Json | null
+          achievements?: number[] | null
           created_at?: string
           current_xp?: number
+          has_finished_challenge?: boolean
           id?: number
+          last_challenge_timestamp?: string | null
           level?: number
           points?: number
-          rank?: string
+          rank?: Database["public"]["Enums"]["Ranks"]
           streaks?: number
           user_id?: string | null
           username?: string | null
@@ -101,6 +110,7 @@ export type Database = {
     }
     Enums: {
       Difficulty: "Easy" | "Medium" | "Hard"
+      Ranks: "Beginner" | "Intermediate" | "Advanced" | "Master"
     }
     CompositeTypes: {
       [_ in never]: never
