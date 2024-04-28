@@ -6,7 +6,7 @@ import supabase from "@/lib/supabaseClient";
 
 import Input from "components/Input";
 
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/lib/hooks/useAuth";
 
 import signInIllustration from "assets/signin-illustration.svg";
 import MailIcon from "assets/components/MailIcon";

@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import DashboardNavBar from "@/layout/NavBar";
 import DashboardSideBar from "@/layout/SideBar";
 
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/lib/hooks/useAuth";
 
 function Dashboard() {
     const { handleDashboardAuth } = useAuth();

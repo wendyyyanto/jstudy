@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/lib/hooks/useAuth";
 
 import supabase from "@/lib/supabaseClient";
 
