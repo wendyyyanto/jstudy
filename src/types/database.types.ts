@@ -20,7 +20,7 @@ export type Database = {
           reward_points: number
           snippet: string | null
           topics: string
-          user_ids: number[] | null
+          user_ids: number[]
         }
         Insert: {
           answers?: string[]
@@ -32,7 +32,7 @@ export type Database = {
           reward_points?: number
           snippet?: string | null
           topics: string
-          user_ids?: number[] | null
+          user_ids: number[]
         }
         Update: {
           answers?: string[]
@@ -44,7 +44,7 @@ export type Database = {
           reward_points?: number
           snippet?: string | null
           topics?: string
-          user_ids?: number[] | null
+          user_ids?: number[]
         }
         Relationships: []
       }
