@@ -2,7 +2,7 @@ import Countdown, { CountdownRenderProps } from "react-countdown";
 import ModalFinish from "./ModalFinish";
 import { FiClock } from "react-icons/fi";
 
-interface ICountdownChallengeProps {
+interface IChallengeCountdownProps {
     durations: number;
 }
 
@@ -29,8 +29,8 @@ const renderer = ({ minutes, seconds, completed }: CountdownRenderProps) => {
     );
 };
 
-function CountdownChallenge({ durations }: ICountdownChallengeProps) {
+function ChallengeCountdown({ durations }: IChallengeCountdownProps) {
     return <Countdown date={Date.now() + durations * 1000} renderer={renderer}></Countdown>;
 }
 
-export default CountdownChallenge;
+export default ChallengeCountdown;

@@ -9,23 +9,28 @@ import { SlBadge } from "react-icons/sl";
 import Button from "@/components/Button";
 import useChallengeContext from "@/context/challengeContext";
 import { useNavigate } from "react-router-dom";
+import ChallengeInfo from "./ChallengeInfo";
 
 dayjs.extend(duration);
 
-function ModalConfirmChallenge() {
+function ChallengeConfirmModal() {
     const navigate = useNavigate();
-    const { challenge, updateIsConfirmed, updateIsOpened } = useChallengeContext();
+    const { challenge, setIsConfirmed, setIsOpened } = useChallengeContext();
 
-    const durations = dayjs.duration({ seconds: challenge?.durations }).asMinutes();
+    if (!challenge) {
+        return <p>Loading Challenge Data...</p>;
+    }
+
+    const durations = dayjs.duration({ seconds: challenge.durations }).asMinutes();
 
     const handleOnStart = () => {
-        updateIsOpened(false);
-        updateIsConfirmed(true);
+        setIsOpened(false);
+        setIsConfirmed(true);
     };
 
     const handleOnCancel = () => {
         navigate("/dashboard", { replace: true });
-        updateIsOpened(false);
+        setIsOpened(false);
     };
 
     return (
@@ -34,31 +39,25 @@ function ModalConfirmChallenge() {
                 <div className="bg-white w-[700px] h-96 rounded-md p-8 flex flex-col">
                     <div>
                         <p className="text-p2-regular">Challenge's Topic</p>
-                        <p className="text-h5-semibold">{challenge?.topics}</p>
+                        <p className="text-h5-semibold">{challenge.topics}</p>
                     </div>
 
                     <div className="flex gap-8 mt-10">
-                        <div className="flex flex-col gap-2">
-                            <p className="text-caption-regular">Difficulty</p>
-                            <div className="flex items-end gap-2">
-                                <FaRankingStar size={28} />
-                                <p className="text-p2-semibold">{challenge?.difficulty}</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <p className="text-caption-regular">Reward</p>
-                            <div className="flex items-end gap-2">
-                                <SlBadge size={28} />
-                                <p className="text-p2-semibold">{challenge?.reward_points} Points</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <p className="text-caption-regular">Time Limit</p>
-                            <div className="flex items-end gap-2">
-                                <FiClock size={28} />
-                                <p className="text-p2-semibold">{durations} Minute(s)</p>
-                            </div>
-                        </div>
+                        <ChallengeInfo
+                            title="Difficulty"
+                            icon={<FaRankingStar size={28} />}
+                            details={challenge.difficulty}
+                        />
+                        <ChallengeInfo
+                            title="Rewards"
+                            icon={<SlBadge size={28} />}
+                            details={`${challenge.reward_points} Points`}
+                        />
+                        <ChallengeInfo
+                            title="Durations"
+                            icon={<FiClock size={28} />}
+                            details={`${durations} Minute(s)`}
+                        />
                     </div>
 
                     <div className="flex flex-1 justify-around items-end gap-4-">
@@ -97,4 +96,4 @@ function ModalConfirmChallenge() {
     );
 }
 
-export default ModalConfirmChallenge;
+export default ChallengeConfirmModal;
