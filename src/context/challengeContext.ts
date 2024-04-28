@@ -11,10 +11,10 @@ type State = {
 };
 
 type Action = {
-    updateIsConfirmed: (isConfirmed: boolean) => void;
-    updateIsOpened: (isOpened: boolean) => void;
-    updateIsCompleted: (isCompleted: boolean) => void;
-    updateChallenge: (challenge: Challenge) => void;
+    setIsConfirmed: (isConfirmed: boolean) => void;
+    setIsOpened: (isOpened: boolean) => void;
+    setIsCompleted: (isCompleted: boolean) => void;
+    setChallenge: (challenge: Challenge) => void;
     resetChallengeState: () => void;
 };
 
@@ -27,10 +27,10 @@ const initialState: State = {
 
 const useChallengeContext = create<State & Action>((set) => ({
     ...initialState,
-    updateIsConfirmed: (isConfirmed: boolean) => set({ isConfirmed }),
-    updateIsOpened: (isOpened: boolean) => set({ isOpened }),
-    updateIsCompleted: (isCompleted: boolean) => set({ isCompleted }),
-    updateChallenge: (challenge: Challenge) => set({ challenge }),
+    setIsConfirmed: (isConfirmed: boolean) => set({ isConfirmed }),
+    setIsOpened: (isOpened: boolean) => set({ isOpened }),
+    setIsCompleted: (isCompleted: boolean) => set({ isCompleted }),
+    setChallenge: (challenge: Challenge) => set({ challenge }),
     resetChallengeState: () => {
         set(initialState);
     }
