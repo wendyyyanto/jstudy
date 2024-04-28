@@ -5,80 +5,103 @@ import { CodeBlock, dracula } from "react-code-blocks";
 import { FaRankingStar } from "react-icons/fa6";
 import { SlBadge } from "react-icons/sl";
 
-import supabase from "@/supabaseClient";
-
-import ModalConfirmChallenge from "./components/ModalConfirmChallenge";
-import CountdownChallenge from "./components/CountdownChallenge";
+import ChallengeConfirmModal from "./components/ChallengeConfirmModal";
+import ChallengeCountdown from "./components/ChallengeCountdown";
 
 import useChallengeContext from "@/context/challengeContext";
-import useStudentContext from "@/context/studentContext";
 import ModalFinish from "./components/ModalFinish";
+import { useChallenge, useUpdateChallenge } from "@/api/challenge";
+import useStudentContext from "@/context/studentContext";
+import { TablesUpdate } from "@/types/database.types";
+import { useUpdateStudent } from "@/api/student";
+import { useUpdateStudentSubscription } from "@/api/student/subscription";
 
 type Inputs = {
     answer: string;
 };
 
 function ChallengePage() {
+    useUpdateStudentSubscription();
+
     const { handleSubmit, control } = useForm<Inputs>();
 
+    const { updateChallenge } = useUpdateChallenge();
+    const { updateStudent } = useUpdateStudent();
+    const { getChallenge } = useChallenge();
     const { student } = useStudentContext();
-    const { isOpened, isCompleted, challenge, updateChallenge, updateIsOpened, updateIsCompleted } =
-        useChallengeContext();
+    const { isOpened, isCompleted, challenge, setChallenge, setIsOpened, setIsCompleted } = useChallengeContext();
+
+    if (!student) {
+        throw new Error("Failed fetching student data");
+    }
 
     useEffect(() => {
-        updateIsOpened(true);
+        setIsOpened(true);
+        setIsCompleted(student.has_finished_challenge);
 
         const fetchChallenge = async () => {
-            const { data: challenge, error } = await supabase
-                .from("challenges")
-                .select("*")
-                .eq("id", 6)
-                .limit(1)
-                .single();
+            const challenge = await getChallenge(6);
 
-            if (error) {
-                throw new Error(error.message);
-            }
-
-            console.log(challenge);
-            updateChallenge(challenge);
+            setChallenge(challenge);
         };
 
         fetchChallenge();
     }, []);
 
+    if (!challenge) {
+        return <p>Loading Challenge Data...</p>;
+    }
+
     const checkAnswer = (answer: string): boolean => {
-        return challenge?.answers.includes(answer.trim()) as boolean;
+        return challenge.answers.includes(answer.trim()) as boolean;
     };
 
     const handleSubmitAnswer: SubmitHandler<Inputs> = async ({ answer }) => {
-        //Check answer
         const isCorrect = checkAnswer(answer);
 
         if (isCorrect) {
-            updateIsCompleted(isCorrect);
+            handleUpdateChallege();
+
             return;
         } else {
-            console.log("False!");
             return;
         }
+    };
+
+    const handleUpdateChallege = async () => {
+        const studentId = student.id;
+        const challengeId = challenge.id;
+        const challengeUserIds = challenge.user_ids;
+
+        const newChallengeUserIds = [...challengeUserIds, studentId!];
+
+        const updatedChallenge: TablesUpdate<"challenges"> = {
+            user_ids: newChallengeUserIds
+        };
+
+        const updatedStudent: TablesUpdate<"students"> = {
+            has_finished_challenge: true
+        };
+
+        setIsCompleted(true);
+
+        const challengeResponse = updateChallenge(challengeId, updatedChallenge);
+        const studentResponse = updateStudent(studentId, updatedStudent);
+
+        console.log(challengeResponse, studentResponse);
     };
 
     if (isCompleted) {
         return (
             <ModalFinish
-                headerText="Congratulations!"
-                descriptionText="You answer the question correctly! The challenge is completed for today 🎉"
+                headerText="Congratulations 🎉"
+                descriptionText="The challenge is completed for today. See you tomorrow 👋"
             />
         );
     }
 
     if (isOpened) {
-        return <ModalConfirmChallenge />;
-    }
-
-    if (!challenge) {
-        return <p>Loading Challenge Data...</p>;
+        return <ChallengeConfirmModal />;
     }
 
     return (
@@ -98,7 +121,7 @@ function ChallengePage() {
                         </div>
                     </div>
                     <div className="flex  gap-2 bg-stroke-500 p-4 rounded-sm justify-end end text-white">
-                        <CountdownChallenge durations={challenge.durations} />
+                        <ChallengeCountdown durations={challenge.durations} />
                     </div>
                 </div>
 
