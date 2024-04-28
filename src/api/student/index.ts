@@ -1,7 +1,7 @@
 import supabase from "@/lib/supabaseClient";
 import { TablesUpdate } from "@/types/database.types";
 
-export const useStudent = () => {
+export const useStudentApi = () => {
     const getStudent = async (studentId: number) => {
         const { data: student, error } = await supabase.from("students").select("*").eq("id", studentId).single();
 
@@ -12,10 +12,6 @@ export const useStudent = () => {
         return student;
     };
 
-    return { getStudent };
-};
-
-export const useUpdateStudent = () => {
     const updateStudent = async (studentId: number, updatedFields: TablesUpdate<"students">) => {
         const { data: updatedStudent, error } = await supabase
             .from("students")
@@ -31,5 +27,5 @@ export const useUpdateStudent = () => {
         return updatedStudent;
     };
 
-    return { updateStudent };
+    return { getStudent, updateStudent };
 };

@@ -1,7 +1,7 @@
 import supabase from "@/lib/supabaseClient";
 import { TablesUpdate } from "@/types/database.types";
 
-export const useChallenge = () => {
+export const useChallengeApi = () => {
     const getChallenge = async (challengeId: number) => {
         const { data: challenge, error } = await supabase.from("challenges").select().eq("id", challengeId).single();
 
@@ -12,10 +12,6 @@ export const useChallenge = () => {
         return challenge;
     };
 
-    return { getChallenge };
-};
-
-export const useUpdateChallenge = () => {
     const updateChallenge = async (challengeId: number, updatedFields: TablesUpdate<"challenges">) => {
         const { data: updatedChallenge, error } = await supabase
             .from("challenges")
@@ -31,5 +27,5 @@ export const useUpdateChallenge = () => {
         return updatedChallenge;
     };
 
-    return { updateChallenge };
+    return { getChallenge, updateChallenge };
 };
