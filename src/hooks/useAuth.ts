@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import supabase from "@/supabaseClient";
+import supabase from "@/lib/supabaseClient";
 import useAuthContext from "@/context/authContext";
 import useStudentContext from "@/context/studentContext";
 
@@ -8,7 +8,7 @@ const useAuth = () => {
     const navigate = useNavigate();
 
     const { updateAuthUser } = useAuthContext();
-    const { updateStudent } = useStudentContext();
+    const { setStudent } = useStudentContext();
 
     const handleDashboardAuth = async (path: string = "/") => {
         const {
@@ -29,7 +29,7 @@ const useAuth = () => {
             throw new Error("Something went wrong, failed fetching Student data");
         }
 
-        updateStudent(student[0]);
+        setStudent(student[0]);
     };
 
     return { handleDashboardAuth };

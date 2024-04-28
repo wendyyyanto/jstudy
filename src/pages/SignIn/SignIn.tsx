@@ -2,7 +2,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-import supabase from "@/supabaseClient";
+import supabase from "@/lib/supabaseClient";
 
 import Input from "components/Input";
 

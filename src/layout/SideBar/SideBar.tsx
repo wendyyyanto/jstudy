@@ -5,7 +5,7 @@ import { IoBookOutline } from "react-icons/io5";
 import { SlScreenDesktop } from "react-icons/sl";
 import { TbLogout2 } from "react-icons/tb";
 
-import supabase from "@/supabaseClient";
+import supabase from "@/lib/supabaseClient";
 
 import styled from "styled-components";
 

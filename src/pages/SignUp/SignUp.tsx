@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import useAuth from "@/hooks/useAuth";
 
-import supabase from "@/supabaseClient";
+import supabase from "@/lib/supabaseClient";
 
 import Input from "components/Input";
 
