@@ -18,6 +18,7 @@ export type Database = {
           id: number
           question: string
           reward_points: number
+          reward_xp: number
           snippet: string | null
           topics: string
           user_ids: number[]
@@ -30,6 +31,7 @@ export type Database = {
           id?: number
           question?: string
           reward_points?: number
+          reward_xp?: number
           snippet?: string | null
           topics: string
           user_ids: number[]
@@ -42,6 +44,7 @@ export type Database = {
           id?: number
           question?: string
           reward_points?: number
+          reward_xp?: number
           snippet?: string | null
           topics?: string
           user_ids?: number[]

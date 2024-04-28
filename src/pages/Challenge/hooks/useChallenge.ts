@@ -31,24 +31,21 @@ export const useChallenge = () => {
     }, []);
 
     const handleUpdateChallege = async () => {
-        if (!student) {
-            return console.error("Error loading student data");
-        } else if (!challenge) {
-            return console.error("Error loading challenge data");
-        }
+        const { id: studentId, points, current_xp, streaks } = student!;
+        const { id: challengeId, user_ids, reward_points, reward_xp } = challenge!;
 
-        const studentId = student.id;
-        const challengeId = challenge.id;
-        const challengeUserIds = challenge.user_ids;
-
-        const newChallengeUserIds = [...challengeUserIds, studentId!];
+        const newChallengeUserIds = [...user_ids, studentId!];
 
         const updatedChallenge: TablesUpdate<"challenges"> = {
             user_ids: newChallengeUserIds
         };
 
         const updatedStudent: TablesUpdate<"students"> = {
-            has_finished_challenge: true
+            points: points + reward_points,
+            current_xp: current_xp + reward_xp,
+            streaks: streaks + 1,
+            has_finished_challenge: true,
+            last_challenge_timestamp: new Date().toISOString()
         };
 
         setIsCompleted(true);
