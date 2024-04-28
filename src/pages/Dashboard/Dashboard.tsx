@@ -8,8 +8,11 @@ import LastModuleInfo from "./components/Info/LastModuleInfo";
 import RankInfo from "./components/Info/RankInfo";
 import LevelInfo from "./components/Info/LevelInfo";
 import PointInfo from "./components/Info/PointInfo";
+import { useUpdateStudentSubscription } from "@/api/student/subscription";
 
 function DashboardPage() {
+    useUpdateStudentSubscription();
+
     const { student } = useStudentContext();
 
     if (!student) {
