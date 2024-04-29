@@ -2,8 +2,13 @@ import supabase from "@/lib/supabaseClient";
 import { TablesUpdate } from "@/types/database.types";
 
 export const useStudentApi = () => {
-    const getStudent = async (studentId: number) => {
-        const { data: student, error } = await supabase.from("students").select("*").eq("id", studentId).single();
+    const getStudent = async (userId: string) => {
+        const { data: student, error } = await supabase
+            .from("students")
+            .select("*")
+            .eq("user_id", userId)
+            .select()
+            .single();
 
         if (error) {
             throw new Error(error.message);

@@ -9,7 +9,7 @@ export const useUpdateStudentSubscription = () => {
     const { setStudent } = useStudentContext();
 
     useEffect(() => {
-        const challengeSubscription = supabase
+        const studentSubscription = supabase
             .channel("custom-update-channel")
             .on(
                 "postgres_changes",
@@ -25,7 +25,7 @@ export const useUpdateStudentSubscription = () => {
             .subscribe();
 
         return () => {
-            challengeSubscription.unsubscribe();
+            studentSubscription.unsubscribe();
         };
     });
 };

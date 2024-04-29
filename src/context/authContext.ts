@@ -6,12 +6,12 @@ type State = {
 };
 
 type Action = {
-    updateAuthUser: (user: User) => void;
+    setAuthUser: (user: User) => void;
 };
 
 const useAuthContext = create<State & Action>((set) => ({
     authUser: null,
-    updateAuthUser: (user: User) => set({ authUser: user })
+    setAuthUser: (user: User) => set({ authUser: user })
 }));
 
 export default useAuthContext;

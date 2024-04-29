@@ -56,6 +56,7 @@ export type Database = {
           achievements: number[] | null
           created_at: string
           current_xp: number
+          has_failed_challenge: boolean
           has_finished_challenge: boolean
           id: number
           last_challenge_timestamp: string | null
@@ -70,6 +71,7 @@ export type Database = {
           achievements?: number[] | null
           created_at?: string
           current_xp?: number
+          has_failed_challenge?: boolean
           has_finished_challenge?: boolean
           id?: number
           last_challenge_timestamp?: string | null
@@ -84,6 +86,7 @@ export type Database = {
           achievements?: number[] | null
           created_at?: string
           current_xp?: number
+          has_failed_challenge?: boolean
           has_finished_challenge?: boolean
           id?: number
           last_challenge_timestamp?: string | null

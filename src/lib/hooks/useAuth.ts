@@ -3,12 +3,41 @@ import { useNavigate } from "react-router-dom";
 import supabase from "@/lib/supabaseClient";
 import useAuthContext from "@/context/authContext";
 import useStudentContext from "@/context/studentContext";
+import { useStudentApi } from "@/api/student";
+import { useEffect, useState } from "react";
 
 const useAuth = () => {
     const navigate = useNavigate();
 
-    const { updateAuthUser } = useAuthContext();
+    const { setAuthUser, authUser } = useAuthContext();
+
     const { setStudent } = useStudentContext();
+    const { getStudent } = useStudentApi();
+
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        handleDashboardAuth();
+
+        const fetchStudent = async () => {
+            if (!authUser) return;
+
+            const student = await getStudent(authUser?.id as string);
+
+            if (!student) {
+                throw new Error("Something went wrong, failed fetching Student data");
+            }
+
+            console.log(student);
+
+            setStudent(student);
+        };
+
+        fetchStudent();
+
+        return () => {};
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoaded]);
 
     const handleDashboardAuth = async (path: string = "/") => {
         const {
@@ -20,16 +49,10 @@ const useAuth = () => {
             return;
         }
 
+        setAuthUser(user);
+        setIsLoaded(true);
+
         navigate("/dashboard");
-        updateAuthUser(user);
-
-        const { data: student } = await supabase.from("students").select().eq("user_id", user.id);
-
-        if (!student) {
-            throw new Error("Something went wrong, failed fetching Student data");
-        }
-
-        setStudent(student[0]);
     };
 
     return { handleDashboardAuth };

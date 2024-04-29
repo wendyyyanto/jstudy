@@ -1,5 +1,5 @@
 import Button from "@/components/Button";
-import { useNavigate } from "react-router-dom";
+import { useChallenge } from "../hooks/useChallenge";
 
 interface IModalFinishProps {
     headerText: string;
@@ -7,11 +7,7 @@ interface IModalFinishProps {
 }
 
 function ModalFinish({ headerText, descriptionText }: IModalFinishProps) {
-    const navigate = useNavigate();
-
-    const handleExitChallenge = () => {
-        navigate("/dashboard");
-    };
+    const { handleExitChallenge } = useChallenge();
 
     return (
         <div className="absolute top-0 left-0 w-screen h-screen bg-para-900 bg-opacity-25">

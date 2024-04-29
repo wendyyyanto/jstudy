@@ -1,20 +1,11 @@
-import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
 import DashboardNavBar from "@/layout/NavBar";
 import DashboardSideBar from "@/layout/SideBar";
-
 import useAuth from "@/lib/hooks/useAuth";
 
 function Dashboard() {
-    const { handleDashboardAuth } = useAuth();
-
-    useEffect(() => {
-        handleDashboardAuth();
-
-        return () => {};
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    useAuth();
 
     return (
         <div className="flex">

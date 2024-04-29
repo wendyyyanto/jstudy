@@ -1,15 +1,17 @@
+import { LegacyRef, useRef } from "react";
+import { useBlocker } from "react-router-dom";
+import Countdown, { CountdownRenderProps } from "react-countdown";
 import { useForm } from "react-hook-form";
 
 import { FaRankingStar } from "react-icons/fa6";
 import { SlBadge } from "react-icons/sl";
+import { FiClock } from "react-icons/fi";
 
 import ChallengeConfirmModal from "./components/ChallengeConfirmModal";
-import ChallengeCountdown from "./components/ChallengeCountdown";
 import ChallengeInputAnswer from "./components/ChallengeInputAnswer";
 import ChallengeQuestion from "./components/ChallengeQuestion";
+import ChallengeLeaveModal from "./components/ChallengeLeaveModal";
 import ModalFinish from "./components/ModalFinish";
-
-import useChallengeContext from "@/context/challengeContext";
 
 import { useUpdateStudentSubscription } from "@/api/student/subscription";
 
@@ -22,9 +24,69 @@ function ChallengePage() {
 
     const { handleSubmit, control } = useForm<ChallengeInputs>();
 
-    const { handleSubmitAnswer } = useChallenge();
+    const {
+        challenge,
+        isModalOpened,
+        isStudentFailed,
+        isStudentCompleted,
+        handleSubmitAnswer,
+        updateFailedStudent,
+        setDuration,
+        duration
+    } = useChallenge();
 
-    const { isOpened, isCompleted, challenge } = useChallengeContext();
+    const isCompleted = isStudentCompleted();
+    const isFailed = isStudentFailed();
+
+    const countdownRef = useRef<Countdown>();
+    const handleStart = () => countdownRef?.current?.start();
+    const handlePause = () => countdownRef?.current?.pause();
+
+    const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+        handlePause();
+
+        return currentLocation.pathname !== nextLocation.pathname;
+    });
+
+    const handleExit = () => {
+        if (blocker.state === "blocked") {
+            blocker.proceed();
+            updateFailedStudent();
+        }
+    };
+
+    const handleResume = () => {
+        if (blocker.state === "blocked") {
+            handleStart();
+            blocker.reset();
+        }
+    };
+
+    const renderer = ({ minutes, seconds, completed }: CountdownRenderProps) => {
+        if (completed) {
+            // updateFailedStudent();
+
+            return (
+                <>
+                    <p className="text-h6-bold">Finished!</p>
+                    <ModalFinish
+                        headerText="Time is up!"
+                        descriptionText="You failed the challenge because you can not finished the challenge within the given duration!"
+                    />
+                </>
+            );
+        }
+
+        return (
+            <>
+                {blocker.state === "blocked" ? <ChallengeLeaveModal leave={handleExit} resume={handleResume} /> : null}
+                <FiClock size={24} />
+                <p className="text-h6-bold">
+                    {minutes} : {seconds}
+                </p>
+            </>
+        );
+    };
 
     if (!challenge) {
         return <p>Loading Challenge Data...</p>;
@@ -39,8 +101,17 @@ function ChallengePage() {
         );
     }
 
-    if (isOpened) {
-        return <ChallengeConfirmModal />;
+    if (isFailed) {
+        return (
+            <ModalFinish
+                headerText="You already failed for today's challenge 😭"
+                descriptionText="Keep your head up! Try again tomorrow."
+            />
+        );
+    }
+
+    if (isModalOpened) {
+        return <ChallengeConfirmModal challenge={challenge} />;
     }
 
     return (
@@ -60,7 +131,16 @@ function ChallengePage() {
                         </div>
                     </div>
                     <div className="flex gap-2 bg-stroke-500 p-4 rounded-sm justify-end end text-white">
-                        <ChallengeCountdown durations={challenge.durations} />
+                        {duration > 0 && (
+                            <Countdown
+                                date={Date.now() + duration}
+                                renderer={renderer}
+                                ref={countdownRef as LegacyRef<Countdown>}
+                                onPause={({ total }) => {
+                                    setDuration(total);
+                                }}
+                            />
+                        )}
                     </div>
                 </div>
 

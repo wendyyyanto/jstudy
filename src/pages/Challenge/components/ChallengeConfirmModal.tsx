@@ -10,27 +10,28 @@ import Button from "@/components/Button";
 import useChallengeContext from "@/context/challengeContext";
 import { useNavigate } from "react-router-dom";
 import ChallengeInfo from "./ChallengeInfo";
+import { Tables } from "@/types/database.types";
+
+interface IChallengeConfirmModalProps {
+    challenge: Tables<"challenges">;
+}
 
 dayjs.extend(duration);
 
-function ChallengeConfirmModal() {
+function ChallengeConfirmModal({ challenge }: IChallengeConfirmModalProps) {
     const navigate = useNavigate();
-    const { challenge, setIsConfirmed, setIsOpened } = useChallengeContext();
 
-    if (!challenge) {
-        return <p>Loading Challenge Data...</p>;
-    }
+    const { setIsModalOpened } = useChallengeContext();
 
     const durations = dayjs.duration({ seconds: challenge.durations }).asMinutes();
 
     const handleOnStart = () => {
-        setIsOpened(false);
-        setIsConfirmed(true);
+        setIsModalOpened(false);
     };
 
     const handleOnCancel = () => {
-        navigate("/dashboard", { replace: true });
-        setIsOpened(false);
+        setIsModalOpened(false);
+        navigate("/dashboard");
     };
 
     return (
@@ -64,8 +65,8 @@ function ChallengeConfirmModal() {
                         <div className="flex items-center gap-2">
                             <PiWarningCircleFill size={50} color="#E63946" />
                             <p className="text-caption-regular">
-                                We encourage you to prepare an IDE/Text Editor in case the challenge requires you to
-                                run/create code snippet
+                                Once you failed the challenge (by passing the time limit or leaving the challenge page),
+                                your streak will be resetted to 0.
                             </p>
                         </div>
                         <div className="flex flex-col gap-2">
