@@ -19,13 +19,6 @@ export const useChallenge = () => {
     const { challenge, isModalOpened, setIsModalOpened, setChallenge, duration, setDuration } = useChallengeContext();
 
     useEffect(() => {
-        const fetchChallenge = async () => {
-            const challenge = await getChallenge(6);
-
-            setChallenge(challenge);
-            setDuration((challenge.durations - 55) * 1000);
-        };
-
         if (!challenge) {
             fetchChallenge();
         }
@@ -34,6 +27,13 @@ export const useChallenge = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [challenge]);
+
+    const fetchChallenge = async () => {
+        const challenge = await getChallenge(6);
+
+        setChallenge(challenge);
+        setDuration((challenge.durations - 55) * 1000);
+    };
 
     const handleUpdateChallege = async () => {
         const { id: studentId, points, current_xp, streaks, challenges_completed } = student!;

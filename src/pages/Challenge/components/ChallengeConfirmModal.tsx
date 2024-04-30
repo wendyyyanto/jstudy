@@ -8,17 +8,18 @@ import { SlBadge } from "react-icons/sl";
 
 import Button from "@/components/Button";
 import useChallengeContext from "@/context/challengeContext";
-import { useNavigate } from "react-router-dom";
+import { Blocker, useNavigate } from "react-router-dom";
 import ChallengeInfo from "./ChallengeInfo";
 import { Tables } from "@/types/database.types";
 
 interface IChallengeConfirmModalProps {
     challenge: Tables<"challenges">;
+    blocker: Blocker;
 }
 
 dayjs.extend(duration);
 
-function ChallengeConfirmModal({ challenge }: IChallengeConfirmModalProps) {
+function ChallengeConfirmModal({ challenge, blocker }: IChallengeConfirmModalProps) {
     const navigate = useNavigate();
 
     const { setIsModalOpened } = useChallengeContext();
@@ -30,8 +31,11 @@ function ChallengeConfirmModal({ challenge }: IChallengeConfirmModalProps) {
     };
 
     const handleOnCancel = () => {
-        setIsModalOpened(false);
         navigate("/dashboard");
+
+        if (blocker.state === "blocked") {
+            blocker.proceed();
+        }
     };
 
     return (

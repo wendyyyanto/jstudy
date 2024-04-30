@@ -131,7 +131,7 @@ function ChallengePage() {
     }
 
     if (isModalOpened) {
-        return <ChallengeConfirmModal challenge={challenge} />;
+        return <ChallengeConfirmModal blocker={blocker} challenge={challenge} />;
     }
 
     return (
