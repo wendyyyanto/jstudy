@@ -39,7 +39,7 @@ export const useChallenge = () => {
         const { id: studentId, points, current_xp, streaks, challenges_completed } = student!;
         const { id: challengeId, user_ids, reward_points, reward_xp } = challenge!;
 
-        const newChallengeUserIds = [...user_ids, studentId!];
+        const newChallengeUserIds = [...user_ids, studentId];
         const newChallengesCompleted = [...challenges_completed, challengeId];
 
         const updatedChallenge: TablesUpdate<"challenges"> = {
