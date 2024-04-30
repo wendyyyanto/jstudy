@@ -54,6 +54,7 @@ export type Database = {
       students: {
         Row: {
           achievements: number[] | null
+          challenges_completed: number[]
           created_at: string
           current_xp: number
           has_failed_challenge: boolean
@@ -69,6 +70,7 @@ export type Database = {
         }
         Insert: {
           achievements?: number[] | null
+          challenges_completed?: number[]
           created_at?: string
           current_xp?: number
           has_failed_challenge?: boolean
@@ -84,6 +86,7 @@ export type Database = {
         }
         Update: {
           achievements?: number[] | null
+          challenges_completed?: number[]
           created_at?: string
           current_xp?: number
           has_failed_challenge?: boolean

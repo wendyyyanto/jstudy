@@ -9,8 +9,12 @@ type Action = {
     setAuthUser: (user: User) => void;
 };
 
+const initialState: State = {
+    authUser: null
+};
+
 const useAuthContext = create<State & Action>((set) => ({
-    authUser: null,
+    ...initialState,
     setAuthUser: (user: User) => set({ authUser: user })
 }));
 

@@ -6,16 +6,17 @@ import { ChallengeInputs } from "@/types/challenge";
 import { TablesUpdate } from "@/types/database.types";
 import { useEffect } from "react";
 import { SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const useChallenge = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const { getChallenge, updateChallenge } = useChallengeApi();
     const { updateStudent } = useStudentApi();
 
     const { student } = useStudentContext();
-    const { challenge, isModalOpened, setChallenge, duration, setDuration } = useChallengeContext();
+    const { challenge, isModalOpened, setIsModalOpened, setChallenge, duration, setDuration } = useChallengeContext();
 
     useEffect(() => {
         const fetchChallenge = async () => {
@@ -35,10 +36,11 @@ export const useChallenge = () => {
     }, [challenge]);
 
     const handleUpdateChallege = async () => {
-        const { id: studentId, points, current_xp, streaks } = student!;
+        const { id: studentId, points, current_xp, streaks, challenges_completed } = student!;
         const { id: challengeId, user_ids, reward_points, reward_xp } = challenge!;
 
         const newChallengeUserIds = [...user_ids, studentId!];
+        const newChallengesCompleted = [...challenges_completed, challengeId];
 
         const updatedChallenge: TablesUpdate<"challenges"> = {
             user_ids: newChallengeUserIds
@@ -49,7 +51,8 @@ export const useChallenge = () => {
             current_xp: current_xp + reward_xp,
             streaks: streaks + 1,
             has_finished_challenge: true,
-            last_challenge_timestamp: new Date().toISOString()
+            last_challenge_timestamp: new Date().toISOString(),
+            challenges_completed: newChallengesCompleted
         };
 
         const challengeResponse = updateChallenge(challengeId, updatedChallenge);
@@ -60,6 +63,8 @@ export const useChallenge = () => {
 
     const handleSubmitAnswer: SubmitHandler<ChallengeInputs> = async ({ answer }) => {
         const isCorrect = checkAnswer(answer);
+
+        console.log(isCorrect);
 
         if (isCorrect) {
             handleUpdateChallege();
@@ -84,10 +89,6 @@ export const useChallenge = () => {
         console.log(studentResponse);
     };
 
-    const handleExitChallenge = () => {
-        navigate("/dashboard");
-    };
-
     const checkAnswer = (answer: string): boolean => {
         return challenge?.answers.includes(answer.trim()) as boolean;
     };
@@ -105,13 +106,15 @@ export const useChallenge = () => {
         challenge,
         student,
         duration,
+        navigate,
+        location,
         handleUpdateChallege,
         updateFailedStudent,
         handleSubmitAnswer,
-        handleExitChallenge,
         setDuration,
         isStudentFailed,
         isStudentCompleted,
+        setIsModalOpened,
         checkAnswer
     };
 };
