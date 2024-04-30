@@ -18,10 +18,10 @@ function CourseModule() {
 
     return (
         <div className="h-screen w-screen overflow-hidden relative">
-            <div className="flex bg-highlight-100 items-center px-8 py-6 w-screen gap-2">
+            <NavLink to="/dashboard/courses" className="flex bg-highlight-100 items-center px-8 py-6 w-screen gap-2">
                 <FaArrowLeft size={18} />
                 <p className="text-p2-semibold">Introduction to JavaScript</p>
-            </div>
+            </NavLink>
             <div className="h-screen w-1/2 mx-auto overflow-auto">
                 <div className="pt-16 pb-52">{parsedHTML}</div>
             </div>

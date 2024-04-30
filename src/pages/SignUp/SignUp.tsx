@@ -24,10 +24,10 @@ function SignUp() {
 
     const navigate = useNavigate();
 
-    const { handleDashboardAuth } = useAuth();
+    const { handleAuthenticatedUser } = useAuth();
 
     useEffect(() => {
-        handleDashboardAuth("/auth/signup");
+        handleAuthenticatedUser();
 
         return () => {};
         // eslint-disable-next-line react-hooks/exhaustive-deps
