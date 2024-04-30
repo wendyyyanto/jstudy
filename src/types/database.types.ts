@@ -9,6 +9,36 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      achievements: {
+        Row: {
+          created_at: string
+          description: string
+          id: number
+          requirements: Json | null
+          reward_points: number
+          reward_xp: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: number
+          requirements?: Json | null
+          reward_points?: number
+          reward_xp?: number
+          title?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: number
+          requirements?: Json | null
+          reward_points?: number
+          reward_xp?: number
+          title?: string
+        }
+        Relationships: []
+      }
       challenges: {
         Row: {
           answers: string[]
