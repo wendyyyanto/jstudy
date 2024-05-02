@@ -9,11 +9,19 @@ type State = {
 
 type Action = {
     setStudent: (student: Student) => void;
+    resetStudentState: () => void;
+};
+
+const initialState: State = {
+    student: null
 };
 
 const useStudentContext = create<State & Action>((set) => ({
-    student: null,
-    setStudent: (student: Student) => set({ student })
+    ...initialState,
+    setStudent: (student: Student) => set({ student }),
+    resetStudentState: () => {
+        set(initialState);
+    }
 }));
 
 export default useStudentContext;

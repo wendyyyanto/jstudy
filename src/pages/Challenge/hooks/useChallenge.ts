@@ -36,7 +36,14 @@ export const useChallenge = () => {
     };
 
     const handleUpdateChallege = async () => {
-        const { id: studentId, points, current_xp, streaks, challenges_completed } = student!;
+        const {
+            id: studentId,
+            points,
+            current_xp,
+            streaks,
+            challenges_completed,
+            total_challenges_completed
+        } = student!;
         const { id: challengeId, user_ids, reward_points, reward_xp } = challenge!;
 
         const newChallengeUserIds = [...user_ids, studentId];
@@ -52,7 +59,8 @@ export const useChallenge = () => {
             streaks: streaks + 1,
             has_finished_challenge: true,
             last_challenge_timestamp: new Date().toISOString(),
-            challenges_completed: newChallengesCompleted
+            challenges_completed: newChallengesCompleted,
+            total_challenges_completed: total_challenges_completed + 1
         };
 
         const challengeResponse = updateChallenge(challengeId, updatedChallenge);

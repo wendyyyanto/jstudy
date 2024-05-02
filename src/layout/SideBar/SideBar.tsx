@@ -8,9 +8,16 @@ import { TbLogout2 } from "react-icons/tb";
 import supabase from "@/lib/supabaseClient";
 
 import styled from "styled-components";
+import useStudentContext from "@/context/studentContext";
+import useAchievementContext from "@/context/achievementContext";
+import useChallengeContext from "@/context/challengeContext";
 
 function DashboardSideBar() {
     const navigate = useNavigate();
+
+    const { resetStudentState } = useStudentContext();
+    const { resetAchievementState } = useAchievementContext();
+    const { resetChallengeState } = useChallengeContext();
 
     const onActiveClass = ({ isActive }: { isActive: boolean }) =>
         isActive ? "bg-secondary text-p1-bold" : "text-p1-regular";
@@ -22,6 +29,9 @@ function DashboardSideBar() {
             throw new Error(error.message);
         }
 
+        resetStudentState();
+        resetAchievementState();
+        resetChallengeState();
         console.log("Logging Out User Success!");
 
         navigate("/auth/signin");
