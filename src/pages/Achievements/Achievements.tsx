@@ -1,4 +1,3 @@
-import useAchievementContext from "@/context/achievementContext";
 import AchievementItem from "./components/AchievementItem";
 import { useEffect, useState } from "react";
 import useStudentContext from "@/context/studentContext";
@@ -14,6 +13,8 @@ function AchievementsPage() {
         if (student) {
             fetchStudentAchievements(student);
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [student]);
 
     const fetchStudentAchievements = async (student: Tables<"students">) => {

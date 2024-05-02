@@ -10,7 +10,6 @@ import { Tables, TablesUpdate } from "@/types/database.types";
 import { useStudentApi } from "@/api/student";
 import AchievementModal from "./Achievements/components/AchievementModal";
 import useAchievementContext from "@/context/achievementContext";
-import { useAchievementApi } from "@/api/achievement";
 
 type Achievements = Tables<"achievements">;
 type Students = Tables<"students"> | null;
@@ -24,7 +23,7 @@ function Dashboard() {
     const { handleDashboardAuth } = useAuth();
 
     const { student } = useStudentContext();
-    const { achievementModalShown, setAchievementModalShown, achievement } = useAchievementContext();
+    const { achievementModalShown, setAchievementModalShown, achievement, setAchievement } = useAchievementContext();
 
     const { updateStudent } = useStudentApi();
 
