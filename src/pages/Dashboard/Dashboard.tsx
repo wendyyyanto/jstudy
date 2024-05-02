@@ -9,11 +9,31 @@ import RankInfo from "./components/Info/RankInfo";
 import LevelInfo from "./components/Info/LevelInfo";
 import PointInfo from "./components/Info/PointInfo";
 import { useUpdateStudentSubscription } from "@/api/student/subscription";
+import { useAchievementApi } from "@/api/achievement";
+import { useEffect, useState } from "react";
+import { Tables } from "@/types/database.types";
 
 function DashboardPage() {
     useUpdateStudentSubscription();
 
     const { student } = useStudentContext();
+    const { getStudentAchievements } = useAchievementApi();
+
+    const [achievementList, setAchievementList] = useState<Tables<"achievements">[]>([]);
+
+    useEffect(() => {
+        if (student) {
+            fetchStudentAchievements(student);
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [student]);
+
+    const fetchStudentAchievements = async (student: Tables<"students">) => {
+        const studentAchievements = await getStudentAchievements(student.achievements);
+
+        setAchievementList(studentAchievements);
+    };
 
     if (!student) {
         return <p>Loading...</p>;
@@ -44,7 +64,11 @@ function DashboardPage() {
                     <LearningProgress />
                 </WhiteCard>
                 <WhiteCard className="col-span-4 row-span-5">
-                    <Achievements />
+                    {achievementList.length > 0 ? (
+                        <Achievements achievements={achievementList} />
+                    ) : (
+                        <p>No Achievements</p>
+                    )}
                 </WhiteCard>
             </div>
         </>
