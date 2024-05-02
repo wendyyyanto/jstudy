@@ -83,7 +83,7 @@ export type Database = {
       }
       students: {
         Row: {
-          achievements: number[] | null
+          achievements: number[]
           challenges_completed: number[]
           created_at: string
           current_xp: number
@@ -95,11 +95,12 @@ export type Database = {
           points: number
           rank: Database["public"]["Enums"]["Ranks"]
           streaks: number
+          total_challenges_completed: number
           user_id: string | null
           username: string | null
         }
         Insert: {
-          achievements?: number[] | null
+          achievements: number[]
           challenges_completed?: number[]
           created_at?: string
           current_xp?: number
@@ -111,11 +112,12 @@ export type Database = {
           points?: number
           rank?: Database["public"]["Enums"]["Ranks"]
           streaks?: number
+          total_challenges_completed?: number
           user_id?: string | null
           username?: string | null
         }
         Update: {
-          achievements?: number[] | null
+          achievements?: number[]
           challenges_completed?: number[]
           created_at?: string
           current_xp?: number
@@ -127,6 +129,7 @@ export type Database = {
           points?: number
           rank?: Database["public"]["Enums"]["Ranks"]
           streaks?: number
+          total_challenges_completed?: number
           user_id?: string | null
           username?: string | null
         }
