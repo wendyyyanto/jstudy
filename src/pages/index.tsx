@@ -59,10 +59,10 @@ function Dashboard() {
                     current_xp: student!.current_xp + achievement.reward_xp
                 };
 
+                await updateStudent(student!.id, newStudent);
+
                 setAchievement(achievement);
                 setAchievementModalShown(true);
-
-                await updateStudent(student!.id, newStudent);
             }
         });
     };
