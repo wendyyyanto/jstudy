@@ -87,7 +87,7 @@ export type Database = {
           course_id: number
           created_at: string
           id: number
-          next_module: string
+          next_module: string | null
           prev_module: string | null
           title: string
         }
@@ -96,7 +96,7 @@ export type Database = {
           course_id: number
           created_at?: string
           id?: number
-          next_module?: string
+          next_module?: string | null
           prev_module?: string | null
           title?: string
         }
@@ -105,7 +105,7 @@ export type Database = {
           course_id?: number
           created_at?: string
           id?: number
-          next_module?: string
+          next_module?: string | null
           prev_module?: string | null
           title?: string
         }
