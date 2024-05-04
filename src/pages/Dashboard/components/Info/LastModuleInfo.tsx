@@ -12,7 +12,7 @@ function LastModuleInfo({ courseName, lastAccessed, address }: ILastModuleInfoPr
         <>
             <div className="flex gap-2 items-center">
                 <LuTerminal size={22} />
-                <p className="text-p1-regular text-stroke-300">Last module accessed by you</p>
+                <p className="text-p1-regular text-stroke-300">Modul yang baru saja kamu akses</p>
             </div>
 
             <p className="text-h5-semibold text-stroke-800 mt-5 w-10/12 text-ellipsis whitespace-nowrap overflow-hidden">
@@ -24,7 +24,7 @@ function LastModuleInfo({ courseName, lastAccessed, address }: ILastModuleInfoPr
                 href={address}
                 className="flex justify-end gap-2 items-center underline text-p2-regular text-stroke-800 mt-8"
             >
-                Continue <HiArrowRight size={18} />
+                Lanjutin <HiArrowRight size={18} />
             </a>
         </>
     );

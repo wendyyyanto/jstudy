@@ -55,14 +55,14 @@ function SignIn() {
 
                 <img className="mt-20 h-[60vh] w-[45vw]" src={signInIllustration} alt="SignIn Illustration" />
 
-                <p className="text-h2-bold mt-6">Welcome back!</p>
+                <p className="text-h2-bold mt-6">Selamat datang!</p>
                 <p className="text-p2-regular text-para-300 mt-2">
-                    Start your programming journey, begin with JavaScript!
+                    Mulai petualangan di dunia pemrograman bersama JavaScript!
                 </p>
             </div>
             <div className="w-[45vw] flex flex-col p-20">
-                <p className="text-h2-bold mt-20">Sign In.</p>
-                <p className="text-p2-regular text-para-300 mt-4">And begin the programming adventure!</p>
+                <p className="text-h2-bold mt-20">Masuk.</p>
+                <p className="text-p2-regular text-para-300 mt-4">Dan lanjutkan petualangan mu!</p>
 
                 <div className="flex flex-col mt-12 gap-3">
                     <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)} id="signin-form">
@@ -99,7 +99,7 @@ function SignIn() {
                         />
                     </form>
 
-                    <p className="text-p2-semibold text-stroke-400 flex justify-end">Forgot password?</p>
+                    <p className="text-p2-semibold text-stroke-400 flex justify-end">Lupa password?</p>
                 </div>
 
                 <div className="flex flex-col gap-5 mt-8 justify-center items-center">
@@ -108,13 +108,13 @@ function SignIn() {
                         form="signin-form"
                         className="bg-highlight-400 flex w-full justify-center items-center h-16 rounded-md cursor-pointer"
                     >
-                        <p className="text-h6-semibold text-stroke-400">Sign In</p>
+                        <p className="text-h6-semibold text-stroke-400">Masuk</p>
                     </button>
 
                     <p className="text-p2-semibold text-para-300">
-                        You don't have an account?{" "}
+                        Tidak memiliki akun?{" "}
                         <NavLink to={"/auth/signup"} className="text-highlight-500">
-                            Sign Up
+                            Daftar
                         </NavLink>
                     </p>
                 </div>

@@ -1,4 +1,5 @@
 import ProgressBar from "@/components/ProgressBar/ProgressBar";
+import { FaArrowRight } from "react-icons/fa";
 
 interface ICourseActiveItemProps {
     title: string;
@@ -10,8 +11,11 @@ function CourseActiveItem({ title, courseAddress }: ICourseActiveItemProps) {
         <div className="min-h-36 flex flex-col rounded-sm border border-stroke-100 py-4 px-6">
             <div className="flex justify-between flex-1">
                 <p className="text-p2-semibold">{title}</p>
-                <a href={courseAddress} className="text-wrap w-min text-p1-regular text-tertiary-800">
-                    See Course
+                <a
+                    href={courseAddress}
+                    className="flex flex-1 justify-end gap-1 text-wrap text-p1-regular text-tertiary-800 underline"
+                >
+                    Buka Materi <FaArrowRight size={14} color="#668080" />
                 </a>
             </div>
             <ProgressBar progress={90} />

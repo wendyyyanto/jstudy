@@ -50,6 +50,7 @@ function SignUp() {
 
         await supabase.from("students").insert({
             user_id: authData?.user?.id,
+            achievements: [],
             username
         });
 
@@ -67,14 +68,14 @@ function SignUp() {
 
                 <img className="mt-20 h-[60vh] w-[45vw]" src={signUpIllustration} alt="SignIn Illustration" />
 
-                <p className="text-h2-bold mt-6">Create your account!</p>
+                <p className="text-h2-bold mt-6">Buat akun mu!</p>
                 <p className="text-p2-regular text-para-300 mt-2">
-                    And begin the journey to conquer programming with JavaScript!
+                    Mulai petualangan untuk menaklukan dunia pemrograman bersama JavaScript!
                 </p>
             </div>
             <div className="w-[45vw] flex flex-col p-20">
-                <p className="text-h2-bold mt-20">Sign Up.</p>
-                <p className="text-p2-regular text-para-300 mt-4">And begin the programming adventure!</p>
+                <p className="text-h2-bold mt-20">Daftar.</p>
+                <p className="text-p2-regular text-para-300 mt-4">Dan mulai petualangan pemrograman mu!</p>
 
                 <div className="flex flex-col mt-12 gap-3">
                     <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)} id="signup-form">
@@ -134,13 +135,13 @@ function SignUp() {
                         form="signup-form"
                         className="bg-highlight-400 flex w-full justify-center items-center h-16 rounded-md cursor-pointer"
                     >
-                        <p className="text-h6-semibold text-stroke-400">Sign Up</p>
+                        <p className="text-h6-semibold text-stroke-400">Daftar</p>
                     </button>
 
                     <p className="text-p2-semibold text-para-300">
-                        Already have an account?{" "}
+                        Sudah memiliki akun?{" "}
                         <NavLink to={"/auth/signin"} className="text-highlight-500">
-                            Sign In
+                            Masuk
                         </NavLink>
                     </p>
                 </div>

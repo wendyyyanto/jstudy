@@ -15,7 +15,7 @@ const levelIcon = {
 function CourseList() {
     return (
         <CourseListContainer className="col-span-7 row-span-full flex flex-col px-8 py-10 rounded-sm bg-white">
-            <p className="text-h5-semibold">All Courses</p>
+            <p className="text-h5-semibold">Daftar Kelas</p>
 
             <div className="grid grid-cols-2 gap-5 mt-4 pr-2 overflow-auto">
                 <CourseItem
