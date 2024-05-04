@@ -81,10 +81,124 @@ export type Database = {
         }
         Relationships: []
       }
+      course_modules: {
+        Row: {
+          content: string
+          course_id: number
+          created_at: string
+          id: number
+          next_module: string
+          prev_module: string | null
+          title: string
+        }
+        Insert: {
+          content?: string
+          course_id: number
+          created_at?: string
+          id?: number
+          next_module?: string
+          prev_module?: string | null
+          title?: string
+        }
+        Update: {
+          content?: string
+          course_id?: number
+          created_at?: string
+          id?: number
+          next_module?: string
+          prev_module?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_modules_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      courses: {
+        Row: {
+          created_at: string
+          description: string
+          difficulty: Database["public"]["Enums"]["Difficulty"]
+          id: number
+          student_ids: number[]
+          title: string
+          total_modules: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          difficulty: Database["public"]["Enums"]["Difficulty"]
+          id?: number
+          student_ids?: number[]
+          title?: string
+          total_modules?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          difficulty?: Database["public"]["Enums"]["Difficulty"]
+          id?: number
+          student_ids?: number[]
+          title?: string
+          total_modules?: number
+        }
+        Relationships: []
+      }
+      student_courses: {
+        Row: {
+          course_id: number
+          created_at: string
+          id: number
+          last_accessed_at: string
+          progress: number | null
+          status: Database["public"]["Enums"]["Completion Status"]
+          student_id: number
+        }
+        Insert: {
+          course_id: number
+          created_at?: string
+          id?: number
+          last_accessed_at?: string
+          progress?: number | null
+          status: Database["public"]["Enums"]["Completion Status"]
+          student_id: number
+        }
+        Update: {
+          course_id?: number
+          created_at?: string
+          id?: number
+          last_accessed_at?: string
+          progress?: number | null
+          status?: Database["public"]["Enums"]["Completion Status"]
+          student_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_courses_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "student_courses_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       students: {
         Row: {
           achievements: number[]
           challenges_completed: number[]
+          courses: number[]
           created_at: string
           current_xp: number
           has_failed_challenge: boolean
@@ -102,6 +216,7 @@ export type Database = {
         Insert: {
           achievements: number[]
           challenges_completed?: number[]
+          courses?: number[]
           created_at?: string
           current_xp?: number
           has_failed_challenge?: boolean
@@ -119,6 +234,7 @@ export type Database = {
         Update: {
           achievements?: number[]
           challenges_completed?: number[]
+          courses?: number[]
           created_at?: string
           current_xp?: number
           has_failed_challenge?: boolean
@@ -151,6 +267,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      "Completion Status": "Completed" | "Incomplete"
       Difficulty: "Easy" | "Medium" | "Hard"
       Ranks: "Beginner" | "Intermediate" | "Advanced" | "Master"
     }
