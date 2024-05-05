@@ -84,38 +84,38 @@ export type Database = {
       course_modules: {
         Row: {
           content: string
-          course_id: number
+          course_slug: string
           created_at: string
-          id: number
+          id: string
           next_module: string | null
           prev_module: string | null
           title: string
         }
         Insert: {
           content?: string
-          course_id: number
+          course_slug: string
           created_at?: string
-          id?: number
+          id?: string
           next_module?: string | null
           prev_module?: string | null
           title?: string
         }
         Update: {
           content?: string
-          course_id?: number
+          course_slug?: string
           created_at?: string
-          id?: number
+          id?: string
           next_module?: string | null
           prev_module?: string | null
           title?: string
         }
         Relationships: [
           {
-            foreignKeyName: "course_modules_course_id_fkey"
-            columns: ["course_id"]
+            foreignKeyName: "course_modules_course_slug_fkey"
+            columns: ["course_slug"]
             isOneToOne: false
             referencedRelation: "courses"
-            referencedColumns: ["id"]
+            referencedColumns: ["slug"]
           },
         ]
       }
@@ -124,7 +124,8 @@ export type Database = {
           created_at: string
           description: string
           difficulty: Database["public"]["Enums"]["Difficulty"]
-          id: number
+          slug: string
+          start_address: string
           student_ids: number[]
           title: string
           total_modules: number
@@ -133,7 +134,8 @@ export type Database = {
           created_at?: string
           description?: string
           difficulty: Database["public"]["Enums"]["Difficulty"]
-          id?: number
+          slug?: string
+          start_address?: string
           student_ids?: number[]
           title?: string
           total_modules?: number
@@ -142,7 +144,8 @@ export type Database = {
           created_at?: string
           description?: string
           difficulty?: Database["public"]["Enums"]["Difficulty"]
-          id?: number
+          slug?: string
+          start_address?: string
           student_ids?: number[]
           title?: string
           total_modules?: number
@@ -151,39 +154,39 @@ export type Database = {
       }
       student_courses: {
         Row: {
-          course_id: number
-          created_at: string
+          course_slug: string
           id: number
           last_accessed_at: string
-          progress: number | null
+          progress: number
+          started_at: string
           status: Database["public"]["Enums"]["Completion Status"]
           student_id: number
         }
         Insert: {
-          course_id: number
-          created_at?: string
+          course_slug?: string
           id?: number
           last_accessed_at?: string
-          progress?: number | null
-          status: Database["public"]["Enums"]["Completion Status"]
+          progress?: number
+          started_at?: string
+          status?: Database["public"]["Enums"]["Completion Status"]
           student_id: number
         }
         Update: {
-          course_id?: number
-          created_at?: string
+          course_slug?: string
           id?: number
           last_accessed_at?: string
-          progress?: number | null
+          progress?: number
+          started_at?: string
           status?: Database["public"]["Enums"]["Completion Status"]
           student_id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "student_courses_course_id_fkey"
-            columns: ["course_id"]
+            foreignKeyName: "student_courses_course_slug_fkey"
+            columns: ["course_slug"]
             isOneToOne: false
             referencedRelation: "courses"
-            referencedColumns: ["id"]
+            referencedColumns: ["slug"]
           },
           {
             foreignKeyName: "student_courses_student_id_fkey"

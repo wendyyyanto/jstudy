@@ -2,28 +2,43 @@ import styled from "styled-components";
 
 import CourseItem from "./CourseItem";
 
-import levelBeginner from "assets/level-beginner.svg";
-import levelIntermediate from "assets/level-intermediate.svg";
-import levelAdvanced from "assets/level-advanced.svg";
+import levelEasy from "assets/level-beginner.svg";
+import levelMedium from "assets/level-intermediate.svg";
+import levelHard from "assets/level-advanced.svg";
+import { useCourses } from "../hooks/useCourses";
 
 const levelIcon = {
-    beginner: levelBeginner,
-    intermediate: levelIntermediate,
-    advanced: levelAdvanced
+    Easy: levelEasy,
+    Medium: levelMedium,
+    Hard: levelHard
 };
 
 function CourseList() {
+    const { courses, onStartCourse } = useCourses();
+
     return (
         <CourseListContainer className="col-span-7 row-span-full flex flex-col px-8 py-10 rounded-sm bg-white">
             <p className="text-h5-semibold">Daftar Kelas</p>
 
             <div className="grid grid-cols-2 gap-5 mt-4 pr-2 overflow-auto">
-                <CourseItem
-                    title="Introduction to JavaScript"
-                    description="Consists of preparation material before you dive into the world of JavaScript"
-                    icon={levelIcon.beginner}
-                    level="Beginner"
-                />
+                {courses ? (
+                    courses.map(
+                        (course) =>
+                            course && (
+                                <CourseItem
+                                    key={course.slug}
+                                    title={course.title}
+                                    description={course.description}
+                                    icon={levelIcon[course.difficulty]}
+                                    level={course.difficulty}
+                                    link={course.start_address}
+                                    onStartCourse={() => onStartCourse(course.slug)}
+                                />
+                            )
+                    )
+                ) : (
+                    <p>Memuat Kelas...</p>
+                )}
             </div>
         </CourseListContainer>
     );
