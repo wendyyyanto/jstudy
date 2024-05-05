@@ -156,8 +156,10 @@ export type Database = {
         Row: {
           completed_at: string | null
           course_slug: string
+          course_title: string
           id: number
           last_accessed_at: string
+          last_module: string | null
           progress: number
           started_at: string
           status: Database["public"]["Enums"]["Completion Status"]
@@ -166,8 +168,10 @@ export type Database = {
         Insert: {
           completed_at?: string | null
           course_slug?: string
+          course_title: string
           id?: number
           last_accessed_at?: string
+          last_module?: string | null
           progress?: number
           started_at?: string
           status?: Database["public"]["Enums"]["Completion Status"]
@@ -176,8 +180,10 @@ export type Database = {
         Update: {
           completed_at?: string | null
           course_slug?: string
+          course_title?: string
           id?: number
           last_accessed_at?: string
+          last_module?: string | null
           progress?: number
           started_at?: string
           status?: Database["public"]["Enums"]["Completion Status"]

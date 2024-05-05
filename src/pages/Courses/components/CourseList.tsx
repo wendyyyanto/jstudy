@@ -5,7 +5,15 @@ import CourseItem from "./CourseItem";
 import levelEasy from "assets/level-beginner.svg";
 import levelMedium from "assets/level-intermediate.svg";
 import levelHard from "assets/level-advanced.svg";
-import { useCourses } from "../hooks/useCourses";
+import { Tables } from "@/types/database.types";
+
+type Course = Tables<"courses"> | null;
+type Courses = Course[] | null;
+
+interface ICourseListProps {
+    courses: Courses;
+    onStartCourse: (slug: string) => void;
+}
 
 const levelIcon = {
     Easy: levelEasy,
@@ -13,9 +21,7 @@ const levelIcon = {
     Hard: levelHard
 };
 
-function CourseList() {
-    const { courses, onStartCourse } = useCourses();
-
+function CourseList({ courses, onStartCourse }: ICourseListProps) {
     return (
         <CourseListContainer className="col-span-7 row-span-full flex flex-col px-8 py-10 rounded-sm bg-white">
             <p className="text-h5-semibold">Daftar Kelas</p>

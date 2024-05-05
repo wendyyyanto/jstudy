@@ -5,8 +5,23 @@ import { TablesUpdate } from "@/types/database.types";
 import { useEffect } from "react";
 
 export const useCourses = () => {
-    const { getSingleCourse, getCourses, updateStudentCourse, updateCourse, insertStudentCourse } = useCoursesApi();
-    const { setCourses, courses } = useCoursesContext();
+    const {
+        getSingleCourse,
+        getCourses,
+        getCompletedCourses,
+        getStudentCourses,
+        updateStudentCourse,
+        updateCourse,
+        insertStudentCourse
+    } = useCoursesApi();
+    const {
+        setCourses,
+        courses,
+        setCompletedStudentCourses,
+        completedStudentCourses,
+        setStudentCourses,
+        studentCourses
+    } = useCoursesContext();
     const { student } = useStudentContext();
 
     useEffect(() => {
@@ -16,9 +31,15 @@ export const useCourses = () => {
     }, []);
 
     const fetchCourses = async () => {
-        const courses = await getCourses();
+        if (!student) return;
 
-        setCourses(courses);
+        const coursesList = await getCourses();
+        const completedCoursesList = await getCompletedCourses(student.id);
+        const studentCoursesList = await getStudentCourses(student.id);
+
+        setCourses(coursesList);
+        setCompletedStudentCourses(completedCoursesList);
+        setStudentCourses(studentCoursesList);
     };
 
     const onStartCourse = async (slug: string) => {
@@ -43,7 +64,7 @@ export const useCourses = () => {
             return;
         }
 
-        await insertStudentCourse(slug, student.id);
+        await insertStudentCourse(slug, student.id, course.title);
 
         const updatedCourse: TablesUpdate<"courses"> = {
             student_ids: [...course.student_ids, student.id]
@@ -58,6 +79,8 @@ export const useCourses = () => {
 
     return {
         courses,
-        onStartCourse
+        onStartCourse,
+        completedStudentCourses,
+        studentCourses
     };
 };

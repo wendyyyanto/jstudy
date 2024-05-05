@@ -47,12 +47,39 @@ export const useCoursesApi = () => {
         return studentCourse;
     };
 
-    const insertStudentCourse = async (slug: string, studentId: number) => {
+    const getStudentCourses = async (studentId: number) => {
+        const { data: studentCourses, error } = await supabase.from("student_courses").select("*").match({
+            student_id: studentId,
+            status: "Incomplete"
+        });
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return studentCourses;
+    };
+
+    const getCompletedCourses = async (studentId: number) => {
+        const { data: completedCourses, error } = await supabase.from("student_courses").select("*").match({
+            student_id: studentId,
+            status: "Completed"
+        });
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return completedCourses;
+    };
+
+    const insertStudentCourse = async (slug: string, studentId: number, title: string) => {
         const { error } = await supabase
             .from("student_courses")
-            .upsert({
+            .insert({
                 course_slug: slug,
-                student_id: studentId
+                student_id: studentId,
+                course_title: title
             })
             .select();
 
@@ -96,12 +123,14 @@ export const useCoursesApi = () => {
     };
 
     return {
-        getSingleCourse,
-        insertStudentCourse,
         getCourses,
-        updateCourse,
-        updateStudentCourse,
+        getSingleCourse,
+        getStudentCourse,
+        getStudentCourses,
         getCourseModules,
-        getStudentCourse
+        getCompletedCourses,
+        insertStudentCourse,
+        updateCourse,
+        updateStudentCourse
     };
 };

@@ -6,6 +6,7 @@ type Module = Tables<"course_modules"> | null;
 type StudentCourse = Tables<"student_courses"> | null;
 type Courses = Course[] | null;
 type Modules = Module[] | null;
+type StudentCourses = StudentCourse[] | null;
 
 type State = {
     course: Course;
@@ -13,6 +14,8 @@ type State = {
     courseModules: Modules;
     currentModule: Module;
     studentCourse: StudentCourse;
+    studentCourses: StudentCourses;
+    completedStudentCourses: StudentCourses;
 };
 
 type Action = {
@@ -21,6 +24,8 @@ type Action = {
     setCourseModules: (courseModules: Modules) => void;
     setCurrentModule: (currentModule: Module) => void;
     setStudentCourse: (studentCourse: StudentCourse) => void;
+    setStudentCourses: (studentCourses: StudentCourses) => void;
+    setCompletedStudentCourses: (CompletedstudentCourses: StudentCourses) => void;
     resetCoursesState: () => void;
 };
 
@@ -29,7 +34,9 @@ const initialState: State = {
     courses: null,
     courseModules: null,
     currentModule: null,
-    studentCourse: null
+    studentCourse: null,
+    studentCourses: null,
+    completedStudentCourses: null
 };
 
 const useCoursesContext = create<State & Action>((set) => ({
@@ -39,6 +46,8 @@ const useCoursesContext = create<State & Action>((set) => ({
     setCourseModules: (courseModules: Modules) => set({ courseModules }),
     setCurrentModule: (currentModule: Module) => set({ currentModule }),
     setStudentCourse: (studentCourse: StudentCourse) => set({ studentCourse }),
+    setStudentCourses: (studentCourses: StudentCourses) => set({ studentCourses }),
+    setCompletedStudentCourses: (completedStudentCourses: StudentCourses) => set({ completedStudentCourses }),
     resetCoursesState: () => {
         set(initialState);
     }
