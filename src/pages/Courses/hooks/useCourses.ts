@@ -5,7 +5,7 @@ import { TablesUpdate } from "@/types/database.types";
 import { useEffect } from "react";
 
 export const useCourses = () => {
-    const { getSingleCourse, getCourses, upsertStudentCourse, updateCourse } = useCoursesApi();
+    const { getSingleCourse, getCourses, updateStudentCourse, updateCourse, insertStudentCourse } = useCoursesApi();
     const { setCourses, courses } = useCoursesContext();
     const { student } = useStudentContext();
 
@@ -28,19 +28,30 @@ export const useCourses = () => {
 
         if (!student) return;
 
+        const isAlreadyStarted = course.student_ids.includes(student.id);
+        if (isAlreadyStarted) {
+            const updatedStudentCourse: TablesUpdate<"student_courses"> = {
+                last_accessed_at: new Date().toISOString()
+            };
+
+            const updateStudentCourseResponse = await updateStudentCourse(slug, student.id, updatedStudentCourse);
+
+            if (!updateStudentCourseResponse) {
+                throw new Error("Error while updating course");
+            }
+
+            return;
+        }
+
+        await insertStudentCourse(slug, student.id);
+
         const updatedCourse: TablesUpdate<"courses"> = {
             student_ids: [...course.student_ids, student.id]
         };
 
-        await upsertStudentCourse(course.slug, student.id);
+        const updateCourseResponse = await updateCourse(slug, updatedCourse);
 
-        const isAlreadyStarted = course.student_ids.includes(student.id);
-
-        if (isAlreadyStarted) return;
-
-        const response = await updateCourse(slug, updatedCourse);
-
-        if (!response) {
+        if (!updateCourseResponse) {
             throw new Error("Error while updating course");
         }
     };

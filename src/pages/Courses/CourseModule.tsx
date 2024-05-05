@@ -2,9 +2,12 @@ import { NavLink } from "react-router-dom";
 import parse from "html-react-parser";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { useCourseModule } from "./hooks/useCourseModule";
+import { useUpdateStudentSubscription } from "@/api/student/subscription";
 
 function CourseModule() {
-    const { currentModule: module, courseModules: modules } = useCourseModule();
+    useUpdateStudentSubscription();
+
+    const { currentModule: module, courseModules: modules, onFinishCourse } = useCourseModule();
 
     if (!modules) {
         return <div>Loading modules...</div>;
@@ -30,7 +33,7 @@ function CourseModule() {
             </div>
             <div className="flex bg-highlight-100 justify-between items-center px-8 py-6 w-screen gap-2 absolute bottom-0 left-0">
                 {module.prev_module ? (
-                    <NavLink to={module.prev_module} className="flex items-center gap-2">
+                    <NavLink to={module.prev_module} className="flex items-center gap-2 cursor-pointer">
                         <p className="text-p2-semibold">Prev Module</p>
                         <FaArrowLeft size={18} />
                     </NavLink>
@@ -40,17 +43,20 @@ function CourseModule() {
 
                 <div>
                     <p className="text-p2-semibold">
-                        Module {currentIndex} of {totalModules}
+                        Module {currentIndex + 1} of {totalModules}
                     </p>
                 </div>
 
                 {module.next_module ? (
-                    <NavLink to={module.next_module} className="flex items-center gap-2">
+                    <NavLink to={module.next_module} className="flex items-center gap-2 cursor-pointer">
                         <p className="text-p2-semibold">Next Module</p>
                         <FaArrowRight size={18} />
                     </NavLink>
                 ) : (
-                    <div></div>
+                    <div onClick={() => onFinishCourse()} className="flex items-center gap-2 cursor-pointer">
+                        <p className="text-p2-semibold">Finish</p>
+                        <FaArrowRight size={18} />
+                    </div>
                 )}
             </div>
         </div>

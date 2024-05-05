@@ -1,8 +1,11 @@
+import { useUpdateStudentSubscription } from "@/api/student/subscription";
 import CourseActive from "./components/CourseActive";
 import CourseCompleted from "./components/CourseCompleted";
 import CourseList from "./components/CourseList";
 
 function CoursesPage() {
+    useUpdateStudentSubscription();
+
     return (
         <>
             <h1 className="text-h2-semibold text-stroke-600 mb-5">Courses</h1>

@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import useStudentContext from "@/context/studentContext";
 import { Tables } from "@/types/database.types";
 import { useAchievementApi } from "@/api/achievement";
+import { useUpdateStudentSubscription } from "@/api/student/subscription";
 
 function AchievementsPage() {
+    useUpdateStudentSubscription();
+
     const [achievementsList, setAchievementsList] = useState<Tables<"achievements">[]>([]);
     const { student } = useStudentContext();
     const { getStudentAchievements } = useAchievementApi();

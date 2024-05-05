@@ -49,7 +49,7 @@ function Dashboard() {
         }
 
         studentAchievements.forEach(async (achievement) => {
-            const isDeserved = isMatchRequirements(achievement) || isIncludesRequirements(achievement);
+            const isDeserved = isMatchRequirements(achievement);
             const isAlreadyReceived = isAchievementAlreadyReceived(achievement, student);
 
             if (isDeserved && !isAlreadyReceived) {
@@ -86,6 +86,12 @@ function Dashboard() {
         keys.forEach((key) => {
             const studentValue = student[key];
             const requirement = requirementObj[key];
+            const isIncluded = typeof studentValue === "object" ? studentValue.includes(requirement) : false;
+
+            if (isIncluded) {
+                isDeserved = true;
+                return;
+            }
 
             if (studentValue !== requirement) {
                 isDeserved = false;
@@ -96,29 +102,30 @@ function Dashboard() {
         return isDeserved;
     };
 
-    const isIncludesRequirements = (achievement: Achievements) => {
-        if (!achievement) return false;
-        if (!student) return false;
+    // const isIncludesRequirements = (achievement: Achievements) => {
+    //     if (!achievement) return false;
+    //     if (!student) return false;
 
-        const keys = Object.keys(achievement.requirements as Requirement);
-        const requirementsString = JSON.stringify(achievement.requirements);
-        const requirementObj = JSON.parse(requirementsString);
+    //     const keys = Object.keys(achievement.requirements as Requirement);
+    //     const requirementsString = JSON.stringify(achievement.requirements);
+    //     const requirementObj = JSON.parse(requirementsString);
 
-        let isDeserved = true;
+    //     let isDeserved = true;
 
-        keys.forEach((key: string) => {
-            const studentValue = student[key];
-            const requirement = requirementObj[key];
-            const isIncluded = studentValue.includes(requirement);
+    //     keys.forEach((key: string) => {
+    //         const studentValue = student[key];
+    //         const requirement = requirementObj[key];
+    //         const isIncluded = studentValue.includes(requirement);
+    //         console.log(studentValue, requirement, isIncluded);
 
-            if (isIncluded) {
-                isDeserved = false;
-                return;
-            }
-        });
+    //         if (isIncluded as boolean) {
+    //             isDeserved = false;
+    //             return;
+    //         }
+    //     });
 
-        return isDeserved;
-    };
+    //     return isDeserved;
+    // };
 
     return (
         <div className="flex">

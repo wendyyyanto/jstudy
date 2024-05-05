@@ -3,6 +3,7 @@ import { create } from "zustand";
 
 type Course = Tables<"courses"> | null;
 type Module = Tables<"course_modules"> | null;
+type StudentCourse = Tables<"student_courses"> | null;
 type Courses = Course[] | null;
 type Modules = Module[] | null;
 
@@ -11,6 +12,7 @@ type State = {
     courses: Courses;
     courseModules: Modules;
     currentModule: Module;
+    studentCourse: StudentCourse;
 };
 
 type Action = {
@@ -18,6 +20,7 @@ type Action = {
     setCourses: (courses: Courses) => void;
     setCourseModules: (courseModules: Modules) => void;
     setCurrentModule: (currentModule: Module) => void;
+    setStudentCourse: (studentCourse: StudentCourse) => void;
     resetCoursesState: () => void;
 };
 
@@ -25,7 +28,8 @@ const initialState: State = {
     course: null,
     courses: null,
     courseModules: null,
-    currentModule: null
+    currentModule: null,
+    studentCourse: null
 };
 
 const useCoursesContext = create<State & Action>((set) => ({
@@ -34,6 +38,7 @@ const useCoursesContext = create<State & Action>((set) => ({
     setCourses: (courses: Courses) => set({ courses }),
     setCourseModules: (courseModules: Modules) => set({ courseModules }),
     setCurrentModule: (currentModule: Module) => set({ currentModule }),
+    setStudentCourse: (studentCourse: StudentCourse) => set({ studentCourse }),
     resetCoursesState: () => {
         set(initialState);
     }

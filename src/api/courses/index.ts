@@ -32,7 +32,22 @@ export const useCoursesApi = () => {
         return modules;
     };
 
-    const upsertStudentCourse = async (slug: string, studentId: number) => {
+    const getStudentCourse = async (slug: string, studentId: number) => {
+        const { data: studentCourse, error } = await supabase
+            .from("student_courses")
+            .select("*")
+            .match({ course_slug: slug, student_id: studentId })
+            .select()
+            .single();
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return studentCourse;
+    };
+
+    const insertStudentCourse = async (slug: string, studentId: number) => {
         const { error } = await supabase
             .from("student_courses")
             .upsert({
@@ -61,5 +76,32 @@ export const useCoursesApi = () => {
         return course;
     };
 
-    return { getSingleCourse, upsertStudentCourse, getCourses, updateCourse, getCourseModules };
+    const updateStudentCourse = async (
+        slug: string,
+        studentId: number,
+        updatedField: TablesUpdate<"student_courses">
+    ) => {
+        const { data: course, error } = await supabase
+            .from("student_courses")
+            .update(updatedField)
+            .match({ course_slug: slug, student_id: studentId })
+            .select()
+            .single();
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return course;
+    };
+
+    return {
+        getSingleCourse,
+        insertStudentCourse,
+        getCourses,
+        updateCourse,
+        updateStudentCourse,
+        getCourseModules,
+        getStudentCourse
+    };
 };
