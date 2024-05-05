@@ -16,6 +16,7 @@ type State = {
     studentCourse: StudentCourse;
     studentCourses: StudentCourses;
     completedStudentCourses: StudentCourses;
+    lastAccessedCourse: StudentCourse;
 };
 
 type Action = {
@@ -25,7 +26,8 @@ type Action = {
     setCurrentModule: (currentModule: Module) => void;
     setStudentCourse: (studentCourse: StudentCourse) => void;
     setStudentCourses: (studentCourses: StudentCourses) => void;
-    setCompletedStudentCourses: (CompletedstudentCourses: StudentCourses) => void;
+    setCompletedStudentCourses: (completedStudentCourses: StudentCourses) => void;
+    setLastAccessedCourse: (lastAccessedCourse: StudentCourse) => void;
     resetCoursesState: () => void;
 };
 
@@ -36,7 +38,8 @@ const initialState: State = {
     currentModule: null,
     studentCourse: null,
     studentCourses: null,
-    completedStudentCourses: null
+    completedStudentCourses: null,
+    lastAccessedCourse: null
 };
 
 const useCoursesContext = create<State & Action>((set) => ({
@@ -48,6 +51,7 @@ const useCoursesContext = create<State & Action>((set) => ({
     setStudentCourse: (studentCourse: StudentCourse) => set({ studentCourse }),
     setStudentCourses: (studentCourses: StudentCourses) => set({ studentCourses }),
     setCompletedStudentCourses: (completedStudentCourses: StudentCourses) => set({ completedStudentCourses }),
+    setLastAccessedCourse: (lastAccessedCourse: StudentCourse) => set({ lastAccessedCourse }),
     resetCoursesState: () => {
         set(initialState);
     }

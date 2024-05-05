@@ -73,6 +73,25 @@ export const useCoursesApi = () => {
         return completedCourses;
     };
 
+    const getLatestAccessedCourse = async (studentId: number) => {
+        const { data: lastAccessedCourse, error } = await supabase
+            .from("student_courses")
+            .select("*")
+            .match({
+                student_id: studentId,
+                status: "Incomplete"
+            })
+            .order("last_accessed_at", { ascending: true })
+            .select()
+            .single();
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return lastAccessedCourse;
+    };
+
     const insertStudentCourse = async (slug: string, studentId: number, title: string) => {
         const { error } = await supabase
             .from("student_courses")
@@ -129,6 +148,7 @@ export const useCoursesApi = () => {
         getStudentCourses,
         getCourseModules,
         getCompletedCourses,
+        getLatestAccessedCourse,
         insertStudentCourse,
         updateCourse,
         updateStudentCourse

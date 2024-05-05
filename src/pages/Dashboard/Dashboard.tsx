@@ -12,12 +12,17 @@ import { useUpdateStudentSubscription } from "@/api/student/subscription";
 import { useAchievementApi } from "@/api/achievement";
 import { useEffect, useState } from "react";
 import { Tables } from "@/types/database.types";
+import useCoursesContext from "@/context/coursesContext";
+import { useCoursesApi } from "@/api/courses";
 
 function DashboardPage() {
     useUpdateStudentSubscription();
 
-    const { student } = useStudentContext();
     const { getStudentAchievements } = useAchievementApi();
+    const { getLatestAccessedCourse } = useCoursesApi();
+
+    const { student } = useStudentContext();
+    const { setLastAccessedCourse, lastAccessedCourse } = useCoursesContext();
 
     const [achievementList, setAchievementList] = useState<Tables<"achievements">[]>([]);
 
@@ -31,8 +36,10 @@ function DashboardPage() {
 
     const fetchStudentAchievements = async (student: Tables<"students">) => {
         const studentAchievements = await getStudentAchievements(student.achievements);
+        const latestCourse = await getLatestAccessedCourse(student.id);
 
         setAchievementList(studentAchievements);
+        setLastAccessedCourse(latestCourse);
     };
 
     if (!student) {
@@ -45,7 +52,7 @@ function DashboardPage() {
 
             <div className="grid grid-cols-10 grid-rows-7 gap-5">
                 <div className="col-span-4 row-span-2 bg-highlight-300 rounded-sm flex flex-col px-8 py-6">
-                    <LastModuleInfo courseName="JavaScript Fundamental" lastAccessed="2 days ago" address="/" />
+                    <LastModuleInfo course={lastAccessedCourse} />
                 </div>
 
                 <div className="relative col-span-4 row-span-2 bg-stroke-900 rounded-sm flex items-center pl-10 gap-8 overflow-hidden">
