@@ -314,6 +314,13 @@ export default {
                     }
                 ],
 
+                "p2-light": [
+                    "16px",
+                    {
+                        lineHeight: "24px",
+                        fontWeight: "300"
+                    }
+                ],
                 "p2-regular": [
                     "16px",
                     {
