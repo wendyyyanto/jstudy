@@ -154,6 +154,7 @@ export type Database = {
       }
       student_courses: {
         Row: {
+          completed_at: string | null
           course_slug: string
           id: number
           last_accessed_at: string
@@ -163,6 +164,7 @@ export type Database = {
           student_id: number
         }
         Insert: {
+          completed_at?: string | null
           course_slug?: string
           id?: number
           last_accessed_at?: string
@@ -172,6 +174,7 @@ export type Database = {
           student_id: number
         }
         Update: {
+          completed_at?: string | null
           course_slug?: string
           id?: number
           last_accessed_at?: string
@@ -201,7 +204,7 @@ export type Database = {
         Row: {
           achievements: number[]
           challenges_completed: number[]
-          courses: number[]
+          completed_courses: string[]
           created_at: string
           current_xp: number
           has_failed_challenge: boolean
@@ -219,7 +222,7 @@ export type Database = {
         Insert: {
           achievements: number[]
           challenges_completed?: number[]
-          courses?: number[]
+          completed_courses?: string[]
           created_at?: string
           current_xp?: number
           has_failed_challenge?: boolean
@@ -237,7 +240,7 @@ export type Database = {
         Update: {
           achievements?: number[]
           challenges_completed?: number[]
-          courses?: number[]
+          completed_courses?: string[]
           created_at?: string
           current_xp?: number
           has_failed_challenge?: boolean
