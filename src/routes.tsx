@@ -8,8 +8,8 @@ import AchievementsPage from "pages/Achievements";
 import CoursesPage from "pages/Courses";
 import CourseModule from "pages/Courses/CourseModule";
 import ChallengePage from "pages/Challenge";
-import SignIn from "pages/SignIn";
-import SignUp from "pages/SignUp";
+import SignIn from "pages/Auth/SignIn";
+import SignUp from "pages/Auth/SignUp";
 
 const router = createBrowserRouter([
     {
