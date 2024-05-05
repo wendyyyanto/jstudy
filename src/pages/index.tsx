@@ -102,31 +102,6 @@ function Dashboard() {
         return isDeserved;
     };
 
-    // const isIncludesRequirements = (achievement: Achievements) => {
-    //     if (!achievement) return false;
-    //     if (!student) return false;
-
-    //     const keys = Object.keys(achievement.requirements as Requirement);
-    //     const requirementsString = JSON.stringify(achievement.requirements);
-    //     const requirementObj = JSON.parse(requirementsString);
-
-    //     let isDeserved = true;
-
-    //     keys.forEach((key: string) => {
-    //         const studentValue = student[key];
-    //         const requirement = requirementObj[key];
-    //         const isIncluded = studentValue.includes(requirement);
-    //         console.log(studentValue, requirement, isIncluded);
-
-    //         if (isIncluded as boolean) {
-    //             isDeserved = false;
-    //             return;
-    //         }
-    //     });
-
-    //     return isDeserved;
-    // };
-
     return (
         <div className="flex">
             <DashboardSideBar />
