@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         path: "courses",
         children: [
             {
-                path: ":courseId/modules/:moduleId",
+                path: ":courseSlug/modules/:moduleId",
                 element: <CourseModule />
             }
         ]
