@@ -14,7 +14,7 @@ import useAchievementContext from "@/context/achievementContext";
 type Achievements = Tables<"achievements">;
 type Students = Tables<"students"> | null;
 
-type Achievement = {
+type Requirement = {
     [key: string]: number | string;
 };
 
@@ -49,7 +49,7 @@ function Dashboard() {
         }
 
         studentAchievements.forEach(async (achievement) => {
-            const isDeserved = checkDeservedAchievement(achievement);
+            const isDeserved = isMatchRequirements(achievement) || isIncludesRequirements(achievement);
             const isAlreadyReceived = isAchievementAlreadyReceived(achievement, student);
 
             if (isDeserved && !isAlreadyReceived) {
@@ -73,16 +73,45 @@ function Dashboard() {
         return studentAchievements?.includes(achievement!.id);
     };
 
-    const checkDeservedAchievement = (achievement: Achievements) => {
-        const keys = Object.keys(achievement?.requirements as Achievement);
+    const isMatchRequirements = (achievement: Achievements) => {
+        if (!achievement) return false;
+        if (!student) return false;
+
+        const keys = Object.keys(achievement.requirements as Requirement);
+        const requirementsString = JSON.stringify(achievement.requirements);
+        const requirementObj = JSON.parse(requirementsString);
 
         let isDeserved = true;
 
         keys.forEach((key) => {
-            const studentValue = student?.[key];
-            const requirement = achievement.requirements?.[key];
+            const studentValue = student[key];
+            const requirement = requirementObj[key];
 
             if (studentValue !== requirement) {
+                isDeserved = false;
+                return;
+            }
+        });
+
+        return isDeserved;
+    };
+
+    const isIncludesRequirements = (achievement: Achievements) => {
+        if (!achievement) return false;
+        if (!student) return false;
+
+        const keys = Object.keys(achievement.requirements as Requirement);
+        const requirementsString = JSON.stringify(achievement.requirements);
+        const requirementObj = JSON.parse(requirementsString);
+
+        let isDeserved = true;
+
+        keys.forEach((key: string) => {
+            const studentValue = student[key];
+            const requirement = requirementObj[key];
+            const isIncluded = studentValue.includes(requirement);
+
+            if (isIncluded) {
                 isDeserved = false;
                 return;
             }
