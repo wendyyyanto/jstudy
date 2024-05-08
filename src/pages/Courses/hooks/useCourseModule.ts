@@ -50,7 +50,10 @@ export const useCourseModule = () => {
 
         const slug = courseSlug as string;
 
-        if (student.completed_courses.includes(slug)) return;
+        if (student.completed_courses.includes(slug)) {
+            navigate("/dashboard/courses");
+            return;
+        }
 
         const updatedStudent: TablesUpdate<"students"> = {
             completed_courses: [...student.completed_courses, slug]

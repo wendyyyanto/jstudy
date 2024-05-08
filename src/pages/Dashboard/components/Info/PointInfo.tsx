@@ -8,7 +8,7 @@ function PointInfo({ points }: { points: number }) {
                 <img alt="Lamp Icon" src={giftIcon} className="h-full" />
             </SmallCircle>
             <div>
-                <p className="text-p1-regular">Point</p>
+                <p className="text-p1-regular">Poin</p>
                 <p className="text-h3-semibold">{points}</p>
             </div>
         </>

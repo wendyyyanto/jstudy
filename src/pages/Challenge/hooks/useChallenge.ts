@@ -32,7 +32,7 @@ export const useChallenge = () => {
         const challenge = await getChallenge(6);
 
         setChallenge(challenge);
-        setDuration((challenge.durations - 55) * 1000);
+        setDuration(challenge.durations * 1000);
     };
 
     const handleUpdateChallege = async () => {

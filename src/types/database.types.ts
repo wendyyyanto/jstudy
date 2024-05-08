@@ -167,7 +167,7 @@ export type Database = {
         }
         Insert: {
           completed_at?: string | null
-          course_slug?: string
+          course_slug: string
           course_title: string
           id?: number
           last_accessed_at?: string
@@ -263,7 +263,7 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "students_user_fkey"
+            foreignKeyName: "students_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"

@@ -24,7 +24,7 @@ function DashboardPage() {
     const { student } = useStudentContext();
     const { setLastAccessedCourse, lastAccessedCourse } = useCoursesContext();
 
-    const [achievementList, setAchievementList] = useState<Tables<"achievements">[]>([]);
+    const [achievementList, setAchievementList] = useState<Tables<"achievements">[] | null>(null);
 
     useEffect(() => {
         if (student) {
@@ -36,9 +36,9 @@ function DashboardPage() {
 
     const fetchStudentAchievements = async (student: Tables<"students">) => {
         const studentAchievements = await getStudentAchievements(student.achievements);
-        const latestCourse = await getLatestAccessedCourse(student.id);
-
         setAchievementList(studentAchievements);
+
+        const latestCourse = await getLatestAccessedCourse(student.id);
         setLastAccessedCourse(latestCourse);
     };
 
@@ -59,11 +59,11 @@ function DashboardPage() {
                     <RankInfo rank={student.rank} />
                 </div>
 
-                <div className="col-span-2 col-start-9 row-span-1 bg-secondary rounded-sm flex items-center gap-4 px-4">
+                <div className="col-span-2 col-start-9 row-span-1 bg-secondary rounded-sm flex items-center gap-4 p-4">
                     <LevelInfo level={student.level} />
                 </div>
 
-                <div className="col-span-2 col-start-9 row-span-1 bg-tertiary-500 rounded-sm flex items-center gap-4 px-4">
+                <div className="col-span-2 col-start-9 row-span-1 bg-tertiary-500 rounded-sm flex items-center gap-4 p-4">
                     <PointInfo points={student.points} />
                 </div>
 
@@ -71,10 +71,12 @@ function DashboardPage() {
                     <LearningProgress />
                 </WhiteCard>
                 <WhiteCard className="col-span-4 row-span-5">
-                    {achievementList.length > 0 ? (
+                    {achievementList && achievementList.length > 0 ? (
                         <Achievements achievements={achievementList} />
                     ) : (
-                        <p>No Achievements</p>
+                        <div className="flex flex-1 h-full justify-center items-center">
+                            <p>Tidak ada Achievement</p>
+                        </div>
                     )}
                 </WhiteCard>
             </div>

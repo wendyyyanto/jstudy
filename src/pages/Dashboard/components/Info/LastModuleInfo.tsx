@@ -20,7 +20,7 @@ function LastModuleInfo({ course }: ILastModuleInfoProps) {
                 <p className="text-p1-regular text-stroke-300">Modul yang baru saja kamu akses</p>
             </div>
 
-            {course && (
+            {course ? (
                 <>
                     <p className="text-h5-semibold text-stroke-800 mt-5 w-10/12 text-ellipsis whitespace-nowrap overflow-hidden">
                         {course.course_title}
@@ -36,6 +36,10 @@ function LastModuleInfo({ course }: ILastModuleInfoProps) {
                         Lanjutin <HiArrowRight size={18} />
                     </NavLink>
                 </>
+            ) : (
+                <div className="flex flex-1 justify-center items-center">
+                    <p className="text-p2-semibold text-stroke-300">Tidak ada</p>
+                </div>
             )}
         </>
     );

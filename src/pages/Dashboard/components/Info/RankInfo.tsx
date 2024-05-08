@@ -11,7 +11,7 @@ function RankInfo({ rank }: { rank: string }) {
                 className="absolute -right-1/3 top-1/2 transform -translate-y-1/4 -translate-x-1/4 w-64 opacity-20"
             />
             <div className="flex flex-col text-white gap-5">
-                <p className="text-p2-semibold">Your Rank</p>
+                <p className="text-p2-semibold">Pangkat</p>
                 <p className="text-h4-semibold">{rank}</p>
             </div>
         </>
