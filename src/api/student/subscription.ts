@@ -1,12 +1,12 @@
-import useStudentContext from "@/context/studentContext";
+import { useEffect } from "react";
+import { useLevelAndRank } from "@/lib/hooks/useLevelAndRank";
 import supabase from "@/lib/supabaseClient";
 import { Tables } from "@/types/database.types";
-import { useEffect } from "react";
 
 type Student = Tables<"students">;
 
 export const useUpdateStudentSubscription = () => {
-    const { setStudent } = useStudentContext();
+    const { handleLeveledUp, handleRankedUp } = useLevelAndRank();
 
     useEffect(() => {
         const studentSubscription = supabase
@@ -19,7 +19,8 @@ export const useUpdateStudentSubscription = () => {
                     table: "students"
                 },
                 (payload) => {
-                    setStudent({ ...(payload.new as Student) });
+                    handleRankedUp(payload.new as Student);
+                    handleLeveledUp(payload.new as Student);
                 }
             )
             .subscribe();

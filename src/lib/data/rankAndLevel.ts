@@ -1,37 +1,11 @@
-export const rankUp = [
+export const ranks = [
     { level: 1, rank: "Beginner" },
-    { level: 2, rank: "Beginner" },
-    { level: 3, rank: "Beginner" },
-    { level: 4, rank: "Beginner" },
-    { level: 5, rank: "Beginner" },
-    { level: 6, rank: "Beginner" },
-    { level: 7, rank: "Beginner" },
-    { level: 8, rank: "Beginner" },
-    { level: 9, rank: "Beginner" },
     { level: 10, rank: "Intermediate" },
-    { level: 11, rank: "Intermediate" },
-    { level: 12, rank: "Intermediate" },
-    { level: 13, rank: "Intermediate" },
-    { level: 14, rank: "Intermediate" },
-    { level: 15, rank: "Intermediate" },
-    { level: 16, rank: "Intermediate" },
-    { level: 17, rank: "Intermediate" },
-    { level: 18, rank: "Intermediate" },
-    { level: 19, rank: "Intermediate" },
-    { level: 20, rank: "Intermediate" },
-    { level: 21, rank: "Intermediate" },
-    { level: 22, rank: "Intermediate" },
-    { level: 23, rank: "Intermediate" },
-    { level: 24, rank: "Intermediate" },
-    { level: 25, rank: "Advanced" },
-    { level: 26, rank: "Advanced" },
-    { level: 27, rank: "Advanced" },
-    { level: 28, rank: "Advanced" },
-    { level: 29, rank: "Advanced" },
-    { level: 30, rank: "Advanced" }
+    { level: 30, rank: "Advanced" },
+    { level: 50, rank: "Master" }
 ];
 
-export const levelUp = [
+export const levels = [
     { level: 1, xp_required: 100 },
     { level: 2, xp_required: 200 },
     { level: 3, xp_required: 300 },
