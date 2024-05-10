@@ -6,7 +6,7 @@ export const ranks = [
 ];
 
 export const levels = [
-    { level: 1, xp_required: 100 },
+    { level: 1, xp_required: 0 },
     { level: 2, xp_required: 200 },
     { level: 3, xp_required: 300 },
     { level: 4, xp_required: 400 },
