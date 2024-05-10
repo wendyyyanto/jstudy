@@ -41,7 +41,8 @@ export type Database = {
       }
       challenges: {
         Row: {
-          answers: string[]
+          answer: string
+          choices: string[]
           created_at: string
           difficulty: Database["public"]["Enums"]["Difficulty"]
           durations: number
@@ -54,7 +55,8 @@ export type Database = {
           user_ids: number[]
         }
         Insert: {
-          answers?: string[]
+          answer?: string
+          choices?: string[]
           created_at?: string
           difficulty?: Database["public"]["Enums"]["Difficulty"]
           durations: number
@@ -67,7 +69,8 @@ export type Database = {
           user_ids: number[]
         }
         Update: {
-          answers?: string[]
+          answer?: string
+          choices?: string[]
           created_at?: string
           difficulty?: Database["public"]["Enums"]["Difficulty"]
           durations?: number
