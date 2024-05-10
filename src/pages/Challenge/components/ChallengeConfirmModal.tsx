@@ -1,6 +1,3 @@
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
-
 import { FaRankingStar } from "react-icons/fa6";
 import { FiClock } from "react-icons/fi";
 import { PiWarningCircleFill } from "react-icons/pi";
@@ -18,14 +15,10 @@ interface IChallengeConfirmModalProps {
     blocker: Blocker;
 }
 
-dayjs.extend(duration);
-
 function ChallengeConfirmModal({ challenge, blocker }: IChallengeConfirmModalProps) {
     const navigate = useNavigate();
 
     const { setIsModalOpened } = useChallengeContext();
-
-    const durations = dayjs.duration({ seconds: challenge.durations }).asMinutes();
 
     const handleOnStart = () => {
         setIsModalOpened(false);
@@ -58,7 +51,11 @@ function ChallengeConfirmModal({ challenge, blocker }: IChallengeConfirmModalPro
                         icon={<SlBadge size={28} />}
                         details={`${challenge.reward_points} Points`}
                     />
-                    <ChallengeInfo title="Durations" icon={<FiClock size={28} />} details={`${durations} Minute(s)`} />
+                    <ChallengeInfo
+                        title="Durations"
+                        icon={<FiClock size={28} />}
+                        details={`${challenge.durations} seconds`}
+                    />
                 </div>
 
                 <div className="flex flex-1 justify-around items-end gap-4-">

@@ -63,16 +63,12 @@ export const useChallenge = () => {
             total_challenges_completed: total_challenges_completed + 1
         };
 
-        const challengeResponse = updateChallenge(challengeId, updatedChallenge);
-        const studentResponse = updateStudent(studentId, updatedStudent);
-
-        console.log(challengeResponse, studentResponse);
+        await updateChallenge(challengeId, updatedChallenge);
+        await updateStudent(studentId, updatedStudent);
     };
 
-    const handleSubmitAnswer: SubmitHandler<ChallengeInputs> = async ({ answer }) => {
-        const isCorrect = checkAnswer(answer);
-
-        console.log(isCorrect);
+    const handleSubmitAnswer: SubmitHandler<ChallengeInputs> = async ({ multiple_choices }) => {
+        const isCorrect = checkAnswer(multiple_choices);
 
         if (isCorrect) {
             handleUpdateChallege();
@@ -92,13 +88,11 @@ export const useChallenge = () => {
 
         const studentId = student?.id as number;
 
-        const studentResponse = updateStudent(studentId, updatedStudent);
-
-        console.log(studentResponse);
+        await updateStudent(studentId, updatedStudent);
     };
 
     const checkAnswer = (answer: string): boolean => {
-        return challenge?.answers.includes(answer.trim()) as boolean;
+        return challenge?.answer === answer;
     };
 
     const isStudentFailed = () => {

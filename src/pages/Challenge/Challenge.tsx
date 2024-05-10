@@ -1,13 +1,12 @@
 import { LegacyRef, useRef } from "react";
 import Countdown, { CountdownRenderProps } from "react-countdown";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import { FaRankingStar } from "react-icons/fa6";
 import { SlBadge } from "react-icons/sl";
 import { FiClock } from "react-icons/fi";
 
 import ChallengeConfirmModal from "./components/ChallengeConfirmModal";
-import ChallengeInputAnswer from "./components/ChallengeInputAnswer";
 import ChallengeQuestion from "./components/ChallengeQuestion";
 import ChallengeLeaveModal from "./components/ChallengeLeaveModal";
 import ModalFinish from "./components/ModalFinish";
@@ -16,8 +15,9 @@ import { useUpdateStudentSubscription } from "@/api/student/subscription";
 
 import { useChallenge } from "./hooks/useChallenge";
 
-import { ChallengeInputs } from "@/types/challenge";
 import { useBlocker } from "react-router-dom";
+import CheckBoxes from "@/components/CheckBoxes";
+import { ChallengeInputs } from "@/types/challenge";
 
 function ChallengePage() {
     useUpdateStudentSubscription();
@@ -51,13 +51,6 @@ function ChallengePage() {
         return currentLocation.pathname !== nextLocation.pathname;
     });
 
-    const handleFailed = () => {
-        if (blocker.state === "blocked") {
-            updateFailedStudent();
-            blocker.proceed();
-        }
-    };
-
     const handleResume = () => {
         if (blocker.state === "blocked") {
             handleStart();
@@ -65,10 +58,13 @@ function ChallengePage() {
         }
     };
 
-    const handleExitFailedChallenge = () => {
+    const handleExitFailedChallenge = async () => {
         navigate("/dashboard");
+        await updateFailedStudent();
 
-        handleFailed();
+        if (blocker.state === "blocked") {
+            blocker.proceed();
+        }
     };
 
     const handleCloseModal = () => {
@@ -96,7 +92,7 @@ function ChallengePage() {
         return (
             <>
                 {blocker.state === "blocked" ? (
-                    <ChallengeLeaveModal leave={handleFailed} resume={handleResume} />
+                    <ChallengeLeaveModal leave={handleExitFailedChallenge} resume={handleResume} />
                 ) : null}
                 <FiClock size={24} />
                 <p className="text-h6-bold">
@@ -135,7 +131,7 @@ function ChallengePage() {
     }
 
     return (
-        <>
+        <div className="h-screen overflow-auto">
             <h1 className="text-h2-semibold text-stroke-600 mb-5">Daily Challenge</h1>
 
             <div className="flex flex-col">
@@ -165,17 +161,29 @@ function ChallengePage() {
                     </div>
                 </div>
 
-                <div className="my-8 max-h-[50vh] overflow-auto">
+                <div className="my-8 overflow-auto">
                     <ChallengeQuestion challenge={challenge} />
                 </div>
 
-                <div className="flex">
-                    <form className="flex flex-1 gap-4" onSubmit={handleSubmit(handleSubmitAnswer)}>
-                        <ChallengeInputAnswer control={control} />
+                <div className="h-[30vh] overflow-auto pb-12">
+                    <form className="flex flex-col gap-4" onSubmit={handleSubmit(handleSubmitAnswer)}>
+                        <Controller
+                            name="multiple_choices"
+                            control={control}
+                            render={({ field: { name } }) => (
+                                <CheckBoxes options={challenge.choices} control={control} name={name} />
+                            )}
+                        />
+
+                        <input
+                            type="submit"
+                            placeholder="Submit"
+                            className="py-5 px-10 bg-stroke-500 text-white text-subheading-semibold rounded-md cursor-pointer"
+                        />
                     </form>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
