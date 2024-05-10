@@ -22,7 +22,7 @@ function SignIn() {
 
     const navigate = useNavigate();
 
-    const { handleAuthenticatedUser } = useAuth();
+    const { handleAuthenticatedUser, showToast } = useAuth();
 
     useEffect(() => {
         handleAuthenticatedUser();
@@ -32,17 +32,17 @@ function SignIn() {
     }, []);
 
     const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
-        const { data: authData, error } = await supabase.auth.signInWithPassword({
+        const { error } = await supabase.auth.signInWithPassword({
             email,
             password
         });
 
         if (error) {
+            showToast("error", error.message);
             throw new Error(error.message);
         }
 
-        console.log("Sign In Success!", authData);
-
+        showToast("success", "Login Success!");
         navigate("/dashboard");
     };
 

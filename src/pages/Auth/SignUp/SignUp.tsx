@@ -24,7 +24,7 @@ function SignUp() {
 
     const navigate = useNavigate();
 
-    const { handleAuthenticatedUser } = useAuth();
+    const { handleAuthenticatedUser, showToast } = useAuth();
 
     useEffect(() => {
         handleAuthenticatedUser();
@@ -45,6 +45,7 @@ function SignUp() {
         });
 
         if (error) {
+            showToast("error", error.message);
             throw new Error(error.message);
         }
 
@@ -54,8 +55,7 @@ function SignUp() {
             username
         });
 
-        console.log("Sign Up Success!", authData);
-
+        showToast("success", "Sign Up Success!");
         navigate("/auth/signin");
     };
 

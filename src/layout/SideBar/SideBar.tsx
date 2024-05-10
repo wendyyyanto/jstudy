@@ -1,41 +1,18 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { BsLightningCharge } from "react-icons/bs";
 import { FaRegStar } from "react-icons/fa";
 import { IoBookOutline } from "react-icons/io5";
 import { SlScreenDesktop } from "react-icons/sl";
 import { TbLogout2 } from "react-icons/tb";
 
-import supabase from "@/lib/supabaseClient";
-
 import styled from "styled-components";
-import useStudentContext from "@/context/studentContext";
-import useAchievementContext from "@/context/achievementContext";
-import useChallengeContext from "@/context/challengeContext";
+import useAuth from "@/lib/hooks/useAuth";
 
 function DashboardSideBar() {
-    const navigate = useNavigate();
-
-    const { resetStudentState } = useStudentContext();
-    const { resetAchievementState } = useAchievementContext();
-    const { resetChallengeState } = useChallengeContext();
+    const { handleLogOut } = useAuth();
 
     const onActiveClass = ({ isActive }: { isActive: boolean }) =>
         isActive ? "bg-secondary text-p1-bold" : "text-p1-regular";
-
-    const logOut = async () => {
-        const { error } = await supabase.auth.signOut();
-
-        if (error) {
-            throw new Error(error.message);
-        }
-
-        resetStudentState();
-        resetAchievementState();
-        resetChallengeState();
-        console.log("Logging Out User Success!");
-
-        navigate("/auth/signin");
-    };
 
     return (
         <SideBarContainer className="bg-tertiary-500">
@@ -66,7 +43,7 @@ function DashboardSideBar() {
                     </li>
                 </ul>
                 <div
-                    onClick={logOut}
+                    onClick={handleLogOut}
                     className="flex text-p1-regular items-center pl-[15px] mb-[30px] gap-[10px] cursor-pointer"
                 >
                     <TbLogout2 size={28} /> Logout
