@@ -23,7 +23,11 @@ export const useCoursesApi = () => {
     };
 
     const getCourseModules = async (slug: string) => {
-        const { data: modules, error } = await supabase.from("course_modules").select("*").eq("course_slug", slug);
+        const { data: modules, error } = await supabase
+            .from("course_modules")
+            .select("*")
+            .eq("course_slug", slug)
+            .order("id", { ascending: true });
 
         if (error) {
             throw new Error(error.message);

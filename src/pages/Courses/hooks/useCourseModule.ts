@@ -2,6 +2,7 @@ import { useCoursesApi } from "@/api/courses";
 import { useStudentApi } from "@/api/student";
 import useCoursesContext from "@/context/coursesContext";
 import useStudentContext from "@/context/studentContext";
+import supabase from "@/lib/supabaseClient";
 import { TablesUpdate } from "@/types/database.types";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,39 +10,47 @@ import { useNavigate, useParams } from "react-router-dom";
 export const useCourseModule = () => {
     const navigate = useNavigate();
 
-    const { updateStudent } = useStudentApi();
+    const { updateStudent, getStudent } = useStudentApi();
     const { getCourseModules, getStudentCourse, updateStudentCourse } = useCoursesApi();
 
     const { setCourseModules, courseModules, currentModule, setCurrentModule, setStudentCourse, studentCourse } =
         useCoursesContext();
-    const { student } = useStudentContext();
+    const { student, setStudent } = useStudentContext();
 
     const { courseSlug, moduleId } = useParams();
 
     useEffect(() => {
-        fetchModules();
+        fetchStudent();
+
+        if (student) {
+            fetchModules();
+        }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [moduleId, student?.user_id]);
+
+    const fetchStudent = async () => {
+        const { data } = await supabase.auth.getUser();
+
+        const currentStudent = await getStudent(data.user?.id as string);
+        setStudent(currentStudent);
+    };
 
     const fetchModules = async () => {
-        if (!student) return;
-
         const slug = courseSlug as string;
 
         const modules = await getCourseModules(slug);
-        const course = await getStudentCourse(slug, student.id);
-        const currentModuleIndex = modules.findIndex((module) => module.id === moduleId);
+        const course = await getStudentCourse(slug, student!.id);
+        const module = modules.filter((module) => module.id === moduleId);
 
-        setCurrentModule(modules[currentModuleIndex]);
+        setCurrentModule(module[0]);
+
         setCourseModules(modules);
         setStudentCourse(course);
     };
 
     const onFinishCourse = async () => {
-        if (!student) return;
-
-        if (!studentCourse) return;
+        if (!student || !studentCourse) return;
 
         if (studentCourse.status === "Completed") {
             navigate("/dashboard/courses");

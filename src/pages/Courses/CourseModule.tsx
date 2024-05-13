@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
-import parse from "html-react-parser";
+import parse, { Element, HTMLReactParserOptions } from "html-react-parser";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { useCourseModule } from "./hooks/useCourseModule";
 import { useUpdateStudentSubscription } from "@/api/student/subscription";
+import { Code, CopyBlock, dracula } from "react-code-blocks";
 
 function CourseModule() {
     useUpdateStudentSubscription();
@@ -19,7 +20,41 @@ function CourseModule() {
         return <div>Loading module...</div>;
     }
 
-    const parsedHTML = parse(module.content);
+    const options: HTMLReactParserOptions = {
+        replace(domNode, index) {
+            if ((domNode as Element).attribs) {
+                const { attribs, children } = domNode as Element;
+
+                if (attribs.id === "codeblock") {
+                    return (
+                        <CopyBlock
+                            key={index}
+                            text={attribs.text}
+                            theme={dracula}
+                            language="javascript"
+                            showLineNumbers
+                        />
+                    );
+                }
+
+                if (attribs.id === "code") {
+                    return <Code key={index} text={attribs.text} language="javascript" theme={dracula} />;
+                }
+
+                if (attribs.id === "shortcode") {
+                    return <ShortCode code={children[0].data} />;
+                }
+            }
+
+            return domNode;
+        }
+    };
+
+    const html = `
+    
+    `;
+
+    const parsedHTML = parse(module.content, options);
     const currentIndex = modules.findIndex((m) => m?.id === module.id);
 
     return (
@@ -30,6 +65,7 @@ function CourseModule() {
             </NavLink>
             <div className="h-screen w-2/5 mx-auto overflow-auto">
                 <div className="pt-16 pb-52">{parsedHTML}</div>
+                {/* <div className="pt-16 pb-52"></div> */}
             </div>
             <div className="flex bg-highlight-100 justify-between items-center px-8 py-6 w-screen gap-2 absolute bottom-0 left-0">
                 {module.prev_module ? (
@@ -61,6 +97,10 @@ function CourseModule() {
             </div>
         </div>
     );
+}
+
+function ShortCode({ code }: { code: string }) {
+    return <span className="text-[#ff0000]">{code}</span>;
 }
 
 export default CourseModule;
