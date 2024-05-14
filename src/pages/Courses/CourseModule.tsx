@@ -8,7 +8,7 @@ import { Code, CopyBlock, dracula } from "react-code-blocks";
 function CourseModule() {
     useUpdateStudentSubscription();
 
-    const { currentModule: module, courseModules: modules, onFinishCourse } = useCourseModule();
+    const { currentModule: module, courseModules: modules, onFinishCourse, onNextModule } = useCourseModule();
 
     if (!modules) {
         return <div>Loading modules...</div>;
@@ -84,10 +84,10 @@ function CourseModule() {
                 </div>
 
                 {module.next_module ? (
-                    <NavLink to={module.next_module} className="flex items-center gap-2 cursor-pointer">
+                    <div onClick={() => onNextModule()} className="flex items-center gap-2 cursor-pointer">
                         <p className="text-p2-semibold">Next Module</p>
                         <FaArrowRight size={18} />
-                    </NavLink>
+                    </div>
                 ) : (
                     <div onClick={() => onFinishCourse()} className="flex items-center gap-2 cursor-pointer">
                         <p className="text-p2-semibold">Finish</p>

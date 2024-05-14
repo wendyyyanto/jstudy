@@ -3,21 +3,23 @@ import { useStudentApi } from "@/api/student";
 import useCoursesContext from "@/context/coursesContext";
 import useStudentContext from "@/context/studentContext";
 import supabase from "@/lib/supabaseClient";
-import { TablesUpdate } from "@/types/database.types";
-import { useEffect } from "react";
+import { Tables, TablesUpdate } from "@/types/database.types";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const useCourseModule = () => {
     const navigate = useNavigate();
 
     const { updateStudent, getStudent } = useStudentApi();
-    const { getCourseModules, getStudentCourse, updateStudentCourse } = useCoursesApi();
+    const { getCourseModules, getStudentCourse, getLastModuleRef, updateStudentCourse } = useCoursesApi();
 
     const { setCourseModules, courseModules, currentModule, setCurrentModule, setStudentCourse, studentCourse } =
         useCoursesContext();
     const { student, setStudent } = useStudentContext();
 
     const { courseSlug, moduleId } = useParams();
+
+    const [lastModule, setLastModule] = useState<Tables<"course_modules"> | null>(null);
 
     useEffect(() => {
         fetchStudent();
@@ -43,10 +45,33 @@ export const useCourseModule = () => {
         const course = await getStudentCourse(slug, student!.id);
         const module = modules.filter((module) => module.id === moduleId);
 
-        setCurrentModule(module[0]);
+        const { course_modules: lastModule } = await getLastModuleRef(slug, student!.id);
+        setLastModule(lastModule);
 
+        setCurrentModule(module[0]);
         setCourseModules(modules);
         setStudentCourse(course);
+    };
+
+    const updateStudentProgress = async () => {
+        const moduleProgress = (currentModule!.module_number / courseModules!.length) * 100;
+        const slug = courseSlug as string;
+
+        const newStudentCourses: TablesUpdate<"student_courses"> = {
+            progress: moduleProgress,
+            last_module: currentModule?.id,
+            last_accessed_at: new Date().toISOString()
+        };
+
+        await updateStudentCourse(slug, student!.id, newStudentCourses);
+    };
+
+    const onNextModule = async () => {
+        if (lastModule?.address === currentModule?.prev_module) {
+            await updateStudentProgress();
+        }
+
+        navigate(currentModule?.next_module as string);
     };
 
     const onFinishCourse = async () => {
@@ -83,6 +108,7 @@ export const useCourseModule = () => {
     return {
         currentModule,
         courseModules,
-        onFinishCourse
+        onFinishCourse,
+        onNextModule
     };
 };

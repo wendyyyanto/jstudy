@@ -86,28 +86,34 @@ export type Database = {
       }
       course_modules: {
         Row: {
+          address: string
           content: string
           course_slug: string
           created_at: string
           id: string
+          module_number: number
           next_module: string | null
           prev_module: string | null
           title: string
         }
         Insert: {
+          address?: string
           content?: string
           course_slug: string
           created_at?: string
           id?: string
+          module_number?: number
           next_module?: string | null
           prev_module?: string | null
           title?: string
         }
         Update: {
+          address?: string
           content?: string
           course_slug?: string
           created_at?: string
           id?: string
+          module_number?: number
           next_module?: string | null
           prev_module?: string | null
           title?: string
@@ -199,6 +205,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "courses"
             referencedColumns: ["slug"]
+          },
+          {
+            foreignKeyName: "student_courses_last_module_fkey"
+            columns: ["last_module"]
+            isOneToOne: false
+            referencedRelation: "course_modules"
+            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "student_courses_student_id_fkey"

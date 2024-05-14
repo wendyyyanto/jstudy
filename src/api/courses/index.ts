@@ -36,6 +36,23 @@ export const useCoursesApi = () => {
         return modules;
     };
 
+    const getLastModuleRef = async (slug: string, studentId: number) => {
+        const { data: module, error } = await supabase
+            .from("student_courses")
+            .select(`last_module, course_modules(*)`)
+            .match({
+                course_slug: slug,
+                student_id: studentId
+            })
+            .single();
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return module;
+    };
+
     const getStudentCourse = async (slug: string, studentId: number) => {
         const { data: studentCourse, error } = await supabase
             .from("student_courses")
@@ -153,6 +170,7 @@ export const useCoursesApi = () => {
         getCourseModules,
         getCompletedCourses,
         getLatestAccessedCourse,
+        getLastModuleRef,
         insertStudentCourse,
         updateCourse,
         updateStudentCourse
