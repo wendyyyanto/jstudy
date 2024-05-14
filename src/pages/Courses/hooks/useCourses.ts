@@ -3,8 +3,11 @@ import useCoursesContext from "@/context/coursesContext";
 import useStudentContext from "@/context/studentContext";
 import { TablesUpdate } from "@/types/database.types";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useCourses = () => {
+    const navigate = useNavigate();
+
     const {
         getSingleCourse,
         getCourses,
@@ -45,24 +48,10 @@ export const useCourses = () => {
     const onStartCourse = async (slug: string) => {
         const course = await getSingleCourse(slug);
 
-        if (!course) return;
-
-        if (!student) return;
+        if (!course || !student) return;
 
         const isAlreadyStarted = course.student_ids.includes(student.id);
-        if (isAlreadyStarted) {
-            const updatedStudentCourse: TablesUpdate<"student_courses"> = {
-                last_accessed_at: new Date().toISOString()
-            };
-
-            const updateStudentCourseResponse = await updateStudentCourse(slug, student.id, updatedStudentCourse);
-
-            if (!updateStudentCourseResponse) {
-                throw new Error("Error while updating course");
-            }
-
-            return;
-        }
+        checkIsAlreadyStarted(isAlreadyStarted, slug, student.id);
 
         await insertStudentCourse(slug, student.id, course.title);
 
@@ -70,10 +59,20 @@ export const useCourses = () => {
             student_ids: [...course.student_ids, student.id]
         };
 
-        const updateCourseResponse = await updateCourse(slug, updatedCourse);
+        await updateCourse(slug, updatedCourse);
 
-        if (!updateCourseResponse) {
-            throw new Error("Error while updating course");
+        navigate(course.start_address);
+    };
+
+    const checkIsAlreadyStarted = async (isAlreadyStarted: boolean, slug: string, studentId: number) => {
+        if (isAlreadyStarted) {
+            const updatedStudentCourse: TablesUpdate<"student_courses"> = {
+                last_accessed_at: new Date().toISOString()
+            };
+
+            await updateStudentCourse(slug, studentId, updatedStudentCourse);
+
+            return;
         }
     };
 

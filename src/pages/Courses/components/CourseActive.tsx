@@ -17,13 +17,7 @@ function CourseActive({ courses }: ICourseActiveProps) {
                 {courses &&
                     courses.map(
                         (course) =>
-                            course && (
-                                <CourseActiveItem
-                                    key={course.id}
-                                    title={course.course_title}
-                                    courseAddress={course.last_module as string}
-                                />
-                            )
+                            course && <CourseActiveItem key={course.id} title={course.course_title} course={course} />
                     )}
                 {courses && courses.length === 0 && <p>Tidak ada kelas aktif</p>}
             </div>
