@@ -89,7 +89,6 @@ export type Database = {
           address: string
           content: string
           course_slug: string
-          created_at: string
           id: string
           module_number: number
           next_module: string | null
@@ -100,7 +99,6 @@ export type Database = {
           address?: string
           content?: string
           course_slug: string
-          created_at?: string
           id?: string
           module_number?: number
           next_module?: string | null
@@ -111,7 +109,6 @@ export type Database = {
           address?: string
           content?: string
           course_slug?: string
-          created_at?: string
           id?: string
           module_number?: number
           next_module?: string | null

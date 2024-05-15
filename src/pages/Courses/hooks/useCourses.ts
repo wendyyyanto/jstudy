@@ -51,7 +51,10 @@ export const useCourses = () => {
         if (!course || !student) return;
 
         const isAlreadyStarted = course.student_ids.includes(student.id);
-        checkIsAlreadyStarted(isAlreadyStarted, slug, student.id);
+        if (isAlreadyStarted) {
+            continueCourse(course.slug, student.id);
+            return;
+        }
 
         await insertStudentCourse(slug, student.id, course.title);
 
@@ -64,16 +67,12 @@ export const useCourses = () => {
         navigate(course.start_address);
     };
 
-    const checkIsAlreadyStarted = async (isAlreadyStarted: boolean, slug: string, studentId: number) => {
-        if (isAlreadyStarted) {
-            const updatedStudentCourse: TablesUpdate<"student_courses"> = {
-                last_accessed_at: new Date().toISOString()
-            };
+    const continueCourse = async (slug: string, studentId: number) => {
+        const updatedStudentCourse: TablesUpdate<"student_courses"> = {
+            last_accessed_at: new Date().toISOString()
+        };
 
-            await updateStudentCourse(slug, studentId, updatedStudentCourse);
-
-            return;
-        }
+        await updateStudentCourse(slug, studentId, updatedStudentCourse);
     };
 
     return {

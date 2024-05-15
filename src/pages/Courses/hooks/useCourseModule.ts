@@ -58,7 +58,7 @@ export const useCourseModule = () => {
         const slug = courseSlug as string;
 
         const newStudentCourses: TablesUpdate<"student_courses"> = {
-            progress: moduleProgress,
+            progress: Math.floor(moduleProgress),
             last_module: currentModule?.id,
             last_accessed_at: new Date().toISOString()
         };

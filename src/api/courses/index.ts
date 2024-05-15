@@ -114,14 +114,15 @@ export const useCoursesApi = () => {
     };
 
     const insertStudentCourse = async (slug: string, studentId: number, title: string) => {
-        const { error } = await supabase
-            .from("student_courses")
-            .insert({
-                course_slug: slug,
-                student_id: studentId,
-                course_title: title
-            })
-            .select();
+        const module = await getCourseModules(slug);
+        console.log(module);
+
+        const { error } = await supabase.from("student_courses").insert({
+            course_slug: slug,
+            student_id: studentId,
+            course_title: title,
+            last_module: module[0].id
+        });
 
         if (error) {
             throw new Error(error.message);

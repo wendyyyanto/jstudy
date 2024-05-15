@@ -33,12 +33,13 @@ function CourseModule() {
                             theme={dracula}
                             language="javascript"
                             showLineNumbers
+                            wrapLongLines
                         />
                     );
                 }
 
                 if (attribs.id === "code") {
-                    return <Code key={index} text={attribs.text} language="javascript" theme={dracula} />;
+                    return <Code key={index} text={attribs.text} language="javascript" theme={dracula} wrapLongLines />;
                 }
 
                 if (attribs.id === "shortcode") {
@@ -64,8 +65,8 @@ function CourseModule() {
                 <p className="text-p2-semibold">{module.title}</p>
             </NavLink>
             <div className="h-screen w-2/5 mx-auto overflow-auto">
-                <div className="pt-16 pb-52">{parsedHTML}</div>
-                {/* <div className="pt-16 pb-52"></div> */}
+                <div className="pt-16 pb-52 text-p2-light">{parsedHTML}</div>
+                {/* <div className="pt-16 pb-52 text-p2-light"></div> */}
             </div>
             <div className="flex bg-highlight-100 justify-between items-center px-8 py-6 w-screen gap-2 absolute bottom-0 left-0">
                 {module.prev_module ? (
