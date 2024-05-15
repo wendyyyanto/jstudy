@@ -1,12 +1,5 @@
-import { Tables } from "@/types/database.types";
+import { Course, Courses, Module, Modules, StudentCourse, StudentCourses } from "@/types/types";
 import { create } from "zustand";
-
-type Course = Tables<"courses"> | null;
-type Module = Tables<"course_modules"> | null;
-type StudentCourse = Tables<"student_courses"> | null;
-type Courses = Course[] | null;
-type Modules = Module[] | null;
-type StudentCourses = StudentCourse[] | null;
 
 type State = {
     course: Course;
