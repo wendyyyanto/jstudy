@@ -102,8 +102,8 @@ export const useCoursesApi = () => {
                 student_id: studentId,
                 status: "Incomplete"
             })
-            .order("last_accessed_at", { ascending: true })
-            .select()
+            .order("last_accessed_at", { ascending: false })
+            .limit(1)
             .single();
 
         if (error) {
