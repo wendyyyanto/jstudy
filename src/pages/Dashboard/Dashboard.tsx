@@ -14,12 +14,15 @@ import { useEffect, useState } from "react";
 import { Tables } from "@/types/database.types";
 import useCoursesContext from "@/context/coursesContext";
 import { useCoursesApi } from "@/api/courses";
+import { useCourses } from "../Courses/hooks/useCourses";
 
 function DashboardPage() {
     useUpdateStudentSubscription();
 
     const { getStudentAchievements } = useAchievementApi();
     const { getLatestAccessedCourse } = useCoursesApi();
+
+    const { studentCourses } = useCourses();
 
     const { student } = useStudentContext();
     const { setLastAccessedCourse, lastAccessedCourse } = useCoursesContext();
@@ -29,6 +32,7 @@ function DashboardPage() {
     useEffect(() => {
         if (student) {
             fetchStudentAchievements(student);
+            fetchLastAccessedCourse(student.id);
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,8 +41,10 @@ function DashboardPage() {
     const fetchStudentAchievements = async (student: Tables<"students">) => {
         const studentAchievements = await getStudentAchievements(student.achievements);
         setAchievementList(studentAchievements);
+    };
 
-        const latestCourse = await getLatestAccessedCourse(student.id);
+    const fetchLastAccessedCourse = async (studentId: number) => {
+        const latestCourse = await getLatestAccessedCourse(studentId);
         setLastAccessedCourse(latestCourse);
     };
 
@@ -68,7 +74,7 @@ function DashboardPage() {
                 </div>
 
                 <WhiteCard className="col-span-6 col-start-1 row-span-5">
-                    <LearningProgress />
+                    <LearningProgress courses={studentCourses} />
                 </WhiteCard>
                 <WhiteCard className="col-span-4 row-span-5">
                     {achievementList && achievementList.length > 0 ? (
