@@ -40,7 +40,7 @@ function CourseActiveItem({ title, course }: ICourseActiveItemProps) {
                     Buka Materi <FaArrowRight size={14} color="#668080" />
                 </NavLink>
             </div>
-            <ProgressBar progress={90} />
+            <ProgressBar progress={course.progress} />
         </div>
     );
 }
