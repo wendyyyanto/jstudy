@@ -31,11 +31,15 @@ function AchievementsPage() {
             <h1 className="text-h2-semibold text-stroke-600 mb-10">Achievements</h1>
 
             <div className="h-[75%] flex flex-col gap-8 pr-10 overflow-auto">
-                {achievementsList.length > 0
-                    ? achievementsList.map((achievement, index) => (
-                          <AchievementItem achievement={achievement!} index={index + 1} key={achievement?.id} />
-                      ))
-                    : null}
+                {achievementsList.length > 0 ? (
+                    achievementsList.map((achievement, index) => (
+                        <AchievementItem achievement={achievement!} index={index + 1} key={achievement?.id} />
+                    ))
+                ) : (
+                    <div className="h-screen flex flex-1 justify-center items-center">
+                        <p>Belum Memiliki Achievements</p>
+                    </div>
+                )}
             </div>
         </>
     );
