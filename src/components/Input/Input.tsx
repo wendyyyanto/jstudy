@@ -29,7 +29,7 @@ function Input({ inputName, inputType, icon, inputPlaceholder, errors, onChange 
                     placeholder={inputPlaceholder}
                 />
             </div>
-            {errors[inputName] && <p>{errors[inputName].message}</p>}
+            {errors[inputName] && <p className="text-[#ff0000]">{errors[inputName].message}</p>}
         </>
     );
 }
