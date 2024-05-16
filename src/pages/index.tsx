@@ -117,7 +117,7 @@ function Dashboard() {
                         headerTitle="Achievement Unlocked 🎉"
                         message="Congrats, You received a new achievement!"
                         detail={`Achievement :  ${achievement?.title}`}
-                        onClose={() => setIsLeveledUp(false)}
+                        onClose={() => setAchievementModalShown(false)}
                     />
                 )}
 
