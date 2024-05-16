@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -12,6 +12,8 @@ import UserIcon from "assets/components/UserIcon";
 import MailIcon from "assets/components/MailIcon";
 import LockKeyIcon from "assets/components/LockKeyIcon";
 import signUpIllustration from "assets/signup-illustration.svg";
+import { useStudentApi } from "@/api/student";
+import { Tables } from "@/types/database.types";
 
 type Inputs = {
     username: string;
@@ -24,16 +26,36 @@ function SignUp() {
 
     const navigate = useNavigate();
 
+    const { getStudents } = useStudentApi();
+
     const { handleAuthenticatedUser, showToast } = useAuth();
 
+    const [students, setStudents] = useState<Tables<"students">[] | null>(null);
+
     useEffect(() => {
+        fetchStudents();
         handleAuthenticatedUser();
 
         return () => {};
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const fetchStudents = async () => {
+        const students = await getStudents();
+
+        setStudents(students);
+    };
+
     const onSubmit: SubmitHandler<Inputs> = async ({ username, email, password }) => {
+        if (!students) return;
+
+        const isUsernameExist = students.filter((student) => student.username === username);
+
+        if (isUsernameExist.length) {
+            showToast("error", "Username already exist!");
+            return;
+        }
+
         const { data: authData, error } = await supabase.auth.signUp({
             email,
             password,
@@ -114,7 +136,7 @@ function SignUp() {
                         <Controller
                             name="password"
                             control={control}
-                            rules={{ required: "Password is required" }}
+                            rules={{ required: "Password is required", minLength: 6 }}
                             render={({ field: { onChange }, formState: { errors } }) => (
                                 <Input
                                     inputName="password"

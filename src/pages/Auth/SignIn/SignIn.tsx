@@ -85,7 +85,7 @@ function SignIn() {
                         <Controller
                             name="password"
                             control={control}
-                            rules={{ required: "Password is required" }}
+                            rules={{ required: "Password is required", minLength: 6 }}
                             render={({ field: { onChange }, formState: { errors } }) => (
                                 <Input
                                     inputName="password"
