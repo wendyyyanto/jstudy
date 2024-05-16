@@ -17,6 +17,16 @@ export const useStudentApi = () => {
         return student;
     };
 
+    const getStudents = async () => {
+        const { data: students, error } = await supabase.from("students").select("*");
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return students;
+    };
+
     const updateStudent = async (studentId: number, updatedFields: TablesUpdate<"students">) => {
         const { data: updatedStudent, error } = await supabase
             .from("students")
@@ -32,5 +42,5 @@ export const useStudentApi = () => {
         return updatedStudent;
     };
 
-    return { getStudent, updateStudent };
+    return { getStudent, getStudents, updateStudent };
 };
