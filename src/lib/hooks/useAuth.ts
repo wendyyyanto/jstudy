@@ -37,7 +37,11 @@ const useAuth = () => {
             throw new Error(error.message);
         }
 
-        setIsLoggedIn(true);
+        if (session.session) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
     };
 
     const fetchStudent = async (user: User) => {
