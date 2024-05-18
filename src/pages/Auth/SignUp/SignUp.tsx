@@ -28,13 +28,12 @@ function SignUp() {
 
     const { getStudents } = useStudentApi();
 
-    const { handleAuthenticatedUser, showToast } = useAuth();
+    const { showToast } = useAuth();
 
     const [students, setStudents] = useState<Tables<"students">[] | null>(null);
 
     useEffect(() => {
         fetchStudents();
-        handleAuthenticatedUser();
 
         return () => {};
         // eslint-disable-next-line react-hooks/exhaustive-deps

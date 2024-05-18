@@ -8,6 +8,7 @@ import { useReset } from "./useReset";
 import { Bounce, toast } from "react-toastify";
 import useAchievementContext from "@/context/achievementContext";
 import useChallengeContext from "@/context/challengeContext";
+import useAuthContext from "@/context/authContext";
 
 const useAuth = () => {
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ const useAuth = () => {
     const { setStudent, resetStudentState } = useStudentContext();
     const { resetAchievementState } = useAchievementContext();
     const { resetChallengeState } = useChallengeContext();
+    const { setIsLoggedIn } = useAuthContext();
     const { getStudent } = useStudentApi();
 
     const getUser = async () => {
@@ -25,6 +27,17 @@ const useAuth = () => {
         } = await supabase.auth.getUser();
 
         return user;
+    };
+
+    const handleOnSession = async () => {
+        const { data: session, error } = await supabase.auth.getSession();
+
+        if (error) {
+            showToast("error", `Error while fetching user session, ${session}`);
+            throw new Error(error.message);
+        }
+
+        setIsLoggedIn(true);
     };
 
     const fetchStudent = async (user: User) => {
@@ -55,15 +68,6 @@ const useAuth = () => {
         navigate("/auth/signin");
     };
 
-    const handleAuthenticatedUser = async () => {
-        const user = await getUser();
-
-        if (!user) return;
-
-        showToast("success", "Already Logged In!");
-        navigate("/dashboard");
-    };
-
     const handleDashboardAuth = async () => {
         const user = await getUser();
 
@@ -89,7 +93,7 @@ const useAuth = () => {
         });
     };
 
-    return { fetchStudent, handleDashboardAuth, handleAuthenticatedUser, showToast, handleLogOut };
+    return { fetchStudent, handleOnSession, handleDashboardAuth, showToast, handleLogOut };
 };
 
 export default useAuth;

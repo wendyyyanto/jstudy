@@ -5,8 +5,20 @@ import NavBar from "./components/NavBar";
 import Hero from "./components/Hero";
 
 import illustration from "assets/illustration.svg";
+import { useEffect } from "react";
+import useAuth from "@/lib/hooks/useAuth";
 
 function Home() {
+    const { handleOnSession } = useAuth();
+
+    useEffect(() => {
+        handleOnSession();
+
+        return () => {};
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <div className="w-screen h-screen overflow-hidden relative">
             <NavBar />

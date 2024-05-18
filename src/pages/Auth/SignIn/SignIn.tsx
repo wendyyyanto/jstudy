@@ -1,6 +1,5 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 import supabase from "@/lib/supabaseClient";
 
@@ -11,6 +10,7 @@ import useAuth from "@/lib/hooks/useAuth";
 import signInIllustration from "assets/signin-illustration.svg";
 import MailIcon from "assets/components/MailIcon";
 import LockKeyIcon from "assets/components/LockKeyIcon";
+import useAuthContext from "@/context/authContext";
 
 type Inputs = {
     email: string;
@@ -22,14 +22,9 @@ function SignIn() {
 
     const navigate = useNavigate();
 
-    const { handleAuthenticatedUser, showToast } = useAuth();
+    const { showToast } = useAuth();
 
-    useEffect(() => {
-        handleAuthenticatedUser();
-
-        return () => {};
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const { setIsLoggedIn } = useAuthContext();
 
     const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
         const { error } = await supabase.auth.signInWithPassword({
@@ -42,6 +37,7 @@ function SignIn() {
             throw new Error(error.message);
         }
 
+        setIsLoggedIn(true);
         showToast("success", "Login Success!");
         navigate("/dashboard");
     };
