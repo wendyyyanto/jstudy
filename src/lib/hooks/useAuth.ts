@@ -23,10 +23,19 @@ const useAuth = () => {
 
     const getUser = async () => {
         const {
-            data: { user }
-        } = await supabase.auth.getUser();
+            data: { session },
+            error
+        } = await supabase.auth.getSession();
 
-        return user;
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        if (session) {
+            return session.user;
+        } else {
+            return null;
+        }
     };
 
     const handleOnSession = async () => {
