@@ -109,9 +109,11 @@ function Dashboard() {
     return (
         <div className="flex">
             <DashboardSideBar />
-            <div className="w-screen h-screen px-[60px] py-[50px] pt-0 overflow-hidden">
-                <DashboardNavBar />
-                <Outlet />
+            <div className="w-screen h-screen px-[60px]">
+                <div className="overflow-auto w-full h-full pb-4">
+                    <DashboardNavBar />
+                    <Outlet />
+                </div>
                 {achievementModalShown && (
                     <Announcement
                         headerTitle="Achievement Unlocked 🎉"

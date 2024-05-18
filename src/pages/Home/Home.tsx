@@ -41,6 +41,11 @@ const StyledImage = styled.img`
 
     width: 50%;
     height: 50%;
+
+    @media screen and (max-width: 1536px) {
+        width: 45%;
+        height: 45%;
+    }
 `;
 
 export default Home;

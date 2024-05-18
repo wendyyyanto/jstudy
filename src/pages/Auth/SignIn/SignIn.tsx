@@ -49,7 +49,11 @@ function SignIn() {
                     JStudy
                 </NavLink>
 
-                <img className="mt-20 h-[60vh] w-[45vw]" src={signInIllustration} alt="SignIn Illustration" />
+                <img
+                    className="mt-20 max-2xl:h-[50vh] h-[60vh] w-[45vw]"
+                    src={signInIllustration}
+                    alt="SignIn Illustration"
+                />
 
                 <p className="text-h2-bold mt-6">Selamat datang!</p>
                 <p className="text-p2-regular text-para-300 mt-2">

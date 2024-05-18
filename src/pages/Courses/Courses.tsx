@@ -13,7 +13,7 @@ function CoursesPage() {
         <>
             <h1 className="text-h2-semibold text-stroke-600 mb-5">Courses</h1>
 
-            <div className="h-[80%] grid grid-cols-10 grid-rows-6 gap-5">
+            <div className="h-max-full h-min-[80%] grid grid-cols-10 grid-rows-6 gap-5">
                 <CourseList courses={courses} onStartCourse={onStartCourse} />
 
                 <CourseActive courses={studentCourses} />

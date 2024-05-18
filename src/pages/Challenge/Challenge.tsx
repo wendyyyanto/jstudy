@@ -131,7 +131,7 @@ function ChallengePage() {
     }
 
     return (
-        <div className="h-screen overflow-auto">
+        <div className="h-screen">
             <h1 className="text-h2-semibold text-stroke-600 mb-5">Daily Challenge</h1>
 
             <div className="flex flex-col">
@@ -161,11 +161,11 @@ function ChallengePage() {
                     </div>
                 </div>
 
-                <div className="my-8 overflow-auto">
+                <div className="my-8 h-full">
                     <ChallengeQuestion challenge={challenge} />
                 </div>
 
-                <div className="h-[30vh] overflow-auto pb-12">
+                <div className="h-full pb-12">
                     <form className="flex flex-col gap-4" onSubmit={handleSubmit(handleSubmitAnswer)}>
                         <Controller
                             name="multiple_choices"
