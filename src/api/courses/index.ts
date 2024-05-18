@@ -113,15 +113,15 @@ export const useCoursesApi = () => {
         return lastAccessedCourse;
     };
 
-    const insertStudentCourse = async (slug: string, studentId: number, title: string) => {
+    const insertStudentCourse = async (slug: string, studentId: number, title: string, totalModule: number) => {
         const module = await getCourseModules(slug);
-        console.log(module);
 
         const { error } = await supabase.from("student_courses").insert({
             course_slug: slug,
             student_id: studentId,
             course_title: title,
-            last_module: module[0].id
+            last_module: module[0].id,
+            progress: Math.floor((1 / totalModule) * 100)
         });
 
         if (error) {

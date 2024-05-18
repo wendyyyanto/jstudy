@@ -56,7 +56,7 @@ export const useCourses = () => {
             return;
         }
 
-        await insertStudentCourse(slug, student.id, course.title);
+        await insertStudentCourse(slug, student.id, course.title, course.total_modules);
 
         const updatedCourse: TablesUpdate<"courses"> = {
             student_ids: [...course.student_ids, student.id]
