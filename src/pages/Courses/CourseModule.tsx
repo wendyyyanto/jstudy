@@ -66,7 +66,6 @@ function CourseModule() {
             </NavLink>
             <div className="h-screen w-2/5 mx-auto overflow-auto">
                 <div className="pt-16 pb-52 text-p2-light">{parsedHTML}</div>
-                {/* <div className="pt-16 pb-52 text-p2-light"></div> */}
             </div>
             <div className="flex bg-highlight-100 justify-between items-center px-8 py-6 w-screen gap-2 absolute bottom-0 left-0">
                 {module.prev_module ? (
