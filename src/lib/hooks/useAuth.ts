@@ -86,6 +86,7 @@ const useAuth = () => {
 
         if (!user) {
             navigate("/");
+            showToast("error", "You're not logged in yet!");
             return;
         }
 
