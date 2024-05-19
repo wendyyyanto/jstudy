@@ -6,7 +6,9 @@ function NavBar() {
 
     return (
         <section className="flex h-[120px] items-center justify-between px-[60px]">
-            <h5 className="text-h5-bold">JStudy.</h5>
+            <NavLink to="/" className="text-h5-bold">
+                JStudy.
+            </NavLink>
             <div className="flex items-center gap-8">
                 {!isLoggedIn && (
                     <>
