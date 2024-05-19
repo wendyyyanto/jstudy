@@ -13,7 +13,7 @@ function LearningProgress({ courses }: { courses: StudentCourses }) {
                 scale: 1,
                 opacity: 1
             },
-            { bounce: 0, type: "spring", delay: stagger(0.02) }
+            { bounce: 0, type: "spring", delay: stagger(0.02, { startDelay: 0.4 }) }
         );
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
