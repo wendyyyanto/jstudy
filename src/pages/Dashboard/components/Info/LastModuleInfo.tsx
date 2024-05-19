@@ -31,7 +31,7 @@ function LastModuleInfo({ course }: ILastModuleInfoProps) {
 
                     <NavLink
                         to={`/courses/${course.course_slug}/modules/${course.last_module}`}
-                        className="flex justify-end gap-2 items-center underline text-p2-regular text-stroke-800 mt-8"
+                        className="flex flex-1 justify-end gap-2 items-end underline text-p2-regular text-stroke-800 mt-8"
                     >
                         Lanjutin <HiArrowRight size={18} />
                     </NavLink>

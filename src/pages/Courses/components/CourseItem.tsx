@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 
 interface ICourseItemProps {
@@ -11,7 +12,11 @@ interface ICourseItemProps {
 
 function CourseItem({ title, description, icon, level, link, onStartCourse }: ICourseItemProps) {
     return (
-        <div className="h-64 flex flex-col rounded-sm border border-stroke-100 py-6 px-8">
+        <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            id="course-item"
+            className="h-64 flex flex-col rounded-sm border border-stroke-100 py-6 px-8"
+        >
             <p className="text-h5-semibold">{title}</p>
             <p className="text-p1-regular mt-2 text-para-300">{description}</p>
 
@@ -28,7 +33,7 @@ function CourseItem({ title, description, icon, level, link, onStartCourse }: IC
                     Mulai Kelas
                 </NavLink>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

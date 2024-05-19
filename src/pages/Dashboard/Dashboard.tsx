@@ -43,10 +43,6 @@ function DashboardPage() {
             { duration: 0.2, delay: staggerOptions }
         );
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    useEffect(() => {
         if (student) {
             fetchStudentAchievements(student);
             fetchLastAccessedCourse(student.id);
@@ -109,7 +105,7 @@ function DashboardPage() {
                     {achievementList && achievementList.length > 0 ? (
                         <Achievements achievements={achievementList} />
                     ) : (
-                        <div className="flex flex-1 h-full justify-center items-center">
+                        <div id="info-stagger" className="flex flex-1 h-full justify-center items-center">
                             <p>Tidak ada Achievement</p>
                         </div>
                     )}
