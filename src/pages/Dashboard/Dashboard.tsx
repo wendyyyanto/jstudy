@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { motion, stagger, useAnimate } from "framer-motion";
+import { stagger, useAnimate } from "framer-motion";
 
 import useStudentContext from "@/context/studentContext";
 
@@ -34,7 +34,6 @@ function DashboardPage() {
     const [achievementList, setAchievementList] = useState<Tables<"achievements">[] | null>(null);
 
     useEffect(() => {
-        console.log(scope);
         animate(
             "div#info-stagger",
             {
@@ -103,10 +102,10 @@ function DashboardPage() {
                     <PointInfo points={student.points} />
                 </div>
 
-                <WhiteCard id="info-stagger" className="col-span-6 col-start-1 row-span-5">
+                <WhiteCard className="col-span-6 col-start-1 row-span-5">
                     <LearningProgress courses={studentCourses} />
                 </WhiteCard>
-                <WhiteCard id="info-stagger" className="col-span-4 row-span-5">
+                <WhiteCard className="col-span-4 row-span-5">
                     {achievementList && achievementList.length > 0 ? (
                         <Achievements achievements={achievementList} />
                     ) : (
