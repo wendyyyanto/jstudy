@@ -12,7 +12,7 @@ export const useChallenge = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { getChallenge, updateChallenge } = useChallengeApi();
+    const { getRandomChallenge, updateChallenge } = useChallengeApi();
     const { updateStudent } = useStudentApi();
 
     const { student } = useStudentContext();
@@ -29,10 +29,14 @@ export const useChallenge = () => {
     }, [challenge]);
 
     const fetchChallenge = async () => {
-        const challenge = await getChallenge(6);
+        if (student) {
+            const challenge = await getRandomChallenge(student.id);
 
-        setChallenge(challenge);
-        setDuration(challenge.durations * 1000);
+            console.log(challenge);
+
+            setChallenge(challenge);
+            setDuration(challenge.durations * 1000);
+        }
     };
 
     const handleUpdateChallege = async () => {

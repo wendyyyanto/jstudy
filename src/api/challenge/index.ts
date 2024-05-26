@@ -12,6 +12,20 @@ export const useChallengeApi = () => {
         return challenge;
     };
 
+    const getRandomChallenge = async (studentId: number) => {
+        const { data: challenge, error } = await supabase
+            .from("challenges")
+            .select()
+            .not("user_ids", "cs", `{${studentId}}`);
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        const random = Math.round(Math.random() * (challenge.length - 1));
+        return challenge[random];
+    };
+
     const updateChallenge = async (challengeId: number, updatedFields: TablesUpdate<"challenges">) => {
         const { data: updatedChallenge, error } = await supabase
             .from("challenges")
@@ -27,5 +41,5 @@ export const useChallengeApi = () => {
         return updatedChallenge;
     };
 
-    return { getChallenge, updateChallenge };
+    return { getChallenge, getRandomChallenge, updateChallenge };
 };
