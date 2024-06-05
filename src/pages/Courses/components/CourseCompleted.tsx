@@ -25,7 +25,7 @@ function CourseCompleted({ courses }: ICourseCompletedProps) {
                                 <CourseCompletedItem
                                     key={course.id}
                                     title={course.course_title}
-                                    completedAt={dayjs(course.completed_at).fromNow()}
+                                    completedAt={dayjs(course.completed_at).format("DD-MM-YYYY")}
                                 />
                             )
                     )}

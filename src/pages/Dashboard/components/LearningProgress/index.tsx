@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useEffect } from "react";
 import LearningProgressItem from "./LearningProgressItem";
 import { StudentCourses } from "@/types/types";
@@ -32,7 +33,7 @@ function LearningProgress({ courses }: { courses: StudentCourses }) {
                                         key={course!.id}
                                         courseName={course!.course_title}
                                         progress={course!.progress}
-                                        startedAt="2 days ago"
+                                        startedAt={dayjs(course.started_at).fromNow()}
                                     />
                                 )
                         )

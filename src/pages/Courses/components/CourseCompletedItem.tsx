@@ -12,7 +12,7 @@ function CourseCompletedItem({ title, completedAt }: ICourseCompletedItemProps) 
 
             <div className="flex flex-1 items-end text-tertiary-700 gap-2">
                 <FiCheckSquare size={18} />
-                <p className="text-p1-regular">Completed {completedAt}</p>
+                <p className="text-p1-regular">Completed at {completedAt}</p>
             </div>
         </div>
     );
