@@ -7,6 +7,7 @@ import { TbLogout2 } from "react-icons/tb";
 
 import styled from "styled-components";
 import useAuth from "@/lib/hooks/useAuth";
+import { LuCrown } from "react-icons/lu";
 
 function DashboardSideBar() {
     const { handleLogOut } = useAuth();
@@ -39,6 +40,11 @@ function DashboardSideBar() {
                     <li>
                         <NavLink to="/dashboard/achievements" className={onActiveClass} end>
                             <FaRegStar size={28} /> Achievements
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/leaderboard" className={onActiveClass} end>
+                            <LuCrown size={28} /> Leaderboard
                         </NavLink>
                     </li>
                 </ul>

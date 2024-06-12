@@ -5,20 +5,8 @@ import NavBar from "./components/NavBar";
 import Hero from "./components/Hero";
 
 import illustration from "assets/illustration.svg";
-import { useEffect } from "react";
-import useAuth from "@/lib/hooks/useAuth";
 
 function Home() {
-    const { handleOnSession } = useAuth();
-
-    useEffect(() => {
-        handleOnSession();
-
-        return () => {};
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     return (
         <div className="w-screen h-screen overflow-hidden relative">
             <NavBar />
@@ -38,21 +26,5 @@ function Home() {
         </div>
     );
 }
-
-// const StyledImage = styled.img`
-//     position: absolute;
-//     bottom: 9.2%;
-//     left: 50%;
-//     transform: translateX(-50%);
-//     z-index: -10;
-
-//     width: 50%;
-//     height: 50%;
-
-//     @media screen and (max-width: 1536px) {
-//         width: 45%;
-//         height: 45%;
-//     }
-// `;
 
 export default Home;

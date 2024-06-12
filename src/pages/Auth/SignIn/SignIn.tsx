@@ -24,10 +24,10 @@ function SignIn() {
 
     const { showToast } = useAuth();
 
-    const { setIsLoggedIn } = useAuthContext();
+    const { setIsLoggedIn, setToken } = useAuthContext();
 
     const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password
         });
@@ -36,6 +36,8 @@ function SignIn() {
             showToast("error", error.message);
             throw new Error(error.message);
         }
+
+        setToken(data);
 
         setIsLoggedIn(true);
         showToast("success", "Login Success!");

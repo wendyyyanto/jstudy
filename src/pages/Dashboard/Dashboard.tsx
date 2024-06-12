@@ -16,6 +16,9 @@ import { Tables } from "@/types/database.types";
 import useCoursesContext from "@/context/coursesContext";
 import { useCoursesApi } from "@/api/courses";
 import { useCourses } from "../Courses/hooks/useCourses";
+import { useStudentApi } from "@/api/student";
+import { AuthSession, AuthTokenResponse, Session } from "@supabase/supabase-js";
+import useAuthContext from "@/context/authContext";
 
 function DashboardPage() {
     useUpdateStudentSubscription();
@@ -25,10 +28,12 @@ function DashboardPage() {
 
     const { getStudentAchievements } = useAchievementApi();
     const { getLatestAccessedCourse } = useCoursesApi();
+    const { getStudent } = useStudentApi();
 
     const { studentCourses } = useCourses();
 
-    const { student } = useStudentContext();
+    const { student, setStudent } = useStudentContext();
+    const { token } = useAuthContext();
     const { setLastAccessedCourse, lastAccessedCourse } = useCoursesContext();
 
     const [achievementList, setAchievementList] = useState<Tables<"achievements">[] | null>(null);
@@ -43,13 +48,19 @@ function DashboardPage() {
             { duration: 0.2, delay: staggerOptions }
         );
 
-        if (student) {
-            fetchStudentAchievements(student);
-            fetchLastAccessedCourse(student.id);
+        if (token) {
+            fetchStudentDetails(token.session);
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [student]);
+    }, [token, student]);
+
+    const fetchStudentDetails = async (session: AuthSession) => {
+        const currentStudent = await getStudent(session.user.id);
+        setStudent(currentStudent);
+        await fetchStudentAchievements(currentStudent);
+        await fetchLastAccessedCourse(currentStudent.id);
+    };
 
     const fetchStudentAchievements = async (student: Tables<"students">) => {
         const studentAchievements = await getStudentAchievements(student.achievements);
@@ -61,7 +72,7 @@ function DashboardPage() {
         setLastAccessedCourse(latestCourse);
     };
 
-    if (!student) {
+    if (!student || !token) {
         return <p>Loading...</p>;
     }
 

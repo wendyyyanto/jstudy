@@ -2,7 +2,7 @@ import useAuthContext from "@/context/authContext";
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
-    const { isLoggedIn } = useAuthContext();
+    const { token } = useAuthContext();
 
     return (
         <section className="flex h-[120px] items-center justify-between px-[60px]">
@@ -10,7 +10,7 @@ function NavBar() {
                 JStudy.
             </NavLink>
             <div className="flex items-center gap-8">
-                {!isLoggedIn && (
+                {!token && (
                     <>
                         <NavLink to={"/auth/signin"} className="text-h6-regular text-stroke-500 h-auto w-auto">
                             Masuk

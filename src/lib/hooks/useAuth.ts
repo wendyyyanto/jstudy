@@ -18,40 +18,8 @@ const useAuth = () => {
     const { setStudent, resetStudentState } = useStudentContext();
     const { resetAchievementState } = useAchievementContext();
     const { resetChallengeState } = useChallengeContext();
-    const { setIsLoggedIn } = useAuthContext();
+    const { setIsLoggedIn, token } = useAuthContext();
     const { getStudent } = useStudentApi();
-
-    const getUser = async () => {
-        const {
-            data: { session },
-            error
-        } = await supabase.auth.getSession();
-
-        if (error) {
-            throw new Error(error.message);
-        }
-
-        if (session) {
-            return session.user;
-        } else {
-            return null;
-        }
-    };
-
-    const handleOnSession = async () => {
-        const { data: session, error } = await supabase.auth.getSession();
-
-        if (error) {
-            showToast("error", `Error while fetching user session, ${session}`);
-            throw new Error(error.message);
-        }
-
-        if (session.session) {
-            setIsLoggedIn(true);
-        } else {
-            setIsLoggedIn(false);
-        }
-    };
 
     const fetchStudent = async (user: User) => {
         const student = await getStudent(user.id as string);
@@ -82,15 +50,14 @@ const useAuth = () => {
     };
 
     const handleDashboardAuth = async () => {
-        const user = await getUser();
-
-        if (!user) {
+        if (!token) {
             navigate("/");
             showToast("error", "You're not logged in yet!");
+            setIsLoggedIn(false);
             return;
         }
 
-        const student = await fetchStudent(user);
+        const student = await fetchStudent(token.session.user);
         await handleResetOnLoad(student);
     };
 
@@ -107,7 +74,7 @@ const useAuth = () => {
         });
     };
 
-    return { fetchStudent, handleOnSession, handleDashboardAuth, showToast, handleLogOut };
+    return { fetchStudent, handleDashboardAuth, showToast, handleLogOut };
 };
 
 export default useAuth;
