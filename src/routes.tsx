@@ -10,6 +10,7 @@ import CourseModule from "pages/Courses/CourseModule";
 import ChallengePage from "pages/Challenge";
 import SignIn from "pages/Auth/SignIn";
 import SignUp from "pages/Auth/SignUp";
+import Leaderboard from "./pages/Leaderboard";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
             {
                 path: "achievements",
                 element: <AchievementsPage />
+            },
+            {
+                path: "leaderboard",
+                element: <Leaderboard />
             }
         ]
     },

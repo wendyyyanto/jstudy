@@ -17,7 +17,7 @@ import useCoursesContext from "@/context/coursesContext";
 import { useCoursesApi } from "@/api/courses";
 import { useCourses } from "../Courses/hooks/useCourses";
 import { useStudentApi } from "@/api/student";
-import { AuthSession, AuthTokenResponse, Session } from "@supabase/supabase-js";
+import { AuthSession } from "@supabase/supabase-js";
 import useAuthContext from "@/context/authContext";
 
 function DashboardPage() {
