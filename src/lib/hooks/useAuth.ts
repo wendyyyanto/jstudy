@@ -18,7 +18,7 @@ const useAuth = () => {
     const { setStudent, resetStudentState } = useStudentContext();
     const { resetAchievementState } = useAchievementContext();
     const { resetChallengeState } = useChallengeContext();
-    const { setIsLoggedIn, token } = useAuthContext();
+    const { setIsLoggedIn } = useAuthContext();
     const { getStudent } = useStudentApi();
 
     const fetchStudent = async (user: User) => {
@@ -50,13 +50,15 @@ const useAuth = () => {
     };
 
     const handleDashboardAuth = async () => {
-        if (!token) {
+        const tokenJSON = sessionStorage.getItem("token");
+        if (!tokenJSON) {
             navigate("/");
             showToast("error", "You're not logged in yet!");
             setIsLoggedIn(false);
             return;
         }
 
+        const token = JSON.parse(tokenJSON);
         const student = await fetchStudent(token.session.user);
         await handleResetOnLoad(student);
     };

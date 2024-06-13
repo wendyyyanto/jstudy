@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { stagger, useAnimate } from "framer-motion";
+import { useAnimate } from "framer-motion";
 
 import useStudentContext from "@/context/studentContext";
 
@@ -24,7 +24,6 @@ function DashboardPage() {
     useUpdateStudentSubscription();
 
     const [scope, animate] = useAnimate();
-    const staggerOptions = stagger(0.1, { startDelay: 0.15 });
 
     const { getStudentAchievements } = useAchievementApi();
     const { getLatestAccessedCourse } = useCoursesApi();
@@ -40,12 +39,15 @@ function DashboardPage() {
 
     useEffect(() => {
         animate(
-            "div#info-stagger",
+            "#info-stagger",
             {
                 opacity: 1,
                 scale: 1
             },
-            { duration: 0.2, delay: staggerOptions }
+            {
+                type: "spring",
+                duration: 0.1
+            }
         );
 
         if (token) {
@@ -53,7 +55,7 @@ function DashboardPage() {
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token, student]);
+    }, [token, student?.id]);
 
     const fetchStudentDetails = async (session: AuthSession) => {
         const currentStudent = await getStudent(session.user.id);
