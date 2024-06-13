@@ -32,8 +32,6 @@ export const useChallenge = () => {
         if (student) {
             const challenge = await getRandomChallenge(student.id);
 
-            console.log(challenge);
-
             setChallenge(challenge);
             setDuration(challenge.durations * 1000);
         }
