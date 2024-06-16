@@ -23,7 +23,7 @@ function LearningProgress({ courses }: { courses: StudentCourses }) {
     return (
         <div className="flex flex-col h-full overflow-y-auto">
             <p className="text-h5-semibold">Progres Belajar</p>
-            <div ref={scope} className="grid grid-cols-2 gap-5 mt-6">
+            <div ref={scope} className="max-sm:flex max-sm:flex-col grid grid-cols-2 gap-5 mt-6">
                 {courses ? (
                     courses.length > 0 ? (
                         courses.map(

@@ -109,7 +109,7 @@ function Dashboard() {
     return (
         <div className="flex">
             <DashboardSideBar />
-            <div className="w-screen h-screen px-[60px]">
+            <div className="w-screen h-screen max-sm:px-5 px-[60px]">
                 <div className="overflow-auto w-full h-full pb-4">
                     <DashboardNavBar />
                     <Outlet />

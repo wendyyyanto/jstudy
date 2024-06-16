@@ -21,6 +21,8 @@ type Inputs = {
     password: string;
 };
 
+const isSmall = window.innerWidth < 640;
+
 function SignUp() {
     const { handleSubmit, control } = useForm<Inputs>();
 
@@ -81,24 +83,26 @@ function SignUp() {
     };
 
     return (
-        <div className="w-screen h-screen flex overflow-hidden">
-            <div className="w-[55vw] flex flex-col p-14 bg-highlight-200">
-                <NavLink to={"/"} className="text-h5-bold">
-                    JStudy
-                </NavLink>
+        <div className="w-screen h-screen flex max-sm:block overflow-hidden">
+            {!isSmall && (
+                <div className="w-[55vw] flex flex-col p-14 bg-highlight-200">
+                    <NavLink to={"/"} className="text-h5-bold">
+                        JStudy
+                    </NavLink>
 
-                <img
-                    className="mt-20 max-2xl:h-[50vh] h-[60vh] w-[45vw]"
-                    src={signUpIllustration}
-                    alt="SignIn Illustration"
-                />
+                    <img
+                        className="mt-20 max-2xl:h-[50vh] h-[60vh] w-[45vw]"
+                        src={signUpIllustration}
+                        alt="SignIn Illustration"
+                    />
 
-                <p className="text-h2-bold mt-6">Buat akun mu!</p>
-                <p className="text-p2-regular text-para-300 mt-2">
-                    Mulai petualangan untuk menaklukan dunia pemrograman bersama JavaScript!
-                </p>
-            </div>
-            <div className="w-[45vw] flex flex-col p-20">
+                    <p className="text-h2-bold mt-6">Buat akun mu!</p>
+                    <p className="text-p2-regular text-para-300 mt-2">
+                        Mulai petualangan untuk menaklukan dunia pemrograman bersama JavaScript!
+                    </p>
+                </div>
+            )}
+            <div className="w-[45vw] max-sm:p-10 max-sm:w-full flex flex-col p-20">
                 <p className="text-h2-bold mt-20">Daftar.</p>
                 <p className="text-p2-regular text-para-300 mt-4">Dan mulai petualangan pemrograman mu!</p>
 

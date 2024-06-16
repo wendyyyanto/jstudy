@@ -17,6 +17,8 @@ type Inputs = {
     password: string;
 };
 
+const isSmall = window.innerWidth < 640;
+
 function SignIn() {
     const { handleSubmit, control } = useForm<Inputs>();
 
@@ -46,23 +48,25 @@ function SignIn() {
 
     return (
         <div className="w-screen h-screen flex overflow-hidden">
-            <div className="w-[55vw] flex flex-col p-14 bg-highlight-200">
-                <NavLink to={"/"} className="text-h5-bold">
-                    JStudy
-                </NavLink>
+            {!isSmall && (
+                <div className="w-[55vw] flex flex-col p-14 bg-highlight-200">
+                    <NavLink to={"/"} className="text-h5-bold">
+                        JStudy
+                    </NavLink>
 
-                <img
-                    className="mt-20 max-2xl:h-[50vh] h-[60vh] w-[45vw]"
-                    src={signInIllustration}
-                    alt="SignIn Illustration"
-                />
+                    <img
+                        className="mt-20 max-2xl:h-[50vh] h-[60vh] w-[45vw]"
+                        src={signInIllustration}
+                        alt="SignIn Illustration"
+                    />
 
-                <p className="text-h2-bold mt-6">Selamat datang!</p>
-                <p className="text-p2-regular text-para-300 mt-2">
-                    Mulai petualangan di dunia pemrograman bersama JavaScript!
-                </p>
-            </div>
-            <div className="w-[45vw] flex flex-col p-20">
+                    <p className="text-h2-bold mt-6">Selamat datang!</p>
+                    <p className="text-p2-regular text-para-300 mt-2">
+                        Mulai petualangan di dunia pemrograman bersama JavaScript!
+                    </p>
+                </div>
+            )}
+            <div className="w-[45vw] max-sm:w-full max-sm:p-10 flex flex-col p-20">
                 <p className="text-h2-bold mt-20">Masuk.</p>
                 <p className="text-p2-regular text-para-300 mt-4">Dan lanjutkan petualangan mu!</p>
 
@@ -100,8 +104,6 @@ function SignIn() {
                             )}
                         />
                     </form>
-
-                    <p className="text-p2-semibold text-stroke-400 flex justify-end">Lupa password?</p>
                 </div>
 
                 <div className="flex flex-col gap-5 mt-8 justify-center items-center">

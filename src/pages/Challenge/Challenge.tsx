@@ -135,9 +135,9 @@ function ChallengePage() {
             <h1 className="text-h2-semibold text-stroke-600 mb-5">Daily Challenge</h1>
 
             <div className="flex flex-col">
-                <div className="flex justify-between">
+                <div className="flex max-sm:flex-col max-sm:gap-2">
                     <div className="flex gap-3">
-                        <div className="flex grow-0 gap-2 bg-highlight-400 p-4 rounded-sm">
+                        <div className="flex max-sm:flex-1 grow-0 gap-2 bg-highlight-400 p-4 rounded-sm">
                             <FaRankingStar size={24} />
                             <p className="text-h6-semibold">{challenge.difficulty}</p>
                         </div>
@@ -146,7 +146,7 @@ function ChallengePage() {
                             <p className="text-h6-semibold">{challenge.reward_points} Points</p>
                         </div>
                     </div>
-                    <div className="flex gap-2 bg-stroke-500 p-4 rounded-sm justify-end end text-white">
+                    <div className="flex gap-2 max-sm:justify-start bg-stroke-500 p-4 rounded-sm justify-end end text-white">
                         <Countdown
                             date={Date.now() + duration}
                             renderer={renderer}

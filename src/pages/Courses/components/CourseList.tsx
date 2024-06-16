@@ -48,7 +48,7 @@ function CourseList({ courses, onStartCourse }: ICourseListProps) {
         <CourseListContainer className="max-2xl:col-span-10 col-span-7 row-span-full flex flex-col px-8 py-10 rounded-sm bg-white">
             <p className="text-h5-semibold">Daftar Kelas</p>
 
-            <div ref={scope} className="grid grid-cols-2 gap-5 mt-4 pr-2 overflow-auto">
+            <div ref={scope} className="max-sm:flex grid grid-cols-2 gap-5 mt-4 pr-2 overflow-auto">
                 {courses ? (
                     courses.map(
                         (course) =>

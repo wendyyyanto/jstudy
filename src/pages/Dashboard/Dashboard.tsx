@@ -82,7 +82,7 @@ function DashboardPage() {
         <>
             <h1 className="text-h2-semibold text-stroke-600 mb-5">Dashboard</h1>
 
-            <div className="grid grid-cols-10 grid-rows-7 gap-5" ref={scope}>
+            <div className="max-sm:flex max-sm:flex-col grid grid-cols-10 grid-rows-7 gap-5" ref={scope}>
                 <div
                     id="info-stagger"
                     className="col-span-4 row-span-2 bg-highlight-300 rounded-sm flex flex-col px-8 py-6"
@@ -92,7 +92,7 @@ function DashboardPage() {
 
                 <div
                     id="info-stagger"
-                    className="relative col-span-4 row-span-2 bg-stroke-900 rounded-sm flex items-center pl-10 gap-8 overflow-hidden"
+                    className="relative col-span-4 row-span-2 bg-stroke-900 rounded-sm flex items-center max-sm:py-6 pl-10 gap-8 overflow-hidden"
                 >
                     <RankInfo rank={student.rank} />
                 </div>

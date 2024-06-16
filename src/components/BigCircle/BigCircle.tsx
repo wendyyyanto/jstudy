@@ -39,6 +39,10 @@ const CircleElement = styled.div.attrs<{
     border-radius: 50%;
 
     z-index: -20;
+
+    @media screen and (max-width: 640px) {
+        display: none;
+    }
 `;
 
 export default BigCircle;

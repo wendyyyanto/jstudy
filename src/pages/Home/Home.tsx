@@ -17,7 +17,7 @@ function Home() {
                 initial={{ scale: 0.5, x: "-50%" }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute bottom-[9%] left-1/2 -z-10 w-1/2 h-1/2 max-2xl:w-[45%] max-2xl:h-[45%]"
+                className="max-sm:hidden absolute bottom-[9%] left-1/2 -z-10 w-1/2 h-1/2 max-2xl:w-[45%] max-2xl:h-[45%]"
                 src={illustration}
                 alt="Landing Page Illustration"
             />
